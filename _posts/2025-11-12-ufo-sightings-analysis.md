@@ -4,11 +4,20 @@ layout: post
 title: UFO Sightings Analysis
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
 # UFO Sightings in the United States (1950-2014)
 
 ## Visualization 1: Geographic Distribution of UFO Sightings
 
-<vegachart schema-url="{{ site.baseurl }}/assets/json/ufo_map.json" style="width: 100%"></vegachart>
+<div id="vis1"></div>
+<script type="text/javascript">
+  var spec = "{{ site.baseurl }}/assets/json/ufo_map.json";
+  vegaEmbed('#vis1', spec).then(function(result) {
+  }).catch(console.error);
+</script>
 
 ### Description
 This visualization displays a sample of 5,000 UFO sightings across the United States, showing the geographic distribution of reported encounters. Each point represents a sighting location, with colors indicating the shape of the UFO observed.
@@ -31,7 +40,12 @@ Several transformations were applied in the Python notebook:
 
 ## Visualization 2: UFO Sightings Over Time by Shape
 
-<vegachart schema-url="{{ site.baseurl }}/assets/json/ufo_timeseries.json" style="width: 100%"></vegachart>
+<div id="vis2"></div>
+<script type="text/javascript">
+  var spec = "{{ site.baseurl }}/assets/json/ufo_timeseries.json";
+  vegaEmbed('#vis2', spec).then(function(result) {
+  }).catch(console.error);
+</script>
 
 ### Description
 This interactive line chart shows the trend in UFO sightings from 1950 to 2014, broken down by the shape of the observed object. The visualization reveals a dramatic increase in reported sightings beginning in the mid-1990s, with a peak around 2010-2012.
