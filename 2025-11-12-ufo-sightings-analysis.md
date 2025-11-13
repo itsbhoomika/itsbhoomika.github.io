@@ -67,10 +67,6 @@ The dramatic rise in sightings across all shapes from the mid-1990s onward likel
 
 ## Links
 
-<div class="left">
-{% include elements/button.html link="https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_data/main/ufo-scrubbed-geocoded-time-standardized-00.csv" text="The Data" %}
-</div>
+**[The Data](https://raw.githubusercontent.com/UIUC-iSchool-DataViz/is445_data/main/ufo-scrubbed-geocoded-time-standardized-00.csv)**
 
-<div class="right">
-{% include elements/button.html link="https://github.com/itsbhoomika/itsbhoomika.github.io/blob/main/Workbook.ipynb" text="The Analysis" %}
-</div>
+**[The Analysis](https://github.com/itsbhoomika/itsbhoomika.github.io/blob/main/Workbook-3.ipynb)**
