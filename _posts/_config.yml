@@ -1,0 +1,12 @@
+title: Bhoomika Ravishankar
+description: Data Visualization Portfolio
+theme: jekyll-theme-minimal
+
+# Build settings
+markdown: kramdown
+
+# Exclude files
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
