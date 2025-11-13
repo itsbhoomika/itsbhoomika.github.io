@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: UFO Sightings Analysis
@@ -14,7 +13,7 @@ title: UFO Sightings Analysis
 
 <div id="vis1"></div>
 <script type="text/javascript">
-  var spec = "{{ site.baseurl }}/assets/json/ufo_map.json";
+  var spec = "/assets/json/ufo_map.json";
   vegaEmbed('#vis1', spec).then(function(result) {
   }).catch(console.error);
 </script>
@@ -42,7 +41,7 @@ Several transformations were applied in the Python notebook:
 
 <div id="vis2"></div>
 <script type="text/javascript">
-  var spec = "{{ site.baseurl }}/assets/json/ufo_timeseries.json";
+  var spec = "/assets/json/ufo_timeseries.json";
   vegaEmbed('#vis2', spec).then(function(result) {
   }).catch(console.error);
 </script>
