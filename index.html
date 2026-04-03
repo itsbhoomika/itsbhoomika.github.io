@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhoomika Ravishankar — Data Scientist & ML Researcher</title>
+<style>
+:root {
+  --bg:     #080910;
+  --bg2:    #0d0f1c;
+  --card:   #0f1120;
+  --border: rgba(255,255,255,0.07);
+  --cyan:   #00d4ff;
+  --purple: #a78bfa;
+  --mint:   #34d399;
+  --pink:   #f472b6;
+  --amber:  #fbbf24;
+  --text:   #e2e8f0;
+  --muted:  #7c8ca8;
+  --subtle: #1a1e2e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── CANVAS ── */
+#canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; opacity: 0.3;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(8,9,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-size: 1rem; font-weight: 800; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+.nav-links a:hover { color: var(--cyan); }
+
+/* ── LAYOUT ── */
+.wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── HERO ── */
+#hero {
+  position: relative; z-index: 1;
+  max-width: 960px; margin: 0 auto; padding: 0 2rem;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 5rem;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 100px; padding: 0.4rem 1rem;
+  font-size: 0.82rem; color: var(--cyan); letter-spacing: 0.04em; margin-bottom: 1.8rem;
+  width: fit-content;
+}
+.hero-chip::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--mint); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.3; transform:scale(0.75); }
+}
+.hero-name {
+  font-size: clamp(2.8rem, 8vw, 5.2rem);
+  font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 1.2rem;
+}
+.hero-name span {
+  background: linear-gradient(135deg, var(--cyan), var(--purple) 55%, var(--pink));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted); max-width: 520px;
+  line-height: 1.75; margin-bottom: 2.5rem;
+}
+.cta-row { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.72rem 1.55rem; border-radius: 10px;
+  font-size: 0.9rem; font-weight: 600; text-decoration: none;
+  border: none; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #07080f;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; border: 1px solid var(--border); color: var(--muted);
+}
+.btn-ghost:hover { border-color: rgba(0,212,255,0.4); color: var(--cyan); transform: translateY(-2px); }
+.hero-stats {
+  display: flex; gap: 2.5rem; flex-wrap: wrap; margin-top: 4rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.stat { display: flex; flex-direction: column; gap: 0.2rem; }
+.stat-n { font-size: 1.7rem; font-weight: 800; line-height: 1; }
+.stat-l { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
+
+/* ── SECTION GENERIC ── */
+.section { padding: 5.5rem 0; }
+.sec-label {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cyan); font-weight: 700; margin-bottom: 0.5rem;
+}
+.sec-title { font-size: 2rem; font-weight: 800; margin-bottom: 2.5rem; line-height: 1.2; }
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid; grid-template-columns: 260px 1fr; gap: 3.5rem; align-items: start;
+}
+.about-left { display: flex; flex-direction: column; gap: 1.5rem; }
+.photo-wrap {
+  width: 220px; height: 220px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(167,139,250,0.15));
+  border: 2px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+}
+.photo-placeholder {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--muted);
+}
+.photo-placeholder .initials {
+  font-size: 3rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.photo-placeholder .hint { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.4; }
+.about-contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.about-link {
+  font-size: 0.82rem; color: var(--muted); text-decoration: none;
+  display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.about-link:hover { color: var(--cyan); }
+.about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+.about-bio { font-size: 1rem; color: var(--muted); line-height: 1.8; }
+.about-bio strong { color: var(--text); }
+.edu-stack { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.5rem; }
+.edu-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.4rem;
+}
+.edu-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+.edu-deg { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+.edu-gpa {
+  font-size: 0.75rem; font-weight: 700; color: var(--mint);
+  background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25);
+  padding: 0.15rem 0.55rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+}
+.edu-school { font-size: 0.82rem; color: var(--cyan); margin-top: 0.25rem; }
+.edu-year { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
+
+/* ── EXPERIENCE TIMELINE ── */
+.timeline-wrap {
+  position: relative;
+  padding-left: 2.2rem;
+}
+.timeline-wrap::before {
+  content: '';
+  position: absolute; left: 8px; top: 12px; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--cyan) 0%, var(--purple) 35%, var(--mint) 65%, var(--pink) 100%);
+  opacity: 0.4; border-radius: 2px;
+}
+.tl-entry { position: relative; margin-bottom: 1.6rem; }
+.tl-entry:last-child { margin-bottom: 0; }
+.tl-dot-wrap {
+  position: absolute; left: -2.2rem; top: 1.4rem;
+  display: flex; align-items: center; justify-content: center;
+  width: 20px;
+}
+.tl-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid var(--bg); flex-shrink: 0;
+}
+.tl-dot.c { background: var(--cyan);   box-shadow: 0 0 0 3px rgba(0,212,255,0.2),   0 0 16px rgba(0,212,255,0.4); }
+.tl-dot.p { background: var(--purple); box-shadow: 0 0 0 3px rgba(167,139,250,0.2), 0 0 16px rgba(167,139,250,0.4); }
+.tl-dot.m { background: var(--mint);   box-shadow: 0 0 0 3px rgba(52,211,153,0.2),  0 0 16px rgba(52,211,153,0.4); }
+.tl-dot.k { background: var(--pink);   box-shadow: 0 0 0 3px rgba(244,114,182,0.2), 0 0 16px rgba(244,114,182,0.4); }
+
+.exp-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+}
+.exp-card.c { border-left: 3px solid var(--cyan); }
+.exp-card.p { border-left: 3px solid var(--purple); }
+.exp-card.m { border-left: 3px solid var(--mint); }
+.exp-card.k { border-left: 3px solid var(--pink); }
+
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.9rem; }
+.exp-co { font-size: 0.78rem; color: var(--cyan); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+.exp-co.p { color: var(--purple); }
+.exp-co.m { color: var(--mint); }
+.exp-co.k { color: var(--pink); }
+.exp-role { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-top: 0.15rem; }
+.exp-date {
+  font-size: 0.78rem; color: var(--muted);
+  background: var(--subtle); border: 1px solid var(--border);
+  padding: 0.2rem 0.65rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+}
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.5rem; }
+.exp-bullets li {
+  font-size: 0.92rem; color: var(--muted); line-height: 1.65;
+  padding-left: 1.2rem; position: relative;
+}
+.exp-bullets li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--cyan); font-size: 0.8rem; top: 0.05rem;
+}
+.exp-bullets li strong { color: var(--text); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.tag {
+  font-size: 0.75rem; padding: 0.22rem 0.65rem; border-radius: 100px;
+  background: var(--subtle); border: 1px solid var(--border); color: var(--muted);
+}
+
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem;
+}
+.proj-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  cursor: pointer; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex; flex-direction: column;
+}
+.proj-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  border-color: rgba(255,255,255,0.13);
+}
+.proj-illus {
+  width: 100%; height: 200px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.proj-illus svg { width: 100%; height: 100%; }
+.proj-body { padding: 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
+.proj-kind { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+.proj-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
+.proj-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; flex: 1; }
+.proj-nums { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.pnum { display: flex; flex-direction: column; }
+.pnum-v { font-size: 1.25rem; font-weight: 800; line-height: 1; }
+.pnum-l { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.15rem; }
+.proj-more {
+  font-size: 0.82rem; font-weight: 600; color: var(--cyan);
+  display: flex; align-items: center; gap: 0.35rem; margin-top: auto;
+}
+
+/* ── HF SECTION ── */
+.hf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+.hf-model-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.2rem 1.3rem;
+}
+.hf-model-card:hover { border-color: rgba(255,209,102,0.3); }
+.hf-tag {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--amber); font-weight: 700; margin-bottom: 0.5rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.hf-name { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.hf-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+.hf-spaces-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.hf-space-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.2rem 1.3rem; text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s; display: block;
+}
+.hf-space-card:hover { border-color: rgba(167,139,250,0.35); transform: translateY(-2px); }
+.space-status {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.68rem; color: var(--mint); margin-bottom: 0.5rem;
+}
+.space-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
+.space-status.sleeping { color: var(--muted); }
+.space-status.sleeping .dot { background: var(--muted); }
+.space-name { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
+.space-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.space-link { font-size: 0.78rem; color: var(--purple); font-weight: 600; margin-top: 0.6rem; display: block; }
+
+/* ── SKILLS ── */
+.skills-wrap { display: flex; flex-direction: column; gap: 1.8rem; }
+.skill-group-label {
+  font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted); font-weight: 700; margin-bottom: 0.75rem;
+}
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.stag {
+  font-size: 0.85rem; padding: 0.35rem 0.85rem; border-radius: 9px;
+  background: var(--subtle); border: 1px solid var(--border); color: var(--text);
+  font-weight: 500; transition: border-color 0.2s, color 0.2s;
+}
+.stag:hover { border-color: rgba(0,212,255,0.35); color: var(--cyan); }
+.stag.hi  { border-color: rgba(0,212,255,0.25);   color: var(--cyan);   background: rgba(0,212,255,0.06); }
+.stag.pu  { border-color: rgba(167,139,250,0.25); color: var(--purple); background: rgba(167,139,250,0.06); }
+.stag.mi  { border-color: rgba(52,211,153,0.25);  color: var(--mint);   background: rgba(52,211,153,0.06); }
+
+/* ── CONTACT ── */
+#contact { text-align: center; padding-bottom: 7rem; }
+#contact .sec-title { margin-bottom: 0.75rem; }
+.contact-sub { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; }
+.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+/* ── MODAL ── */
+.overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(10px); z-index: 200;
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
+}
+.overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--bg2); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; width: 100%; max-width: 700px; max-height: 90vh;
+  overflow-y: auto; position: relative;
+  transform: translateY(20px); transition: transform 0.25s;
+}
+.overlay.open .modal { transform: translateY(0); }
+.modal-head {
+  padding: 1.8rem 2rem 0; position: sticky; top: 0;
+  background: var(--bg2); z-index: 1;
+  border-bottom: 1px solid var(--border); padding-bottom: 1.4rem;
+}
+.modal-close {
+  position: absolute; top: 1.2rem; right: 1.3rem;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--subtle); border: 1px solid var(--border);
+  color: var(--muted); font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-close:hover { background: var(--border); color: var(--text); }
+.modal-kind { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 0.4rem; }
+.modal-title { font-size: 1.45rem; font-weight: 800; color: var(--text); line-height: 1.25; padding-right: 2.5rem; }
+.modal-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+.modal-body { padding: 1.8rem 2rem; }
+.modal-illus { width: 100%; height: 190px; border-radius: 14px; overflow: hidden; margin-bottom: 1.8rem; }
+.modal-section { margin-bottom: 1.6rem; }
+.modal-section:last-child { margin-bottom: 0; }
+.modal-sec-title {
+  font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted); font-weight: 700; margin-bottom: 0.75rem;
+}
+.modal-text { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
+.modal-text strong { color: var(--text); }
+.modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.modal-list li {
+  font-size: 0.9rem; color: var(--muted); line-height: 1.65;
+  padding-left: 1.3rem; position: relative;
+}
+.modal-list li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-size: 0.78rem; top: 0.08rem; }
+.modal-list li strong { color: var(--text); }
+.results-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+.res-box {
+  background: var(--subtle); border: 1px solid var(--border); border-radius: 10px;
+  padding: 0.9rem; text-align: center;
+}
+.res-val { font-size: 1.3rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
+.res-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; }
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1; text-align: center;
+  padding: 1.5rem; font-size: 0.8rem; color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--subtle); border-radius: 3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-left { align-items: center; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .hf-grid { grid-template-columns: 1fr; }
+  .hf-spaces-row { grid-template-columns: 1fr; }
+  .results-row { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { gap: 1.2rem; }
+  .timeline-wrap { padding-left: 1.8rem; }
+  .timeline-wrap::before { left: 6px; }
+  .tl-dot-wrap { left: -1.8rem; }
+}
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">BR</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#huggingface">HuggingFace</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-chip">Open to opportunities · Graduating May 2026</div>
+  <h1 class="hero-name">Bhoomika<br><span>Ravishankar</span></h1>
+  <p class="hero-sub">Data Scientist & ML Researcher. I build models that ship — from LLM fine-tuning with preference optimization to financial forecasting at scale.</p>
+  <div class="cta-row">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    <a href="https://huggingface.co/itsbhoomika" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-n" style="color:var(--cyan)">4.0</span><span class="stat-l">MS GPA · UIUC</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--purple)">$7.49B</span><span class="stat-l">Loss portfolio modeled</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--mint)">87%</span><span class="stat-l">F1 · Clinical NLP</span></div>
+    <div class="stat"><span class="stat-n" style="color:var(--pink)">14K+</span><span class="stat-l">Accounts forecasted</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="wrap section" id="about">
+  <div class="sec-label">About</div>
+  <h2 class="sec-title">Background</h2>
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="photo-wrap">
+        <!-- Replace with: <img src="your-photo.jpg" alt="Bhoomika Ravishankar"> -->
+        <div class="photo-placeholder">
+          <div class="initials">BR</div>
+          <div class="hint">Add your photo here</div>
+        </div>
+      </div>
+      <div class="about-contact-links">
+        <a href="mailto:br36@illinois.edu" class="about-link">✉ br36@illinois.edu</a>
+        <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="about-link">↗ LinkedIn</a>
+        <a href="https://huggingface.co/itsbhoomika" target="_blank" class="about-link">🤗 HuggingFace</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <p class="about-bio">
+        I'm a <strong>Data Scientist & ML Researcher</strong> at UIUC, concentrating in Data Science within my Master's in Information Management. My work lives at the intersection of <strong>statistical modeling, NLP, and large-scale ML systems</strong> — from fine-tuning LLMs with preference optimization to building financial forecasting models that handle billions in portfolio risk.<br><br>
+        I care about making models that are interpretable, reproducible, and grounded in real evaluation — not just benchmark numbers.
+      </p>
+      <div class="edu-stack">
+        <div class="edu-card">
+          <div class="edu-row">
+            <div>
+              <div class="edu-deg">MS Information Management</div>
+              <div style="font-size:0.82rem;color:var(--muted);margin-top:0.1rem">Data Science Concentration</div>
+            </div>
+            <div class="edu-gpa">4.0 GPA</div>
+          </div>
+          <div class="edu-school">University of Illinois Urbana-Champaign</div>
+          <div class="edu-year">Aug 2024 – May 2026 (expected)</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-row">
+            <div><div class="edu-deg">BE Computer Engineering</div></div>
+            <div class="edu-gpa">9.12 / 10</div>
+          </div>
+          <div class="edu-school">Savitribai Phule Pune University, India</div>
+          <div class="edu-year">Graduated June 2024</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="wrap section" id="experience">
+  <div class="sec-label">Experience</div>
+  <h2 class="sec-title">Where I've Worked</h2>
+  <div class="timeline-wrap">
+
+    <div class="tl-entry">
+      <div class="tl-dot-wrap"><div class="tl-dot c"></div></div>
+      <div class="exp-card c">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co">Synchrony Financial · Champaign, IL</div>
+            <div class="exp-role">Data Scientist — Credit & Customer Analytics</div>
+          </div>
+          <div class="exp-date">May 2025 – Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built statistical models in Python & PySpark supporting a <strong>$7.49B loss model portfolio</strong> for financial forecasting</li>
+          <li>Achieved <strong>90% improvement in early risk detection</strong> and 12% model accuracy gain through feature evaluation</li>
+          <li>Engineered analytical datasets with <strong>500K+ records</strong>; 23% predictive improvement via feature engineering</li>
+          <li>Designed A/B testing frameworks and time-series analyses for data-driven decision making</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">PySpark</span><span class="tag">XGBoost</span><span class="tag">Time Series</span><span class="tag">A/B Testing</span><span class="tag">SAS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot-wrap"><div class="tl-dot p"></div></div>
+      <div class="exp-card p">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co p">Dept of Statistics · UIUC</div>
+            <div class="exp-role">AI Research Assistant</div>
+          </div>
+          <div class="exp-date">Jan 2025 – Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built a clinical NLP pipeline processing <strong>50K+ studies</strong> from ClinicalTrials.gov</li>
+          <li>Fine-tuned <strong>Qwen-2.5 with LoRA</strong> on PubMed abstracts — 87% F1, a 40-point baseline improvement</li>
+          <li>Ran distributed ML training on the <strong>NCSA Delta HPC cluster</strong>; cut inference time by 60% on 100GB+ datasets</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">LoRA</span><span class="tag">Qwen-2.5</span><span class="tag">PyTorch</span><span class="tag">HPC / Delta</span><span class="tag">NLP Pipeline</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot-wrap"><div class="tl-dot m"></div></div>
+      <div class="exp-card m">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co m">Business Intelligence Group · UIUC</div>
+            <div class="exp-role">Data Consultant</div>
+          </div>
+          <div class="exp-date">Jan 2025 – May 2025</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Designed end-to-end decision support system with Python, NLP, and Tableau</li>
+          <li><strong>90% reduction</strong> in information lookup time; <strong>35% cut</strong> in manual analysis time</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Tableau</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-dot-wrap"><div class="tl-dot k"></div></div>
+      <div class="exp-card k">
+        <div class="exp-header">
+          <div>
+            <div class="exp-co k">Repute India Pvt Limited</div>
+            <div class="exp-role">Data Analyst</div>
+          </div>
+          <div class="exp-date">Feb 2023 – Apr 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Automated KPI dashboards via SQL Server & Excel; <strong>30% reduction</strong> in reporting cycle time</li>
+          <li>Identified ~<strong>30% cost inefficiencies</strong> through data-driven analysis</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">Dashboards</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap section" id="projects">
+  <div class="sec-label">Projects</div>
+  <h2 class="sec-title">Selected Work</h2>
+  <div class="projects-grid">
+
+    <!-- 1. LLM Clarification -->
+    <div class="proj-card" onclick="openModal('llm')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg1" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f1"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow1">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="190" cy="100" rx="160" ry="110" fill="url(#rg1)" filter="url(#f1)"/>
+          <!-- giant faint ? -->
+          <text x="195" y="145" text-anchor="middle" font-size="160" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.05">?</text>
+          <!-- glowing ? -->
+          <text x="195" y="135" text-anchor="middle" font-size="100" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.65" filter="url(#glow1)">?</text>
+          <!-- user bubble -->
+          <rect x="22" y="28" width="148" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+          <circle cx="52" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="68" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="84" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <text x="105" y="53" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui">…</text>
+          <!-- ai bubble bottom right -->
+          <rect x="268" y="128" width="148" height="44" rx="22" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+          <text x="342" y="154" text-anchor="middle" font-size="13" fill="rgba(0,212,255,0.9)" font-family="system-ui" font-weight="600">Can you clarify?</text>
+          <!-- small dots top right -->
+          <circle cx="380" cy="38" r="3" fill="rgba(0,212,255,0.2)"/>
+          <circle cx="395" cy="52" r="2" fill="rgba(167,139,250,0.25)"/>
+          <circle cx="408" cy="35" r="2.5" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="360" cy="62" r="2" fill="rgba(52,211,153,0.2)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">NLP · LLM Research · CS546</div>
+        <div class="proj-title">Clarification-Seeking LLMs</div>
+        <div class="proj-desc">Trained Qwen-2.5 7B to detect query ambiguity and strategically ask clarifying questions instead of hallucinating an answer — using SFT + Direct Preference Optimization.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.63</span><span class="pnum-l">Macro F1</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">10K+</span><span class="pnum-l">Training examples</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">+12.5%</span><span class="pnum-l">vs base model</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
+    <!-- 2. M&A Prediction -->
+    <div class="proj-card" onclick="openModal('ma')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg2" cx="55%" cy="45%" r="55%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f2"><feGaussianBlur stdDeviation="16"/></filter>
+            <filter id="glow2">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="250" cy="95" rx="170" ry="115" fill="url(#rg2)" filter="url(#f2)"/>
+          <!-- two overlapping circles (merger metaphor) -->
+          <circle cx="175" cy="100" r="65" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
+          <circle cx="245" cy="100" r="65" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.2)" stroke-width="1.5"/>
+          <!-- overlap intersection glow -->
+          <ellipse cx="210" cy="100" rx="32" ry="55" fill="rgba(167,139,250,0.08)" filter="url(#f2)"/>
+          <!-- rising chart line -->
+          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.7)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow2)"/>
+          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="7" stroke-linecap="round"/>
+          <!-- endpoint glow dot -->
+          <circle cx="370" cy="42" r="5" fill="#a78bfa" filter="url(#glow2)"/>
+          <!-- 89% badge -->
+          <rect x="290" y="148" width="70" height="30" rx="8" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+          <text x="325" y="167" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
+          <!-- small dots -->
+          <circle cx="40" cy="40" r="2.5" fill="rgba(167,139,250,0.2)"/>
+          <circle cx="60" cy="28" r="2" fill="rgba(244,114,182,0.2)"/>
+          <circle cx="415" cy="80" r="2.5" fill="rgba(167,139,250,0.25)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Finance · ML · NLP</div>
+        <div class="proj-title">AI-Driven M&A Prediction</div>
+        <div class="proj-desc">XGBoost model combining 14 financial ratios with Word2Vec embeddings and FinBERT sentiment analysis to predict M&A acquisition targets from 298K+ news articles.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">89%</span><span class="pnum-l">Accuracy</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+15%</span><span class="pnum-l">Over baseline</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">3.8K</span><span class="pnum-l">Companies</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
+    <!-- 3. LSTM Datathon -->
+    <div class="proj-card" onclick="openModal('lstm')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg3" cx="50%" cy="60%" r="60%">
+              <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f3"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glow3">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="120" rx="180" ry="100" fill="url(#rg3)" filter="url(#f3)"/>
+          <!-- faint axis line -->
+          <line x1="30" y1="130" x2="410" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <!-- historical wave (past data, muted) -->
+          <path d="M30,110 C60,80 80,130 110,105 C140,80 160,125 190,100 C220,75 240,120 270,95" fill="none" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-linecap="round"/>
+          <!-- prediction wave (future, glowing) -->
+          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow3)"/>
+          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="8" stroke-linecap="round"/>
+          <!-- divider dashed line at cut-off point -->
+          <line x1="270" y1="45" x2="270" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="280" y="60" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui">forecast →</text>
+          <!-- glow end dot -->
+          <circle cx="420" cy="58" r="5" fill="#34d399" filter="url(#glow3)"/>
+          <!-- badge -->
+          <rect x="20" y="148" width="100" height="30" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="70" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">14,099 accts</text>
+          <!-- dots -->
+          <circle cx="30" cy="42" r="2.5" fill="rgba(52,211,153,0.2)"/>
+          <circle cx="415" cy="165" r="2" fill="rgba(52,211,153,0.15)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Finance · Deep Learning · Datathon</div>
+        <div class="proj-title">LSTM Credit Card Spend Forecasting</div>
+        <div class="proj-desc">Built an LSTM neural network to forecast Q4 2025 quarterly spending for 14,099 Synchrony accounts from 13 months of transaction history — with credit line recommendations.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">14K</span><span class="pnum-l">Accounts</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">LSTM</span><span class="pnum-l">Architecture</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">Q4 '25</span><span class="pnum-l">Forecast horizon</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
+    <!-- 4. LLM Healthcare -->
+    <div class="proj-card" onclick="openModal('health')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg4" cx="40%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="rg4b" cx="70%" cy="65%" r="40%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f4"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow4">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="170" cy="90" rx="150" ry="110" fill="url(#rg4)" filter="url(#f4)"/>
+          <ellipse cx="310" cy="130" rx="120" ry="80" fill="url(#rg4b)" filter="url(#f4)"/>
+          <!-- document silhouette -->
+          <rect x="90" y="35" width="110" height="140" rx="8" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.15)" stroke-width="1.5"/>
+          <line x1="105" y1="65" x2="185" y2="65" stroke="rgba(251,191,36,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="80" x2="185" y2="80" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="95" x2="165" y2="95" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="110" x2="175" y2="110" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="125" x2="155" y2="125" stroke="rgba(251,191,36,0.1)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- arrow pointing right to extracted features -->
+          <path d="M210 105 L250 105" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr4)"/>
+          <defs>
+            <marker id="arr4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(255,255,255,0.2)"/>
+            </marker>
+          </defs>
+          <!-- extracted feature dots floating right -->
+          <circle cx="275" cy="65"  r="6" fill="rgba(251,191,36,0.6)"  filter="url(#glow4)"/>
+          <circle cx="310" cy="88"  r="5" fill="rgba(167,139,250,0.7)" filter="url(#glow4)"/>
+          <circle cx="295" cy="115" r="7" fill="rgba(251,191,36,0.5)"  filter="url(#glow4)"/>
+          <circle cx="340" cy="70"  r="4" fill="rgba(52,211,153,0.6)"  filter="url(#glow4)"/>
+          <circle cx="355" cy="105" r="5" fill="rgba(251,191,36,0.45)" filter="url(#glow4)"/>
+          <circle cx="330" cy="140" r="4" fill="rgba(167,139,250,0.5)" filter="url(#glow4)"/>
+          <circle cx="380" cy="88"  r="3.5" fill="rgba(52,211,153,0.4)" filter="url(#glow4)"/>
+          <circle cx="395" cy="125" r="3" fill="rgba(251,191,36,0.35)" filter="url(#glow4)"/>
+          <!-- badge -->
+          <rect x="20" y="148" width="90" height="30" rx="8" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.25)" stroke-width="1.5"/>
+          <text x="65" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#fbbf24" font-family="system-ui">115K trials</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Healthcare · NLP · LLM Research · UIUC Stats</div>
+        <div class="proj-title">LLM-Powered Clinical Trial Prediction</div>
+        <div class="proj-desc">Used Qwen-2.5 as an autonomous feature engineer on 115K ClinicalTrials.gov records — extracting structured attributes from free text to predict trial success with a supervised feedback loop.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">0.61</span><span class="pnum-l">ROC-AUC</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- HUGGINGFACE -->
+<div class="wrap section" id="huggingface">
+  <div class="sec-label">Open Source</div>
+  <h2 class="sec-title">On HuggingFace 🤗</h2>
+
+  <div class="sec-label" style="margin-bottom:1rem">Models</div>
+  <div class="hf-grid">
+    <div class="hf-model-card">
+      <div class="hf-tag">🤖 Text Generation</div>
+      <div class="hf-name">clarifier-dpo-lora</div>
+      <div class="hf-desc">Fine-tuned Qwen-2.5 with DPO + LoRA for ambiguity-aware response generation. From the Clarification-Seeking LLMs project.</div>
+    </div>
+    <div class="hf-model-card">
+      <div class="hf-tag">📊 Text Classification</div>
+      <div class="hf-name">adv-nlp-hw1-bhoomika.r</div>
+      <div class="hf-desc">67M parameter text classification model from Advanced NLP coursework at UIUC.</div>
+    </div>
+    <div class="hf-model-card">
+      <div class="hf-tag">📦 Model Outputs</div>
+      <div class="hf-name">anlp-hw2-outputs</div>
+      <div class="hf-desc">Output artifacts from UIUC Advanced NLP homework 2, including predictions and evaluation results.</div>
+    </div>
+  </div>
+
+  <div class="sec-label" style="margin-bottom:1rem">Spaces & Demos</div>
+  <div class="hf-spaces-row">
+    <a href="https://huggingface.co/spaces/itsbhoomika/FP_3" target="_blank" class="hf-space-card">
+      <div class="space-status"><div class="dot"></div>Live</div>
+      <div class="space-name">Data Visualization — Final Project</div>
+      <div class="space-desc">Interactive data visualization app built for IS445. Explores complex datasets with dynamic charts and filters.</div>
+      <div class="space-link">Open Space ↗</div>
+    </a>
+    <a href="https://huggingface.co/spaces/itsbhoomika/is445_demo" target="_blank" class="hf-space-card">
+      <div class="space-status"><div class="dot"></div>Live</div>
+      <div class="space-name">Seattle Weather Visualizer</div>
+      <div class="space-desc">Interactive visualization of Seattle weather data with dynamic Altair charts — temperature, precipitation, and seasonal trends.</div>
+      <div class="space-link">Open Space ↗</div>
+    </a>
+    <a href="https://huggingface.co/spaces/itsbhoomika/is445-hw6-building-viz" target="_blank" class="hf-space-card">
+      <div class="space-status sleeping"><div class="dot"></div>Sleeping</div>
+      <div class="space-name">Building Inventory Viz</div>
+      <div class="space-desc">Interactive exploration of building inventory data for Illinois state facilities with linked visualizations.</div>
+      <div class="space-link">Open Space ↗</div>
+    </a>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="wrap section" id="skills">
+  <div class="sec-label">Skills</div>
+  <h2 class="sec-title">Technical Stack</h2>
+  <div class="skills-wrap">
+    <div>
+      <div class="skill-group-label">Languages</div>
+      <div class="skill-tags">
+        <span class="stag hi">Python</span>
+        <span class="stag">R</span>
+        <span class="stag">SQL</span>
+        <span class="stag">PySpark</span>
+        <span class="stag">SAS</span>
+        <span class="stag">C++</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">ML & Statistics</div>
+      <div class="skill-tags">
+        <span class="stag hi">XGBoost</span>
+        <span class="stag hi">Random Forest</span>
+        <span class="stag">Logistic Regression</span>
+        <span class="stag">Decision Trees</span>
+        <span class="stag">Time Series</span>
+        <span class="stag">A/B Testing</span>
+        <span class="stag">Anomaly Detection</span>
+        <span class="stag">Hypothesis Testing</span>
+        <span class="stag">SMOTE</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">LLMs & NLP</div>
+      <div class="skill-tags">
+        <span class="stag pu">LoRA Fine-tuning</span>
+        <span class="stag pu">SFT & DPO</span>
+        <span class="stag pu">LangChain</span>
+        <span class="stag pu">RAG</span>
+        <span class="stag pu">FinBERT</span>
+        <span class="stag pu">Word2Vec</span>
+        <span class="stag">OpenAI API</span>
+        <span class="stag">TF-IDF</span>
+        <span class="stag">NER</span>
+        <span class="stag">CRF</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Frameworks</div>
+      <div class="skill-tags">
+        <span class="stag mi">PyTorch</span>
+        <span class="stag mi">TensorFlow</span>
+        <span class="stag">Weights & Biases</span>
+        <span class="stag">Docker</span>
+        <span class="stag">Git</span>
+        <span class="stag">Tableau</span>
+        <span class="stag">Power BI</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Cloud & Big Data</div>
+      <div class="skill-tags">
+        <span class="stag">AWS (S3, EMR, Glue, SageMaker)</span>
+        <span class="stag">GCP / BigQuery</span>
+        <span class="stag">Databricks</span>
+        <span class="stag">Snowflake</span>
+        <span class="stag">Hadoop</span>
+        <span class="stag">NCSA Delta HPC</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="wrap section" id="contact" style="text-align:center;padding-bottom:7rem">
+  <div class="sec-label" style="justify-content:center;display:flex">Contact</div>
+  <h2 class="sec-title" style="margin-bottom:0.75rem">Let's Connect</h2>
+  <p class="contact-sub">Open to research collaborations, full-time DS/ML roles, and interesting problems.</p>
+  <div class="contact-links">
+    <a href="mailto:br36@illinois.edu" class="btn btn-primary">br36@illinois.edu</a>
+    <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+    <a href="https://huggingface.co/itsbhoomika" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
+  </div>
+</div>
+
+<footer>Bhoomika Ravishankar · Data Scientist & ML Researcher · UIUC 2026</footer>
+
+<!-- MODAL OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<script>
+/* ── Canvas neural net ── */
+(function(){
+  const c = document.getElementById('canvas');
+  const ctx = c.getContext('2d');
+  let W,H,nodes;
+  const colors = ['#00d4ff','#a78bfa','#34d399','#f472b6'];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
+  function init(){
+    const n=Math.min(Math.floor(W*H/13000),60);
+    nodes=Array.from({length:n},()=>({
+      x:Math.random()*W, y:Math.random()*H,
+      vx:(Math.random()-.5)*.38, vy:(Math.random()-.5)*.3,
+      r:1.5+Math.random()*2.5,
+      color:colors[Math.floor(Math.random()*4)]
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<nodes.length;i++){
+      for(let j=i+1;j<nodes.length;j++){
+        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<190){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(100,116,139,${(1-d/190)*.3})`;
+          ctx.lineWidth=.7;
+          ctx.moveTo(nodes[i].x,nodes[i].y);
+          ctx.lineTo(nodes[j].x,nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    nodes.forEach(n=>{
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=n.color+'85';
+      ctx.fill();
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>W)n.vx*=-1;
+      if(n.y<0||n.y>H)n.vy*=-1;
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();init();});
+  resize(); init(); draw();
+})();
+
+/* ── Modal data ── */
+const MODALS = {
+  llm: {
+    kind: 'NLP · LLM Research · CS546 · UIUC',
+    title: 'Clarification-Seeking LLMs',
+    sub: 'Qwen-2.5 7B · SFT + DPO · AmbigNQ · 10,036 examples',
+    illusGrad: 'radial-gradient(ellipse at 40% 50%, rgba(0,212,255,0.2) 0%, #0d0f1c 65%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="mg1"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="mg2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="92" rx="250" ry="100" fill="rgba(0,212,255,0.07)" filter="url(#mg1)"/>
+      <!-- Stage 1 -->
+      <rect x="12" y="28" width="130" height="55" rx="9" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+      <text x="30" y="50" font-size="11" font-weight="700" fill="#00d4ff" font-family="system-ui">Stage 1: SFT</text>
+      <text x="22" y="66" font-size="9.5" fill="#7c8ca8" font-family="monospace">AmbigNQ → facets</text>
+      <text x="22" y="78" font-size="9.5" fill="#7c8ca8" font-family="monospace">structured output</text>
+      <path d="M142 55 L175 55" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma1)"/>
+      <!-- Qwen box -->
+      <rect x="175" y="18" width="120" height="75" rx="10" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
+      <text x="235" y="50" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">Qwen-2.5</text>
+      <text x="235" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#a78bfa" font-family="system-ui">7B</text>
+      <text x="235" y="83" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">32B teacher signals</text>
+      <path d="M295 55 L330 55" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma1)"/>
+      <!-- Stage 2 -->
+      <rect x="330" y="28" width="130" height="55" rx="9" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+      <text x="348" y="50" font-size="11" font-weight="700" fill="#f472b6" font-family="system-ui">Stage 2: DPO</text>
+      <text x="340" y="66" font-size="9.5" fill="#7c8ca8" font-family="monospace">chosen vs rejected</text>
+      <text x="340" y="78" font-size="9.5" fill="#7c8ca8" font-family="monospace">preference pairs</text>
+      <path d="M460 43 L490 32" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M460 65 L490 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- outputs -->
+      <rect x="490" y="16" width="155" height="30" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
+      <text x="568" y="35" text-anchor="middle" font-size="11" fill="#34d399" font-family="system-ui">→ Answer directly (clear)</text>
+      <rect x="490" y="60" width="155" height="30" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+      <text x="568" y="79" text-anchor="middle" font-size="11" fill="#00d4ff" font-family="system-ui">→ Ask to clarify (ambiguous)</text>
+      <!-- Ambiguity types row -->
+      <rect x="12" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+      <text x="22" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">entity-reference</text>
+      <rect x="165" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+      <text x="175" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">underspecified noun</text>
+      <rect x="318" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+      <text x="328" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">degree of action</text>
+      <!-- metrics row -->
+      <rect x="12" y="142" width="88" height="32" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
+      <text x="56" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">F1: 0.63</text>
+      <text x="56" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Macro F1 (SFT)</text>
+      <rect x="108" y="142" width="100" height="32" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
+      <text x="158" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa" font-family="system-ui">10,036 ex.</text>
+      <text x="158" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">AmbigNQ split</text>
+      <rect x="216" y="142" width="100" height="32" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="266" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">+12.5% acc</text>
+      <text x="266" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vs base model</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `LLMs routinely hallucinate answers to ambiguous questions. This project trains <strong>Qwen-2.5 7B</strong> to detect ambiguity and make a strategic decision — answer directly or ask a targeted clarifying question. The model is grounded in a 3-type ambiguity taxonomy with interpretable facet annotations extracted from the AmbigNQ corpus.` },
+      { title: 'Approach', list: [
+        'Derived 10,036 training examples from AmbigNQ (47% ambiguous, 53% clear)',
+        'Extracted <strong>ambiguity facets</strong> — the minimal missing piece (time-period, entity, location) that makes a query ambiguous',
+        'Stage 1 — SFT: teach structured clarify-or-answer output using Qwen-2.5 32B as teacher',
+        'Stage 2 — DPO: align model preferences with chosen vs. rejected response pairs',
+        'Evaluated across 6 metrics: taxonomy accuracy, facet coverage, ambiguity detection F1, QA alignment'
+      ]},
+      { title: 'Results', results: [
+        { val:'0.63', label:'Macro F1 (SFT)', color:'var(--cyan)' },
+        { val:'0.70', label:'Clarify F1 (DPO)', color:'var(--purple)' },
+        { val:'+12.5%', label:'Accuracy vs base', color:'var(--mint)' },
+        { val:'3 types', label:'Ambiguity taxonomy', color:'var(--pink)' }
+      ]},
+      { title: 'Key Insights', list: [
+        'SFT dramatically outperforms base models (0.56 → 0.63); structured format alone drives most of the gain',
+        'Alt-SFT with 32B chain-of-thought supervision shows the most balanced clarify-vs-answer behavior',
+        'DPO improves answer precision but reduces clarify recall — clarify-or-act is inherently multi-objective',
+        'Facet annotations serve as interpretable anchors that ground the model\'s ambiguity decisions',
+        'Model published on HuggingFace: <strong>clarifier-dpo-lora</strong>'
+      ]}
+    ]
+  },
+  ma: {
+    kind: 'Finance · ML · NLP · UIUC',
+    title: 'AI-Driven M&A Prediction',
+    sub: 'XGBoost + Word2Vec + FinBERT · LSEG Data · 3,882 companies · 298K headlines',
+    illusGrad: 'radial-gradient(ellipse at 60% 40%, rgba(167,139,250,0.2) 0%, #0d0f1c 65%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g2a"><feGaussianBlur stdDeviation="13"/></filter>
+        <filter id="g2b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="90" rx="260" ry="100" fill="rgba(167,139,250,0.07)" filter="url(#g2a)"/>
+      <!-- data sources -->
+      <rect x="10" y="12" width="120" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+      <text x="70" y="30" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Financial Ratios</text>
+      <rect x="10" y="48" width="120" height="28" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+      <text x="70" y="66" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">298K Headlines</text>
+      <rect x="10" y="84" width="120" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+      <text x="70" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">FinBERT Sentiment</text>
+      <!-- arrows to NLP box -->
+      <path d="M130 26 L165 60" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M130 62 L165 68" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M130 98 L165 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- NLP pipeline box -->
+      <rect x="165" y="42" width="105" height="52" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
+      <text x="217" y="62" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">NLP Pipeline</text>
+      <text x="217" y="76" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Word2Vec · NER</text>
+      <text x="217" y="87" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">TF-IDF · FastText</text>
+      <path d="M270 68 L305 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma2)"/>
+      <!-- SMOTE -->
+      <rect x="305" y="50" width="90" height="36" rx="9" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5"/>
+      <text x="350" y="67" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">SMOTE</text>
+      <text x="350" y="80" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">1.7K → 3.2K rows</text>
+      <path d="M395 68 L428 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma2)"/>
+      <!-- XGBoost -->
+      <rect x="428" y="40" width="100" height="56" rx="9" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
+      <text x="478" y="63" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">XGBoost</text>
+      <text x="478" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">5-fold CV · p=0.0001</text>
+      <path d="M528 55 L560 36" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M528 80 L560 100" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- outputs -->
+      <rect x="560" y="18" width="90" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+      <text x="605" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">M&A Target ✓</text>
+      <rect x="560" y="85" width="90" height="28" rx="7" fill="rgba(30,34,53,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
+      <text x="605" y="102" text-anchor="middle" font-size="10" fill="#7c8ca8" font-family="system-ui">Peer company</text>
+      <!-- metrics -->
+      <rect x="10" y="138" width="90" height="36" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
+      <text x="55" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
+      <text x="55" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Accuracy</text>
+      <rect x="108" y="138" width="90" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="153" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">+15%</text>
+      <text x="153" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vs numeric-only</text>
+      <rect x="206" y="138" width="100" height="36" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.2)"/>
+      <text x="256" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#f472b6" font-family="system-ui">2.4× F1</text>
+      <text x="256" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">improvement</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `Predicting M&A targets from financial ratios alone misses most of the signal. This project fuses <strong>14 LSEG financial features</strong> with 298K+ news headlines processed through Word2Vec and FinBERT sentiment analysis. The combined model achieves 89% accuracy — a statistically significant 15-point gain (p=0.0001) over the numerical baseline.` },
+      { title: 'Approach', list: [
+        '3,882 companies: 185 M&A targets vs 3,697 peers from London Stock Exchange Group data',
+        'Financial features: EV/EBITDA, Free Cash Flow, Gross Profit Margin, Price-to-Book, and 10 more ratios',
+        'Text pipeline: FastText language filter → NER → Word2Vec embeddings + TF-IDF vectorization',
+        'FinBERT for domain-specific financial sentiment scoring across all news per company',
+        'SMOTE to handle class imbalance (185 vs 3,697) → balanced 3,252-row training set',
+        'XGBoost with 5-fold CV; paired t-test confirms significance (t=14.19, p=0.0001)'
+      ]},
+      { title: 'Results', results: [
+        { val:'89%', label:'Accuracy (full)', color:'var(--purple)' },
+        { val:'0.40', label:'F1-Score', color:'var(--pink)' },
+        { val:'+15%', label:'Over baseline', color:'var(--mint)' },
+        { val:'2.4×', label:'F1 improvement', color:'var(--cyan)' }
+      ]},
+      { title: 'Key Insights', list: [
+        'Word2Vec embeddings are the most influential features — market language carries predictive signal beyond financials',
+        'FinBERT adds value but over-reliance on positive sentiment causes false positives (Cluster 2 error pattern)',
+        'Error analysis revealed 3 failure clusters: overlapping signals, sentiment-driven FPs, weak-signal FNs',
+        'Recommendation: contextual sentiment scoring and PCA for dimensionality reduction'
+      ]}
+    ]
+  },
+  lstm: {
+    kind: 'Finance · Deep Learning · Synchrony Datathon',
+    title: 'LSTM Credit Card Spend Forecasting',
+    sub: 'LSTM · 14,099 accounts · 13 months transaction history · Q4 2025 forecast',
+    illusGrad: 'radial-gradient(ellipse at 50% 65%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g3a"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="g3b"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma3" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="120" rx="280" ry="90" fill="rgba(52,211,153,0.07)" filter="url(#g3a)"/>
+      <!-- axis lines -->
+      <line x1="30" y1="145" x2="630" y2="145" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <line x1="30" y1="145" x2="30" y2="25" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <!-- x labels -->
+      <text x="55" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Apr'24</text>
+      <text x="135" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Jul'24</text>
+      <text x="215" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Oct'24</text>
+      <text x="305" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Jan'25</text>
+      <text x="390" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Apr'25</text>
+      <text x="475" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Q4'25 ↓</text>
+      <!-- historical data (muted) -->
+      <polyline points="45,120 80,108 115,122 155,100 195,115 235,98 275,110 315,92 355,105" fill="none" stroke="rgba(52,211,153,0.25)" stroke-width="2" stroke-linecap="round"/>
+      <!-- cutoff line -->
+      <line x1="355" y1="30" x2="355" y2="148" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="360" y="44" font-size="9" fill="rgba(255,255,255,0.4)" font-family="monospace">forecast</text>
+      <!-- prediction (glowing) -->
+      <polyline points="355,105 395,88 435,72 475,58 515,44 555,35 595,28" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#g3b)"/>
+      <polyline points="355,105 395,88 435,72 475,58 515,44 555,35 595,28" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="595" cy="28" r="5.5" fill="#34d399" filter="url(#g3b)"/>
+      <!-- LSTM model badge -->
+      <rect x="440" y="100" width="90" height="32" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
+      <text x="485" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">LSTM Model</text>
+      <text x="485" y="126" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">64→32 units</text>
+      <!-- metrics row -->
+      <rect x="30" y="28" width="100" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="80" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">14,099</text>
+      <text x="80" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">accounts</text>
+      <rect x="138" y="28" width="100" height="36" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
+      <text x="188" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#00d4ff" font-family="system-ui">13 mo.</text>
+      <text x="188" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">history window</text>
+      <rect x="246" y="28" width="100" height="36" rx="7" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
+      <text x="296" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#fbbf24" font-family="system-ui">Q4 2025</text>
+      <text x="296" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">forecast horizon</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `Built for the UIUC × Synchrony Financial datathon. The goal: forecast Q4 2025 quarterly credit card spending for <strong>14,099 accounts</strong> using 13 months of transaction history, then generate actionable credit line adjustment recommendations based on predicted spend.` },
+      { title: 'Approach', list: [
+        'Pivoted raw transaction data into 14,099 account × 13 month spending sequences',
+        'Per-account min-max normalization + log1p transform to handle high variance and improve stability',
+        'LSTM architecture: 2 stacked layers (64 → 32 units), dense head, trained on 6-month input → 3-month target windows',
+        'Backtested on Q4 2024 historical data to validate before deploying for Q4 2025 predictions',
+        'Credit line recommendation = 20% × predicted quarterly spend per account'
+      ]},
+      { title: 'Results', results: [
+        { val:'14,099', label:'Accounts forecasted', color:'var(--mint)' },
+        { val:'$2,444', label:'MAE (backtest)', color:'var(--cyan)' },
+        { val:'97.96%', label:'Low-spend segment', color:'var(--amber)' },
+        { val:'288', label:'High-spend accounts', color:'var(--purple)' }
+      ]},
+      { title: 'Key Insights', list: [
+        'Account-specific normalization was critical — spending variance across accounts spans orders of magnitude',
+        'High-spending accounts (>$20K predicted) represent just 2% of accounts but require the largest credit adjustments',
+        'Model identifies stable baseline spenders vs. surge-risk accounts, supporting differentiated credit strategies',
+        'Log-scale training significantly improved numerical stability for accounts with near-zero spending'
+      ]}
+    ]
+  },
+  health: {
+    kind: 'Healthcare · NLP · LLM Research · UIUC Statistics Dept',
+    title: 'LLM-Powered Clinical Trial Prediction',
+    sub: 'Qwen-2.5 7B · 115K ClinicalTrials.gov records · Iterative LLM feature engineering',
+    illusGrad: 'radial-gradient(ellipse at 40% 40%, rgba(251,191,36,0.2) 0%, rgba(167,139,250,0.1) 60%, #0d0f1c 80%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g4a"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="g4b"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="280" cy="90" rx="240" ry="100" fill="rgba(251,191,36,0.07)" filter="url(#g4a)"/>
+      <!-- unstructured text box -->
+      <rect x="12" y="20" width="145" height="145" rx="10" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.2)" stroke-width="1.5"/>
+      <text x="85" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">Clinical Trial Text</text>
+      <line x1="24" y1="54" x2="148" y2="54" stroke="rgba(251,191,36,0.15)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="66" x2="140" y2="66" stroke="rgba(251,191,36,0.12)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="78" x2="130" y2="78" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="90" x2="145" y2="90" stroke="rgba(251,191,36,0.12)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="102" x2="120" y2="102" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="114" x2="138" y2="114" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="126" x2="110" y2="126" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="138" x2="142" y2="138" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
+      <line x1="24" y1="150" x2="125" y2="150" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
+      <!-- arrow to LLM -->
+      <path d="M157 92 L193 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
+      <!-- LLM extractor -->
+      <rect x="193" y="64" width="110" height="56" rx="10" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
+      <text x="248" y="87" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">Qwen-2.5</text>
+      <text x="248" y="103" text-anchor="middle" font-size="10" fill="#a78bfa" font-family="system-ui">7B Feature Extractor</text>
+      <text x="248" y="114" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">27 structured features</text>
+      <!-- arrow to features -->
+      <path d="M303 92 L338 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
+      <!-- feature dots scatter -->
+      <circle cx="355" cy="45"  r="7" fill="rgba(251,191,36,0.7)"  filter="url(#g4b)"/>
+      <circle cx="390" cy="72"  r="6" fill="rgba(167,139,250,0.8)" filter="url(#g4b)"/>
+      <circle cx="372" cy="100" r="8" fill="rgba(251,191,36,0.6)"  filter="url(#g4b)"/>
+      <circle cx="415" cy="55"  r="5" fill="rgba(52,211,153,0.7)"  filter="url(#g4b)"/>
+      <circle cx="400" cy="120" r="6" fill="rgba(251,191,36,0.55)" filter="url(#g4b)"/>
+      <circle cx="432" cy="88"  r="5" fill="rgba(167,139,250,0.6)" filter="url(#g4b)"/>
+      <circle cx="450" cy="45"  r="4" fill="rgba(52,211,153,0.5)"  filter="url(#g4b)"/>
+      <circle cx="460" cy="108" r="5" fill="rgba(251,191,36,0.45)" filter="url(#g4b)"/>
+      <!-- arrow to model -->
+      <path d="M475 92 L510 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
+      <!-- logistic regression -->
+      <rect x="510" y="68" width="110" height="48" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
+      <text x="565" y="88" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Logistic Reg.</text>
+      <text x="565" y="101" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">L1 regularized</text>
+      <text x="565" y="112" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">4,474 features</text>
+      <!-- feedback loop arrow -->
+      <path d="M565 116 Q565 155 248 155 Q193 155 193 120" stroke="rgba(167,139,250,0.3)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ma4)"/>
+      <text x="380" y="170" text-anchor="middle" font-size="9" fill="rgba(167,139,250,0.6)" font-family="system-ui">iterative feedback loop</text>
+      <!-- metrics -->
+      <rect x="12" y="28" width="0" height="0"/>
+      <rect x="510" y="22" width="90" height="36" rx="7" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
+      <text x="555" y="37" text-anchor="middle" font-size="11" font-weight="800" fill="#fbbf24" font-family="system-ui">115,480</text>
+      <text x="555" y="51" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">clinical trials</text>
+      <rect x="510" y="140" width="90" height="36" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
+      <text x="555" y="155" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa" font-family="system-ui">97.2%</text>
+      <text x="555" y="169" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">LLM feature imp.</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `Clinical trial success is buried in free text — eligibility criteria, intervention descriptions, study design. This project uses <strong>Qwen-2.5 7B as an autonomous feature engineer</strong>, extracting structured attributes from 115K ClinicalTrials.gov records. A supervised ML feedback loop then refines the LLM's extraction prompts, improving feature quality iteratively.` },
+      { title: 'Approach', list: [
+        '115,480 cancer trials from ClinicalTrials.gov; filtered to binary: completed (79%) vs terminated/withdrawn (21%)',
+        'Qwen-2.5 7B autonomously extracts 8–12 features per trial: study design, intervention type, patient eligibility, operational logistics',
+        'One-hot encoding of 27 LLM-standardized features → 4,424 dimensions; combined with all-MiniLM-L6-v2 embeddings (384→50 via PCA)',
+        'Logistic regression with L1 (Lasso) regularization for automatic feature selection on 4,474-dimensional space',
+        'Model feedback loop: feature importance analysis informs Iteration 2 prompt refinement'
+      ]},
+      { title: 'Results', results: [
+        { val:'0.61', label:'ROC-AUC', color:'var(--amber)' },
+        { val:'97.2%', label:'LLM feature importance', color:'var(--purple)' },
+        { val:'27', label:'Extracted features', color:'var(--mint)' },
+        { val:'115K', label:'Trials processed', color:'var(--cyan)' }
+      ]},
+      { title: 'Key Insights', list: [
+        'LLM-extracted structured features carry 97.2% of total predictive importance — far outweighing raw text embeddings',
+        'Iterative feedback loop effectively guides prompt refinement; Iteration 2 produced more consistent, granular features',
+        'L1 regularization selected only 5 of 50 embedding dimensions — confirming structured features\'s superiority',
+        'Demonstrates a generalizable pipeline: unstructured text → LLM feature extraction → interpretable ML model'
+      ]}
+    ]
+  }
+};
+
+function openModal(key) {
+  const d = MODALS[key];
+  if(!d) return;
+  let body = '';
+  d.sections.forEach(s => {
+    body += `<div class="modal-section"><div class="modal-sec-title">${s.title}</div>`;
+    if(s.body !== undefined) {
+      body += `<p class="modal-text">${s.body}</p>`;
+    } else if(s.list) {
+      body += `<ul class="modal-list">${s.list.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    } else if(s.results) {
+      body += `<div class="results-row">${s.results.map(r=>`
+        <div class="res-box">
+          <div class="res-val" style="color:${r.color}">${r.val}</div>
+          <div class="res-label">${r.label}</div>
+        </div>`).join('')}</div>`;
+    }
+    body += `</div>`;
+  });
+
+  document.getElementById('modalBox').innerHTML = `
+    <div class="modal-head">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-kind">${d.kind}</div>
+      <div class="modal-title">${d.title}</div>
+      <div class="modal-sub">${d.sub}</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-illus" style="background:${d.illusGrad}">${d.illusSvg}</div>
+      ${body}
+    </div>`;
+
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if(e && e.target !== document.getElementById('overlay')) return;
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+</body>
+</html>
