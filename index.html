@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhoomika Ravishankar</title>
+<title>Bhoomika Ravishankar — Data Scientist & ML Researcher</title>
 <style>
 :root {
   --bg:     #080910;
@@ -339,10 +339,34 @@ nav {
   background: var(--subtle); border: 1px solid var(--border); color: var(--muted);
 }
 
-.proj-more {
-  font-size: 0.82rem; font-weight: 600; color: var(--cyan);
-  display: flex; align-items: center; gap: 0.35rem;
+/* ── PROJECTS ── */
+/* ── PROJECTS ── */
+.projects-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem;
 }
+.proj-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  cursor: pointer; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex; flex-direction: column;
+}
+.proj-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+  border-color: rgba(255,255,255,0.13);
+}
+.proj-illus {
+  width: 100%; height: 200px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.proj-illus svg { width: 100%; height: 100%; }
+.proj-body { padding: 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
+.proj-kind { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+.proj-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
+.proj-desc { font-size: 1.052rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; flex: 1; }
+.proj-nums { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.pnum { display: flex; flex-direction: column; }
+.pnum-v { font-size: 1.25rem; font-weight: 800; line-height: 1; }
+.pnum-l { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.15rem; }
 
 .proj-links {
   display: flex;
@@ -378,6 +402,10 @@ nav {
   height: 16px;
 }
 
+.proj-more {
+  font-size: 0.82rem; font-weight: 600; color: var(--cyan);
+  display: flex; align-items: center; gap: 0.35rem;
+}
 <!-- PROJECTS -->
 <div class="wrap section" id="projects">
   <div class="sec-label">Projects</div>
@@ -1920,3 +1948,4 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
 </script>
 </body>
 </html>
+
