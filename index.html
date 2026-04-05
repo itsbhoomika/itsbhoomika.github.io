@@ -213,18 +213,38 @@ nav {
 .about-bio strong { color: var(--text); }
 .edu-stack { display: flex; flex-direction: column; gap: 1.05rem; margin-top: 0.5rem; }
 .edu-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.4rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.3rem 1.6rem;  /* was 1.1rem 1.4rem */
 }
 .edu-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
-.edu-deg { font-size: 1.055rem; font-weight: 600; color: var(--text); }
-.edu-gpa {
-  font-size: 0.75rem; font-weight: 700; color: var(--mint);
-  background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25);
-  padding: 0.15rem 0.55rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
+.edu-deg {
+  font-size: 1.1rem;  /* was 0.95rem */
+  font-weight: 600;
+  color: var(--text);
 }
-.edu-school { font-size: 0.82rem; color: var(--cyan); margin-top: 0.25rem; }
-.edu-year { font-size: 0.78rem; color: var(--muted); margin-top: 0.15rem; }
-
+  .edu-gpa {
+  font-size: 0.82rem;  /* was 0.75rem */
+  font-weight: 700;
+  color: var(--mint);
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.edu-school {
+  font-size: 0.92rem;  /* was 0.82rem */
+  color: var(--cyan);
+  margin-top: 0.25rem;
+}
+.edu-year {
+  font-size: 0.85rem;  /* was 0.78rem */
+  color: var(--muted);
+  margin-top: 0.15rem;
+}
 /* ── EXPERIENCE TIMELINE ── */
 .timeline-wrap {
   position: relative;
@@ -506,43 +526,39 @@ footer {
 
 <!-- ABOUT -->
 <div class="wrap section" id="about">
-  <div class="sec-label">About</div>
+  <div class="sec-label">ABOUT</div>
   <h2 class="sec-title">Background</h2>
-  <div class="about-grid">
-    <div class="about-left">
-      <div class="about-contact-links">
-        <a href="mailto:br36@illinois.edu" class="about-link">✉ br36@illinois.edu</a>
-        <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="about-link">↗ LinkedIn</a>
-        <a href="https://github.com/itsbhoomika" target="_blank" class="about-link">↗ Github</a>
-        <a href="https://huggingface.co/itsbhoomika" target="_blank" class="about-link">↗ HuggingFace</a>
+  
+  <div class="about-contact-links" style="margin-bottom: 1.5rem;">
+    <a href="mailto:br36@illinois.edu" class="about-link">✉ br36@illinois.edu</a>
+    <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="about-link">↗ LinkedIn</a>
+    <a href="https://github.com/itsbhoomika" target="_blank" class="about-link">↗ Github</a>
+    <a href="https://huggingface.co/itsbhoomika" target="_blank" class="about-link">↗ HuggingFace</a>
+  </div>
+  
+  <p class="about-bio">
+    I'm a <strong>Data Scientist & ML Researcher at UIUC</strong>, concentrating in Data Science within my Master's in Information Management. My work lives at the intersection of <strong>statistical modeling, NLP, and large-scale ML systems</strong> — from fine-tuning LLMs with preference optimization to building financial forecasting models that handle billions in portfolio risk.
+  </p>
+  
+  <div class="edu-stack">
+    <div class="edu-card">
+      <div class="edu-row">
+        <div>
+          <div class="edu-deg">MS in Information Management</div>
+          <div style="font-size:0.88rem;color:var(--muted);margin-top:0.1rem">Data Science Concentration</div>
+        </div>
+        <div class="edu-gpa">4.0 GPA</div>
       </div>
+      <div class="edu-school">University of Illinois Urbana-Champaign</div>
+      <div class="edu-year">Aug 2024 – May 2026 (expected)</div>
     </div>
-    <div class="about-right">
-      <p class="about-bio">
-        I'm a <strong>Data Scientist & ML Researcher at UIUC </strong>, concentrating in Data Science within my Master's in Information Management. My work lives at the intersection of <strong>statistical modeling, NLP, and large-scale ML systems</strong> — from fine-tuning LLMs with preference optimization to building financial forecasting models that handle billions in portfolio risk.<br><br>
-      </p>
-      <div class="edu-stack">
-        <div class="edu-card">
-          <div class="edu-row">
-            <div>
-              <div class="edu-deg">MS in Information Management</div>
-              <div style="font-size:0.82rem;color:var(--muted);margin-top:0.1rem">Data Science Concentration</div>
-            </div>
-            <div class="edu-gpa">4.0 GPA</div>
-          </div>
-          <div class="edu-school">University of Illinois Urbana-Champaign</div>
-          <div class="edu-year">Aug 2024 – May 2026 (expected)</div>
-        </div>
-        <div class="edu-card">
-          <div class="edu-row">
-            <div><div class="edu-deg">BE in Computer Engineering</div></div>
-            <div style="font-size:0.82rem;color:var(--muted);margin-top:0.1rem">Data Science Concentration</div>
-            <div class="edu-gpa">9.12 / 10</div>
-          </div>
-          <div class="edu-school">Savitribai Phule Pune University, India</div>
-          <div class="edu-year">August 2020 – June 2024</div>
-        </div>
+    <div class="edu-card">
+      <div class="edu-row">
+        <div><div class="edu-deg">BE in Computer Engineering</div></div>
+        <div class="edu-gpa">9.12 / 10</div>
       </div>
+      <div class="edu-school">Savitribai Phule Pune University, India</div>
+      <div class="edu-year">August 2020 – June 2024</div>
     </div>
   </div>
 </div>
