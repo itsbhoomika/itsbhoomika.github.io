@@ -52,13 +52,28 @@ nav {
 .nav-links a:hover { color: var(--cyan); }
 
 /* ── LAYOUT ── */
-.wrap { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 2rem; }
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-/* ── HERO ── */
+/* Make sure hero has same max-width */
 #hero {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto; padding: 0 2rem;
-  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 5rem;
+  position: relative;
+  z-index: 1;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding-top: 5rem;
 }
 .hero-content {
   display: flex;
@@ -623,6 +638,7 @@ footer {
 }
 
 /* Education Grid */
+/* Education Grid */
 .edu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -645,21 +661,23 @@ footer {
   box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
+/* Horizontal gradient bar at TOP */
 .edu-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 4px;
-  height: 100%;
+  right: 0;
+  height: 3px;
+  width: 100%;
 }
 
 .edu-card.uiuc::before {
-  background: linear-gradient(to bottom, #00d4ff, #a78bfa);
+  background: linear-gradient(90deg, #00d4ff, #a78bfa);
 }
 
 .edu-card.pune::before {
-  background: linear-gradient(to bottom, #34d399, #fbbf24);
+  background: linear-gradient(90deg, #34d399, #fbbf24);
 }
 
 .edu-icon {
