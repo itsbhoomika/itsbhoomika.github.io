@@ -1397,6 +1397,129 @@ footer {
       </div>
     </div>
 
+    <!-- 5. Travel Expense Reimbursement -->
+    <div class="proj-card" onclick="openModal('travel')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg5" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f5"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow5">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <marker id="arr5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
+            </marker>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg5)" filter="url(#f5)"/>
+          <!-- MySQL cylinder -->
+          <ellipse cx="95" cy="52" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <path d="M55 52 L55 100 Q55 113 95 113 Q135 113 135 100 L135 52" fill="rgba(52,211,153,0.05)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <ellipse cx="95" cy="100" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <text x="95" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">MySQL</text>
+          <!-- Migration arrow -->
+          <path d="M140 78 L185 78" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr5)"/>
+          <text x="163" y="70" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">migrate</text>
+          <!-- Neo4j graph -->
+          <circle cx="232" cy="60" r="22" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.5)" stroke-width="2" filter="url(#glow5)"/>
+          <text x="232" y="65" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="system-ui" font-weight="600">Employee</text>
+          <circle cx="295" cy="95" r="20" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
+          <text x="295" y="100" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="system-ui" font-weight="600">Travel</text>
+          <circle cx="220" cy="128" r="18" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.5)" stroke-width="2"/>
+          <text x="220" y="133" text-anchor="middle" font-size="9" fill="#f472b6" font-family="system-ui" font-weight="600">Vehicle</text>
+          <circle cx="282" cy="145" r="16" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.5)" stroke-width="2"/>
+          <text x="282" y="150" text-anchor="middle" font-size="8.5" fill="#fbbf24" font-family="system-ui" font-weight="600">Expense</text>
+          <line x1="252" y1="74" x2="277" y2="79" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+          <line x1="232" y1="82" x2="225" y2="111" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+          <line x1="236" y1="143" x2="267" y2="140" stroke="rgba(244,114,182,0.5)" stroke-width="1.5"/>
+          <line x1="295" y1="115" x2="288" y2="130" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="260" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Neo4j</text>
+          <!-- result badges -->
+          <rect x="336" y="32" width="85" height="28" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="378" y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">50% ↓ errors</text>
+          <rect x="336" y="70" width="85" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
+          <text x="378" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">20% ↓ redun.</text>
+          <rect x="336" y="108" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="378" y="126" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">1K+ records</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Database · Graph DB · MySQL · Neo4j · UIUC</div>
+        <div class="proj-title">Travel Expense Reimbursement System</div>
+        <div class="proj-desc">Designed a MySQL relational database managing 1,000+ travel requests, then migrated to Neo4j graph database — resolving 20% data redundancy and enabling relationship visualization across employees, travel plans, and expenses.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">1K+</span><span class="pnum-l">Records managed</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">50%</span><span class="pnum-l">Fewer errors</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">20%</span><span class="pnum-l">Less redundancy</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
+    <!-- 6. Customer Analytics -->
+    <div class="proj-card" onclick="openModal('analytics')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg6" cx="50%" cy="45%" r="60%">
+              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f6"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glow6">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg6)" filter="url(#f6)"/>
+          <!-- faint axis -->
+          <line x1="40" y1="155" x2="410" y2="155" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <line x1="40" y1="155" x2="40" y2="30" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+          <!-- bars (A/B test groups) -->
+          <rect x="60" y="100" width="30" height="55" rx="4" fill="rgba(244,114,182,0.15)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+          <rect x="100" y="75" width="30" height="80" rx="4" fill="rgba(244,114,182,0.55)" stroke="rgba(244,114,182,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
+          <rect x="155" y="90" width="30" height="65" rx="4" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+          <rect x="195" y="60" width="30" height="95" rx="4" fill="rgba(167,139,250,0.55)" stroke="rgba(167,139,250,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
+          <rect x="250" y="80" width="30" height="75" rx="4" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+          <rect x="290" y="50" width="30" height="105" rx="4" fill="rgba(0,212,255,0.55)" stroke="rgba(0,212,255,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
+          <!-- A/B labels -->
+          <text x="75" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
+          <text x="115" y="170" text-anchor="middle" font-size="9" fill="#f472b6" font-family="monospace">B</text>
+          <text x="170" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
+          <text x="210" y="170" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="monospace">B</text>
+          <text x="265" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
+          <text x="305" y="170" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="monospace">B</text>
+          <!-- trend line overlay -->
+          <polyline points="85,125 170,107 255,95 335,72" fill="none" stroke="rgba(251,191,36,0.7)" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 3" filter="url(#glow6)"/>
+          <!-- badge -->
+          <rect x="338" y="55" width="85" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5"/>
+          <text x="380" y="73" text-anchor="middle" font-size="11" font-weight="800" fill="#f472b6" font-family="system-ui">500K+ rows</text>
+          <rect x="338" y="93" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="380" y="111" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">+23% perf.</text>
+          <!-- dots -->
+          <circle cx="40" cy="42" r="2.5" fill="rgba(244,114,182,0.2)"/>
+          <circle cx="415" cy="160" r="2" fill="rgba(0,212,255,0.15)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Analytics · A/B Testing · SQL · Python</div>
+        <div class="proj-title">Customer Behavior Analytics & Experimentation</div>
+        <div class="proj-desc">Built a 500K+ record analytical dataset from 10+ survey sources, applied statistical modeling on 100M+ financial records for risk detection, and designed A/B testing frameworks to drive data-driven strategy decisions.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">500K+</span><span class="pnum-l">Record dataset</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">+23%</span><span class="pnum-l">Predictive gain</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">90%</span><span class="pnum-l">Risk detection↑</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
     <!-- 4. LLM Healthcare -->
     <div class="proj-card" onclick="openModal('health')">
       <div class="proj-illus">
@@ -2037,8 +2160,94 @@ lstm: {
         'Implemented data validation and compliance checks for organizational policies'
       ]}
     ]
-  };
-  
+  },
+
+  analytics: {
+    kind: 'Analytics · A/B Testing · SQL · Python · Synchrony Financial',
+    title: 'Customer Behavior Analytics & Experimentation',
+    sub: 'SQL · Python · PySpark · XGBoost · 500K+ records · 100M+ financial records',
+    illusGrad: 'radial-gradient(ellipse at 55% 40%, rgba(244,114,182,0.2) 0%, rgba(0,212,255,0.08) 60%, #0d0f1c 80%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g6a"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="g6b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma6" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="90" rx="270" ry="100" fill="rgba(244,114,182,0.06)" filter="url(#g6a)"/>
+      <!-- data ingestion box -->
+      <rect x="10" y="18" width="125" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+      <text x="72" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">10+ Survey Datasets</text>
+      <rect x="10" y="54" width="125" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+      <text x="72" y="72" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">100M+ Financial Records</text>
+      <rect x="10" y="90" width="125" height="28" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+      <text x="72" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Transaction-Level Data</text>
+      <!-- arrows to pipeline -->
+      <path d="M135 32 L168 60" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M135 68 L168 68" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M135 104 L168 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- pipeline box -->
+      <rect x="168" y="44" width="115" height="48" rx="9" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
+      <text x="225" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">ETL Pipeline</text>
+      <text x="225" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">SQL · Python · PySpark</text>
+      <text x="225" y="88" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">500K+ record dataset</text>
+      <path d="M283 68 L318 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma6)"/>
+      <!-- feature engineering box -->
+      <rect x="318" y="44" width="115" height="48" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
+      <text x="375" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Feature Engineering</text>
+      <text x="375" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Statistical modeling</text>
+      <text x="375" y="88" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">+23% predictive gain</text>
+      <path d="M433 55 L463 38" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M433 80 L463 95" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <!-- outputs -->
+      <rect x="463" y="18" width="175" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+      <text x="550" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">Risk Model · 90% Early Detection ↑</text>
+      <rect x="463" y="78" width="175" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
+      <text x="550" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">A/B Tests · Time-Series Evals</text>
+      <!-- A/B test mini chart -->
+      <rect x="10" y="138" width="145" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
+      <rect x="20" y="150" width="18" height="16" rx="3" fill="rgba(244,114,182,0.2)" stroke="rgba(244,114,182,0.4)" stroke-width="1"/>
+      <rect x="42" y="143" width="18" height="23" rx="3" fill="rgba(244,114,182,0.55)" stroke="rgba(244,114,182,0.7)" stroke-width="1" filter="url(#g6b)"/>
+      <rect x="66" y="147" width="18" height="19" rx="3" fill="rgba(167,139,250,0.2)" stroke="rgba(167,139,250,0.4)" stroke-width="1"/>
+      <rect x="88" y="140" width="18" height="26" rx="3" fill="rgba(167,139,250,0.55)" stroke="rgba(167,139,250,0.7)" stroke-width="1" filter="url(#g6b)"/>
+      <text x="120" y="160" font-size="9" fill="#7c8ca8" font-family="monospace">A/B variants</text>
+      <!-- metrics -->
+      <rect x="163" y="138" width="90" height="36" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.2)"/>
+      <text x="208" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#f472b6" font-family="system-ui">500K+</text>
+      <text x="208" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">analytical records</text>
+      <rect x="261" y="138" width="90" height="36" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
+      <text x="306" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">90%</text>
+      <text x="306" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">risk detection↑</text>
+      <rect x="359" y="138" width="90" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="404" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">+23%</text>
+      <text x="404" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">predictive gain</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `Built a comprehensive customer analytics and experimentation platform by integrating <strong>10+ survey datasets</strong> and <strong>100M+ financial records</strong> using SQL and Python into a unified 500K+ record analytical dataset. Applied statistical modeling and feature engineering to surface behavioral patterns, improve predictive performance by <strong>23%</strong>, and enable early risk detection with a <strong>90% improvement</strong>.` },
+      { title: 'Approach', list: [
+        'Queried, cleaned, and integrated 10+ survey datasets using SQL and Python to build a 500K+ record analytical dataset for customer behavior analysis, KPI tracking, and cross-functional decision support',
+        'Built predictive models on 100M+ financial records using Python and statistical learning methods, improving early risk detection by 90% and model accuracy by 12% through careful metric selection and feature evaluation',
+        'Applied feature engineering and statistical modeling on transaction-level data to improve predictive performance by 23%, surfacing behavioral patterns on noisy real-world data',
+        'Designed and analyzed A/B tests and time-series evaluations to assess business initiatives, define success metrics, and translate results into actionable strategy decisions',
+        'Partnered with cross-functional teams to define hypotheses, select evaluation metrics, and standardize analytical workflows for recurring reporting and experimentation'
+      ]},
+      { title: 'Results', results: [
+        { val:'500K+', label:'Analytical records', color:'var(--pink)' },
+        { val:'+23%', label:'Predictive improvement', color:'var(--mint)' },
+        { val:'90%', label:'Early risk detection↑', color:'var(--cyan)' },
+        { val:'+12%', label:'Model accuracy gain', color:'var(--purple)' }
+      ]},
+      { title: 'Key Insights', list: [
+        'Integrating survey data with transaction records unlocked behavioral signals unavailable in either dataset alone',
+        'Feature engineering on noisy transaction data was the primary driver of the 23% predictive improvement',
+        'A/B testing framework standardized hypothesis evaluation across teams, reducing time-to-decision significantly',
+        'Time-series evaluation revealed seasonal patterns in customer behavior that informed credit limit strategies',
+        'Statistical modeling on 100M+ records required careful sampling and distributed computation to maintain performance'
+      ]}
+    ]
+  }
+};
+
 function openModal(key) {
   const d = MODALS[key];
   if(!d) return;
