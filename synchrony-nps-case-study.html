@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synchrony Case Study: NPS Driver Modeling & Survey Intelligence</title>
+<style>
+:root {
+  --bg:     #080910;
+  --bg2:    #0d0f1c;
+  --card:   #0f1120;
+  --border: rgba(255,255,255,0.07);
+  --cyan:   #00d4ff;
+  --purple: #a78bfa;
+  --mint:   #34d399;
+  --pink:   #f472b6;
+  --amber:  #fbbf24;
+  --text:   #e2e8f0;
+  --muted:  #7c8ca8;
+  --subtle: #1a1e2e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(8,9,16,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-size: 1rem; font-weight: 800; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; }
+.nav-back { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+.nav-back:hover { color: var(--cyan); }
+
+/* ── LAYOUT ── */
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto; padding: 0 2rem;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: flex-start;
+  text-align: left; padding-top: 8rem; padding-bottom: 4rem;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 100px; padding: 0.4rem 1rem;
+  font-size: 0.82rem; color: var(--purple); letter-spacing: 0.04em; margin-bottom: 1.8rem;
+}
+.hero-chip::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--amber); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.3; transform:scale(0.75); }
+}
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.2rem;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--purple), var(--amber));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--muted); max-width: 660px;
+  line-height: 1.8; margin-bottom: 2.5rem;
+}
+.hero-meta {
+  display: flex; gap: 1.5rem; flex-wrap: wrap;
+  font-size: 0.82rem; color: var(--muted);
+}
+.hero-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+/* ── CONTENT SECTIONS ── */
+.section { padding: 4.5rem 0; border-top: 1px solid var(--border); }
+.sec-title { font-size: 2rem; font-weight: 800; margin-bottom: 1.8rem; line-height: 1.2; }
+.sec-label {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--purple); font-weight: 700; margin-bottom: 0.75rem;
+}
+
+/* ── METRICS GRID ── */
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+.metric-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.5rem 1.3rem; text-align: center;
+  position: relative; overflow: hidden;
+}
+.metric-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.metric-card.purple::before { background: linear-gradient(90deg, var(--purple), var(--amber)); }
+.metric-card.cyan::before   { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+.metric-card.mint::before   { background: linear-gradient(90deg, var(--mint), var(--cyan)); }
+.metric-card.amber::before  { background: linear-gradient(90deg, var(--amber), var(--pink)); }
+.metric-card.pink::before   { background: linear-gradient(90deg, var(--pink), var(--purple)); }
+.metric-value {
+  font-size: 2rem; font-weight: 800; margin-bottom: 0.4rem; line-height: 1;
+}
+.metric-card.purple .metric-value { color: var(--purple); }
+.metric-card.cyan   .metric-value { color: var(--cyan); }
+.metric-card.mint   .metric-value { color: var(--mint); }
+.metric-card.amber  .metric-value { color: var(--amber); }
+.metric-card.pink   .metric-value { color: var(--pink); }
+.metric-label { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+/* ── TEXT STYLES ── */
+.cs-text { color: var(--muted); line-height: 1.85; margin-bottom: 1.5rem; }
+.cs-text strong { color: var(--text); font-weight: 600; }
+.cs-text .hl-purple { color: var(--purple); font-weight: 600; }
+.cs-text .hl-amber  { color: var(--amber);  font-weight: 600; }
+.cs-text .hl-cyan   { color: var(--cyan);   font-weight: 600; }
+.cs-text .hl-mint   { color: var(--mint);   font-weight: 600; }
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  border-left: 3px solid var(--purple);
+  padding: 1.2rem 1.8rem; margin: 2rem 0;
+  background: rgba(167,139,250,0.05); border-radius: 0 12px 12px 0;
+  font-size: 1.05rem; color: var(--text); line-height: 1.75; font-style: italic;
+}
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.4rem; margin-bottom: 1.5rem;
+  overflow-x: auto; font-family: 'Menlo', 'Courier New', monospace;
+  font-size: 0.85rem; color: #a8d8ea; line-height: 1.65;
+}
+.code-block .cm { color: #4b5563; }
+.code-block .kw { color: var(--purple); }
+.code-block .st { color: var(--mint); }
+.code-block .nu { color: var(--amber); }
+.code-block .fn { color: var(--cyan); }
+
+/* ── PHASES TIMELINE ── */
+.phases-timeline { position: relative; padding-left: 2.5rem; margin-bottom: 2rem; }
+.phases-timeline::before {
+  content: ''; position: absolute; left: 12px; top: 20px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--purple) 0%, var(--amber) 50%, var(--mint) 100%);
+  opacity: 0.3;
+}
+.phase-item { position: relative; margin-bottom: 2.2rem; }
+.phase-dot {
+  position: absolute; left: -2.5rem; top: 0.5rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 0 3px rgba(167,139,250,0.2), 0 0 12px rgba(167,139,250,0.35);
+}
+.phase-dot.amber { background: var(--amber); box-shadow: 0 0 0 3px rgba(251,191,36,0.2), 0 0 12px rgba(251,191,36,0.35); }
+.phase-dot.mint  { background: var(--mint);  box-shadow: 0 0 0 3px rgba(52,211,153,0.2),  0 0 12px rgba(52,211,153,0.35); }
+.phase-dot.cyan  { background: var(--cyan);  box-shadow: 0 0 0 3px rgba(0,212,255,0.2),   0 0 12px rgba(0,212,255,0.35); }
+.phase-dot.pink  { background: var(--pink);  box-shadow: 0 0 0 3px rgba(244,114,182,0.2), 0 0 12px rgba(244,114,182,0.35); }
+.phase-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.phase-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
+.phase-desc strong { color: var(--text); }
+
+/* ── INSIGHTS BOX ── */
+.insights-box {
+  background: linear-gradient(135deg, rgba(167,139,250,0.07) 0%, rgba(251,191,36,0.04) 100%);
+  border: 1px solid rgba(167,139,250,0.15); border-radius: 14px;
+  padding: 1.8rem; margin: 2rem 0;
+}
+.insights-title { font-size: 1rem; font-weight: 700; color: var(--purple); margin-bottom: 0.9rem; }
+.insights-list { list-style: none; }
+.insights-list li {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.75;
+  padding-left: 1.4rem; position: relative; margin-bottom: 0.85rem;
+}
+.insights-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--mint); font-weight: 800;
+}
+.insights-list li strong { color: var(--text); }
+
+/* ── COMPARISON TABLE ── */
+.compare-table {
+  width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+}
+.compare-table th {
+  text-align: left; padding: 0.75rem 1rem;
+  background: var(--subtle); color: var(--muted);
+  font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+.compare-table td {
+  padding: 0.85rem 1rem; border-bottom: 1px solid var(--border);
+  color: var(--muted); vertical-align: top; line-height: 1.55;
+}
+.compare-table td:first-child { color: var(--text); font-weight: 600; }
+.compare-table td.good { color: var(--mint); font-weight: 600; }
+.compare-table td.warn { color: var(--amber); font-weight: 600; }
+.compare-table tr:last-child td { border-bottom: none; }
+
+/* ── RESULT ROW ── */
+.result-row {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin-bottom: 1.5rem;
+}
+.result-item {
+  background: var(--subtle); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+}
+.result-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; }
+.result-value { font-size: 1.75rem; font-weight: 800; }
+.result-item.purple .result-value { color: var(--purple); }
+.result-item.amber  .result-value { color: var(--amber); }
+.result-item.mint   .result-value { color: var(--mint); }
+.result-item.cyan   .result-value { color: var(--cyan); }
+
+/* ── TECH STACK ── */
+.tech-stack { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; }
+.tech-tag {
+  font-size: 0.83rem; padding: 0.33rem 0.8rem; border-radius: 100px;
+  background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25);
+  color: var(--purple); font-weight: 500;
+}
+.tech-tag.amber { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.25); color: var(--amber); }
+.tech-tag.cyan  { background: rgba(0,212,255,0.08);  border-color: rgba(0,212,255,0.25);  color: var(--cyan); }
+.tech-tag.mint  { background: rgba(52,211,153,0.08); border-color: rgba(52,211,153,0.25); color: var(--mint); }
+
+/* ── CAUSAL BOX ── */
+.causal-box {
+  background: linear-gradient(135deg, rgba(52,211,153,0.06) 0%, rgba(0,212,255,0.04) 100%);
+  border: 1px solid rgba(52,211,153,0.2); border-radius: 14px;
+  padding: 2rem; margin: 2rem 0;
+}
+.causal-box h4 { font-size: 1rem; font-weight: 700; color: var(--mint); margin-bottom: 0.5rem; }
+.causal-box p { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
+.causal-box p strong { color: var(--text); }
+.causal-stat {
+  display: inline-flex; align-items: baseline; gap: 0.4rem;
+  margin-top: 1rem; background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.25); border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+}
+.causal-stat .val { font-size: 1.5rem; font-weight: 800; color: var(--mint); }
+.causal-stat .lbl { font-size: 0.82rem; color: var(--muted); }
+
+/* ── IMPACT BOX ── */
+.impact-box {
+  background: linear-gradient(135deg, rgba(251,191,36,0.08) 0%, rgba(167,139,250,0.05) 100%);
+  border: 1px solid rgba(251,191,36,0.2); border-radius: 16px;
+  padding: 2rem; margin: 2rem 0;
+}
+.impact-box h4 { font-size: 1rem; font-weight: 700; color: var(--amber); margin-bottom: 1rem; }
+.impact-list { list-style: none; }
+.impact-list li {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.75;
+  padding-left: 1.4rem; position: relative; margin-bottom: 0.75rem;
+}
+.impact-list li::before {
+  content: '→'; position: absolute; left: 0; color: var(--amber); font-weight: 700;
+}
+.impact-list li strong { color: var(--text); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center; padding: 1.5rem; font-size: 0.8rem; color: var(--muted);
+  border-top: 1px solid var(--border); margin-top: 3rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .result-row { grid-template-columns: 1fr; }
+  .hero { padding-top: 6rem; }
+  nav { padding: 0.8rem 1.5rem; }
+  .wrap { padding: 0 1.5rem; }
+}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--subtle); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">BR</a>
+  <a href="index.html#projects" class="nav-back">← Back to Projects</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="wrap hero">
+  <div class="hero-chip">Case Study · Synchrony Financial · Customer Analytics</div>
+  <h1 class="hero-title">NPS Driver Modeling:<br><span>Replacing a Vendor Model with Internal Intelligence</span></h1>
+  <p class="hero-sub">How I built an internal NPS prediction engine from scratch — migrating 100M+ records out of legacy SAS, uncovering structural data problems that invalidated prior analyses, and delivering causally-validated survey insights that changed how Synchrony designs its customer surveys.</p>
+  <div class="hero-meta">
+    <span>&#128198; Synchrony Financial · May 2025 – Present</span>
+    <span>&#128204; Champaign, IL</span>
+    <span>&#128202; Customer Analytics</span>
+  </div>
+</section>
+
+<!-- ── IMPACT AT A GLANCE ── -->
+<div class="wrap section">
+  <div class="sec-label">Impact at a Glance</div>
+  <h2 class="sec-title">What This Project Delivered</h2>
+  <div class="metrics-grid">
+    <div class="metric-card purple">
+      <div class="metric-value">87%</div>
+      <div class="metric-label">ETL runtime reduction<br>2 hr → 15 min</div>
+    </div>
+    <div class="metric-card cyan">
+      <div class="metric-value">100M+</div>
+      <div class="metric-label">Account-level records unified across 11 survey datasets</div>
+    </div>
+    <div class="metric-card amber">
+      <div class="metric-value">0.43</div>
+      <div class="metric-label">R² (Lasso) on Apply Experience Survey NPS drivers</div>
+    </div>
+    <div class="metric-card mint">
+      <div class="metric-value">−0.001</div>
+      <div class="metric-label">Placebo refutation effect — confirming genuine causal signal</div>
+    </div>
+    <div class="metric-card pink">
+      <div class="metric-value">Adopted</div>
+      <div class="metric-label">Findings adopted by customer analytics leadership to redesign survey structure</div>
+    </div>
+  </div>
+  <p class="cs-text">This project started with a single mandate: <strong>replace an external consulting firm's NPS model with something we own internally.</strong> What followed was a full-stack data science engagement — part infrastructure rebuild, part statistical investigation, part causal inference — that ended with a decision by analytics leadership to redesign the survey instrument itself based on what the model found.</p>
+</div>
+
+<!-- ── THE PROBLEM ── -->
+<div class="wrap section">
+  <div class="sec-label">Context</div>
+  <h2 class="sec-title">Why the Vendor Model Had to Go</h2>
+  <p class="cs-text">Synchrony was paying a third-party consulting firm to deliver a black-box NPS driver model on a recurring basis. The outputs were used to understand which survey questions most influenced customer satisfaction — but the approach had three compounding problems:</p>
+  <div class="phases-timeline">
+    <div class="phase-item">
+      <div class="phase-dot"></div>
+      <div class="phase-title">No Internal Ownership</div>
+      <div class="phase-desc">The model lived entirely with the vendor. Every methodology question required a consultant call. There was no internal ability to re-run, audit, or adapt the model to new survey designs — making iterative product improvement nearly impossible.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot amber"></div>
+      <div class="phase-title">SAS-Locked Infrastructure</div>
+      <div class="phase-desc">All data prep lived in legacy <strong>SAS/SQL workflows</strong> — slow, brittle, and requiring specialist knowledge to maintain. The ETL pipeline took over <strong>2 hours to run</strong>, and schema mismatches between the 11 survey datasets caused silent deduplication failures that went undetected.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot mint"></div>
+      <div class="phase-title">Unknown Data Quality</div>
+      <div class="phase-desc">No one had done a systematic analysis of NPS distribution or survey coverage quality. The existing model inherited whatever problems were in the raw data — including <strong>90% sparse coverage</strong> at the account level, which we later discovered was invalidating the account-level modeling granularity.</div>
+    </div>
+  </div>
+  <div class="pull-quote">"Before I could model anything, I had to figure out whether the data was even modelable. That turned out to be the harder problem."</div>
+</div>
+
+<!-- ── ETL MIGRATION ── -->
+<div class="wrap section">
+  <div class="sec-label">Phase 1 · Infrastructure</div>
+  <h2 class="sec-title">Rebuilding the Data Foundation</h2>
+  <p class="cs-text">The first task was migrating the entire data pipeline from SAS/SQL to Python — not just a line-for-line port, but a ground-up rebuild designed for scalability, reproducibility, and debuggability.</p>
+
+  <div class="result-row">
+    <div class="result-item purple">
+      <div class="result-label">Legacy SAS/SQL runtime</div>
+      <div class="result-value">~2 hr</div>
+    </div>
+    <div class="result-item mint">
+      <div class="result-label">Python ETL runtime</div>
+      <div class="result-value">15 min</div>
+    </div>
+    <div class="result-item cyan">
+      <div class="result-label">Records unified</div>
+      <div class="result-value">100M+</div>
+    </div>
+    <div class="result-item amber">
+      <div class="result-label">Survey datasets integrated</div>
+      <div class="result-value">11</div>
+    </div>
+  </div>
+
+  <p class="cs-text">The pipeline ingests and joins <strong>11 distinct survey datasets</strong> with account-level transaction records — each survey with its own schema, naming conventions, and coverage patterns. Key engineering challenges:</p>
+
+  <div class="phases-timeline">
+    <div class="phase-item">
+      <div class="phase-dot cyan"></div>
+      <div class="phase-title">Schema Mismatch Resolution</div>
+      <div class="phase-desc">Different surveys encoded the same NPS question with different field names, data types, and response scales. I built a schema normalization layer that mapped each survey's question format to a canonical representation — catching ~6 variants of "question ID" fields alone.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot amber"></div>
+      <div class="phase-title">Deduplication at Scale</div>
+      <div class="phase-desc">The original SAS pipeline had a latent deduplication bug — <strong>accounts with multiple survey responses</strong> in the same window were being counted multiple times. Fixing this required account-level deduplication logic before any aggregation step, which changed the effective dataset size.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot mint"></div>
+      <div class="phase-title">Modular, Reproducible Design</div>
+      <div class="phase-desc">Built as a modular Python pipeline: separate stages for ingestion, normalization, join, deduplication, and feature assembly. Each stage writes a checkpoint, making it easy to debug a single stage without re-running the full 100M+ row pipeline.</div>
+    </div>
+  </div>
+
+  <div class="code-block"><span class="cm"># Deduplication: keep most recent response per account per survey window</span>
+survey_df = (
+    raw_df
+    .<span class="fn">sort_values</span>([<span class="st">'account_id'</span>, <span class="st">'survey_id'</span>, <span class="st">'response_date'</span>], ascending=[<span class="kw">True</span>, <span class="kw">True</span>, <span class="kw">False</span>])
+    .<span class="fn">drop_duplicates</span>(subset=[<span class="st">'account_id'</span>, <span class="st">'survey_id'</span>], keep=<span class="st">'first'</span>)
+)
+
+<span class="cm"># Schema normalization across 11 survey sources</span>
+FIELD_MAP = {
+    <span class="st">'q_nps'</span>: [<span class="st">'nps_score'</span>, <span class="st">'net_promoter'</span>, <span class="st">'nps_rating'</span>, <span class="st">'csat_nps'</span>],
+    <span class="st">'q_id'</span>:  [<span class="st">'question_id'</span>, <span class="st">'qid'</span>, <span class="st">'q_num'</span>, <span class="st">'survey_qid'</span>],
+    <span class="cm"># ...</span>
+}
+<span class="kw">for</span> canonical, variants <span class="kw">in</span> FIELD_MAP.items():
+    <span class="kw">for</span> v <span class="kw">in</span> variants:
+        <span class="kw">if</span> v <span class="kw">in</span> df.columns:
+            df = df.<span class="fn">rename</span>(columns={v: canonical})
+            <span class="kw">break</span></div>
+
+  <p class="cs-text">The 87% runtime reduction came primarily from <strong>vectorized pandas operations replacing SAS loops</strong>, parallel ingestion of survey files, and smarter join ordering that filtered before merging instead of after. The resulting dataset is a unified 100M+ row analytical base table joinable by account ID and survey window.</p>
+
+  <div class="tech-stack">
+    <span class="tech-tag">Python</span>
+    <span class="tech-tag">pandas</span>
+    <span class="tech-tag cyan">SQL</span>
+    <span class="tech-tag amber">SAS (legacy)</span>
+    <span class="tech-tag mint">ETL Pipeline</span>
+    <span class="tech-tag">Schema Normalization</span>
+    <span class="tech-tag">Deduplication</span>
+  </div>
+</div>
+
+<!-- ── EXPLORATORY ANALYSIS ── -->
+<div class="wrap section">
+  <div class="sec-label">Phase 2 · Discovery</div>
+  <h2 class="sec-title">What the Data Was Actually Telling Us</h2>
+  <p class="cs-text">With a clean pipeline in place, I ran systematic univariate and multivariate analysis across all 10+ surveys. Two findings immediately changed the modeling strategy.</p>
+
+  <div class="phases-timeline">
+    <div class="phase-item">
+      <div class="phase-dot"></div>
+      <div class="phase-title">Finding 1: Heavily Skewed NPS Targets</div>
+      <div class="phase-desc">NPS scores across most surveys were severely right-skewed — the majority of responses clustered at 9 and 10, with very few detractors (0–6). This matters because <strong>standard regression on skewed targets inflates apparent fit</strong>. Any model claiming high R² on this distribution needed to be treated with suspicion. This finding informed our choice to log-transform the NPS target before modeling and to evaluate MAE in original score space rather than RMSE.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot amber"></div>
+      <div class="phase-title">Finding 2: 90% Sparse Coverage at Account Level</div>
+      <div class="phase-desc">Most accounts appeared in only 1 of the 11 surveys — <strong>90% sparse coverage</strong> meant that account-level modeling would require imputing or ignoring 90% of features for any given account. This is a fatal signal sparsity problem. The prior vendor model had been running at account level — meaning it was effectively modeling noise. We redesigned the modeling granularity to the <strong>survey level</strong>, where coverage was complete within each survey's own respondent population.</div>
+    </div>
+    <div class="phase-item">
+      <div class="phase-dot mint"></div>
+      <div class="phase-title">Redesigning the Modeling Granularity</div>
+      <div class="phase-desc">Instead of asking "what drives NPS across all accounts?", we reframed to "what drives NPS within a specific survey population?" — a more tractable and honest question. We selected the <strong>Apply Experience Survey</strong> as the primary modeling target: highest response volume, richest question set, and most actionable for the product team.</div>
+    </div>
+  </div>
+
+  <div class="insights-box">
+    <div class="insights-title">Why This Matters</div>
+    <ul class="insights-list">
+      <li><strong>The account-level model had a flawed premise.</strong> With 90% sparsity, cross-survey feature imputation would have introduced more noise than signal. Our redesign prevented a model that looked good on paper but would have misled leadership.</li>
+      <li><strong>Survey-level granularity enables actionable findings.</strong> When we identify question X as a top NPS driver within the Apply Experience Survey, the product team can act on it directly — which is exactly what happened.</li>
+      <li><strong>Distribution analysis should gate modeling.</strong> Finding the NPS skew before running models saved weeks of debugging spurious results downstream.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ── MODELING ── -->
+<div class="wrap section">
+  <div class="sec-label">Phase 3 · Modeling</div>
+  <h2 class="sec-title">Running Two Models in Parallel, on Purpose</h2>
+  <p class="cs-text">We modeled NPS drivers at the <strong>Apply Experience Survey level</strong> using two approaches simultaneously: <span class="hl-purple">XGBoost</span> for predictive accuracy and <span class="hl-amber">Lasso regression</span> as a cross-validation signal. Running them in parallel wasn't redundancy — it was a deliberate interpretability strategy.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Approach</th>
+        <th>Purpose</th>
+        <th>Key Output</th>
+        <th>Performance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>XGBoost</td>
+        <td>Predictive accuracy; captures non-linear interactions between survey questions</td>
+        <td>Feature importance ranking</td>
+        <td class="good">R²/RMSE similar to Lasso — no overfitting</td>
+      </tr>
+      <tr>
+        <td>Lasso Regression</td>
+        <td>Regularized linear model; coefficients directly interpretable as NPS driver strength</td>
+        <td>Signed coefficient weights per survey question</td>
+        <td class="good">R² 0.43</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="cs-text">The key insight: <strong>when XGBoost feature importances and Lasso coefficients agreed on the same questions, we had high confidence those were genuine NPS drivers</strong>, not model-specific artifacts. When they disagreed, we investigated the discrepancy rather than picking a winner. This cross-validation-by-architecture approach is more robust than running a single model and trusting its internal importance scores.</p>
+
+  <div class="code-block"><span class="cm"># Imputation across 100K+ missing values before modeling</span>
+<span class="kw">from</span> sklearn.impute <span class="kw">import</span> SimpleImputer
+
+num_imputer = SimpleImputer(strategy=<span class="st">'median'</span>)   <span class="cm"># robust to skewed NPS distribution</span>
+cat_imputer = SimpleImputer(strategy=<span class="st">'most_frequent'</span>)
+
+X_num = num_imputer.<span class="fn">fit_transform</span>(X[numeric_cols])
+X_cat = cat_imputer.<span class="fn">fit_transform</span>(X[categorical_cols])
+
+<span class="cm"># Lasso for interpretable coefficient-based driver ranking</span>
+<span class="kw">from</span> sklearn.linear_model <span class="kw">import</span> LassoCV
+
+lasso = LassoCV(cv=<span class="nu">5</span>, random_state=<span class="nu">42</span>)
+lasso.<span class="fn">fit</span>(X_train, y_train)
+r2 = lasso.<span class="fn">score</span>(X_test, y_test)   <span class="cm"># 0.43</span>
+
+driver_df = pd.DataFrame({
+    <span class="st">'question'</span>:   feature_names,
+    <span class="st">'lasso_coef'</span>: lasso.coef_,
+}).<span class="fn">sort_values</span>(<span class="st">'lasso_coef'</span>, key=<span class="kw">abs</span>, ascending=<span class="kw">False</span>)</div>
+
+  <p class="cs-text">Missing value handling was non-trivial: <strong>over 100,000 values were missing</strong> across the feature matrix, primarily because some survey questions are only shown to respondents who answered a prior branching question. Using median imputation (rather than mean) was a deliberate choice given the confirmed skew in NPS response distributions — mean imputation would have systematically biased question scores upward.</p>
+
+  <div class="tech-stack">
+    <span class="tech-tag">XGBoost</span>
+    <span class="tech-tag amber">Lasso Regression</span>
+    <span class="tech-tag cyan">LassoCV (5-fold)</span>
+    <span class="tech-tag mint">Median Imputation</span>
+    <span class="tech-tag">scikit-learn</span>
+    <span class="tech-tag">Feature Importance</span>
+  </div>
+</div>
+
+<!-- ── CAUSAL VALIDATION ── -->
+<div class="wrap section">
+  <div class="sec-label">Phase 4 · Validation</div>
+  <h2 class="sec-title">Proving the Signal Is Real</h2>
+  <p class="cs-text">Correlation between survey questions and NPS scores is expected — after all, they're measured together. The harder question is: <strong>do the questions we identified actually drive NPS, or did we find a statistical artifact?</strong> To answer this, I applied Placebo Refutation Testing from the causal inference literature.</p>
+
+  <div class="causal-box">
+    <h4>Placebo Refutation Test — What It Does</h4>
+    <p>A placebo refutation test works by replacing the actual treatment variable with a <strong>randomly generated placebo</strong> — a variable that by construction has no causal relationship with the outcome. If the estimated effect of the placebo is near zero, the original model's identified effect is likely genuine signal rather than spurious correlation from confounders or model structure.</p>
+    <div class="causal-stat">
+      <span class="val">−0.001</span>
+      <span class="lbl">Estimated placebo effect (target: near zero)</span>
+    </div>
+  </div>
+
+  <p class="cs-text">The near-zero placebo effect (−0.001) is the test passing. It means: when we swap in a random variable for the survey driver, the model finds no effect — confirming that the effects we identified for real survey questions are not artifacts of model structure or shared confounders. <strong>The NPS drivers we found reflect genuine signal.</strong></p>
+
+  <p class="cs-text">This is critical for the business use case. If analytics leadership is going to <em>redesign the survey instrument</em> based on which questions matter most, they need confidence that the identified drivers aren't statistical noise. Placebo refutation provides that confidence in a way that standard metrics like R² cannot.</p>
+
+  <div class="insights-box">
+    <div class="insights-title">Why Causal Validation Before Survey Redesign</div>
+    <ul class="insights-list">
+      <li>Survey redesigns have <strong>high organizational cost</strong> — removing questions that stakeholders have tracked for years requires strong justification.</li>
+      <li><strong>Predictive performance alone is not sufficient.</strong> A model with R² 0.43 explains substantial variance, but the relevant question for survey redesign is whether the identified questions have genuine causal standing.</li>
+      <li>Placebo refutation is a <strong>falsification test</strong> — it can disprove the hypothesis that we found real drivers. The near-zero result means we could not falsify it, strengthening confidence in the findings.</li>
+    </ul>
+  </div>
+
+  <div class="tech-stack">
+    <span class="tech-tag mint">Placebo Refutation Testing</span>
+    <span class="tech-tag">DoWhy (causal inference)</span>
+    <span class="tech-tag amber">Causal Graph Estimation</span>
+    <span class="tech-tag cyan">Statistical Validation</span>
+  </div>
+</div>
+
+<!-- ── IMPACT ── -->
+<div class="wrap section">
+  <div class="sec-label">Phase 5 · Impact</div>
+  <h2 class="sec-title">What Changed as a Result</h2>
+
+  <div class="impact-box">
+    <h4>Business Outcomes</h4>
+    <ul class="impact-list">
+      <li><strong>Eliminated the external consulting firm's NPS model</strong> — replaced with a fully internal, reproducible solution that the team can re-run, adapt, and audit without external dependency.</li>
+      <li><strong>Survey redesign initiated by customer analytics leadership</strong> — findings on top NPS-driving questions were adopted directly, with low-signal questions identified for removal from future survey waves.</li>
+      <li><strong>87% reduction in pipeline runtime</strong> enables the team to iterate on modeling assumptions and feature definitions in hours rather than days.</li>
+      <li><strong>Corrected a structural data error</strong> — the account-level modeling flaw (90% sparsity) that had been silently running in the prior vendor model was identified and fixed through redesign to survey-level granularity.</li>
+    </ul>
+  </div>
+
+  <p class="cs-text">The most consequential output wasn't a number — it was a change in how Synchrony thinks about the survey itself. When the causal analysis showed that certain questions had near-zero driver strength while others dominated NPS movement, that became the basis for a <strong>structural redesign of the survey instrument</strong>. The questions that didn't move the needle are candidates for removal; the questions that did are candidates for expansion and deeper follow-up.</p>
+
+  <p class="cs-text">That's the full loop: better infrastructure → honest EDA → survey-level modeling → causal validation → actionable survey redesign. Each step made the next one possible, and the final output is a recommendation the business can actually use.</p>
+</div>
+
+<!-- ── TECH SUMMARY ── -->
+<div class="wrap section">
+  <div class="sec-label">Technical Summary</div>
+  <h2 class="sec-title">Stack & Methods</h2>
+  <div class="tech-stack">
+    <span class="tech-tag">Python</span>
+    <span class="tech-tag">pandas</span>
+    <span class="tech-tag cyan">SQL</span>
+    <span class="tech-tag cyan">PySpark</span>
+    <span class="tech-tag">XGBoost</span>
+    <span class="tech-tag amber">Lasso Regression</span>
+    <span class="tech-tag amber">LassoCV</span>
+    <span class="tech-tag mint">Placebo Refutation Testing</span>
+    <span class="tech-tag mint">DoWhy</span>
+    <span class="tech-tag">scikit-learn</span>
+    <span class="tech-tag">Median / Mode Imputation</span>
+    <span class="tech-tag">Univariate Analysis</span>
+    <span class="tech-tag">Multivariate Analysis</span>
+    <span class="tech-tag amber">SAS Migration</span>
+    <span class="tech-tag cyan">ETL Pipeline Design</span>
+    <span class="tech-tag">Schema Normalization</span>
+    <span class="tech-tag">Deduplication</span>
+  </div>
+</div>
+
+<footer>
+  <p>Bhoomika Ravishankar · Synchrony Financial · Customer Analytics · 2025</p>
+  <p style="margin-top: 0.4rem;"><a href="index.html" style="color: var(--purple); text-decoration: none;">Back to Portfolio</a></p>
+</footer>
+
+</body>
+</html>
