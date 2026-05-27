@@ -791,13 +791,6 @@ footer {
       </a>
     </div>
   </div>
-<div class="about-bio-card">
-    <p class="about-bio">
-      I'm a <strong>Data Scientist and ML Researcher at UIUC</strong>. My work lives at the intersection of <span class="highlight-purple">NLP, statistical modeling, and large-scale ML/AI systems</span>. I've worked on everything from fine-tuning LLMs to ask better questions instead of hallucinating answers, to building financial forecasting models connected to billions in portfolio risk, to running clinical NLP pipelines on research clusters at odd hours. Through all of it, I've found myself caring most about models that are interpretable, reliable, and honest about what they don't know.<br><br>
-      When I'm not working, I'm usually reading papers I may or may not be fully qualified to read yet, thinking about AI safety, or unsuccessfully trying to explain at a dinner table why credit risk is actually fascinating. This portfolio is my attempt to capture the work, the lessons, the edge cases, and the things I had to learn the hard way.
-    </p>
-  </div>
-
   <div class="edu-grid">
     <div class="edu-card uiuc">
       <div class="edu-icon">🎓</div>
@@ -832,93 +825,219 @@ footer {
 </div>
 
 <!-- EXPERIENCE -->
+<style>
+/* ── EXPERIENCE V2 (Strider-style cards) ── */
+#experience .exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.exp-card-v2 {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(15, 17, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.exp-card-v2:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+.exp-image {
+  width: 220px;
+  height: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.exp-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(255,255,255,0.08), transparent 60%);
+  pointer-events: none;
+}
+.exp-image svg { width: 80px; height: 80px; opacity: 0.85; z-index: 1; }
+.exp-image.synchrony-cr  { background: linear-gradient(135deg, #0e1a30 0%, #1d3a5f 100%); color: var(--cyan); }
+.exp-image.synchrony-ops { background: linear-gradient(135deg, #0e2a23 0%, #1c5547 100%); color: var(--mint); }
+.exp-image.uiuc          { background: linear-gradient(135deg, #2a0e2a 0%, #4d2057 100%); color: var(--purple); }
+.exp-image.big           { background: linear-gradient(135deg, #2e2210 0%, #57461d 100%); color: var(--amber); }
+
+.exp-content { display: flex; flex-direction: column; min-width: 0; }
+.exp-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+.exp-company {
+  display: inline-block;
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', 'Menlo', 'SF Mono', monospace;
+  font-size: 0.95rem;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  transition: color 0.15s;
+}
+.exp-company:hover { color: #5beaff; text-decoration: underline; }
+.exp-meta {
+  color: var(--muted);
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.exp-meta-sep { margin: 0 0.6rem; opacity: 0.5; }
+.exp-desc {
+  color: #cbd5e1;
+  line-height: 1.65;
+  margin: 0 0 1.2rem;
+  font-size: 0.97rem;
+}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.exp-tags .tag-v2 {
+  font-family: 'JetBrains Mono', 'Menlo', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid rgba(52, 211, 153, 0.32);
+  color: #34d399;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .exp-card-v2 { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem; }
+  .exp-image { width: 100%; height: 180px; max-width: 100%; }
+  .exp-image svg { width: 64px; height: 64px; }
+}
+</style>
+
 <div class="wrap section" id="experience">
   <div class="sec-label">Experience</div>
   <h2 class="sec-title">Where I've Worked</h2>
-  <div class="timeline-wrap">
 
-    <div class="tl-entry">
-      <div class="tl-dot-wrap"><div class="tl-dot c"></div></div>
-      <div class="exp-card c">
-        <div class="exp-header">
-          <div>
-            <div class="exp-co">Synchrony Financial · Champaign, IL</div>
-            <div class="exp-role">Data Scientist — Credit & Customer Analytics</div>
-          </div>
-          <div class="exp-date">May 2025 – Present</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Built statistical models in Python & PySpark supporting a <strong>$7.49B loss model portfolio</strong> using macroeconomic signals for financial forecasting</li>
-          <li>Achieved <strong>90% improvement in early risk detection</strong> and 12% model accuracy gain through feature evaluation</li>
-          <li>Queried, cleaned, and integrated <strong>10+ survey datasets</strong> using SQL and Python to build a <strong>500K+ record analytical dataset</strong> for customer behavior analysis, NPS score tracking, and cross-functional decision support.</li>
-          <li>Engineered analytical datasets with <strong>100M+ records</strong>; 23% predictive improvement via feature engineering</li>
-          <li>Designed <strong>A/B testing</strong> frameworks and time-series analyses for data-driven decision making</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">PySpark</span><span class="tag">XGBoost</span><span class="tag">Time Series</span><span class="tag">A/B Testing</span><span class="tag">SAS</span>
+  <div class="exp-list">
+
+    <!-- Synchrony Financial · Credit Risk Division -->
+    <div class="exp-card-v2">
+      <div class="exp-image synchrony-cr">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L4 5v6c0 5 3.5 9.5 8 11 4.5-1.5 8-6 8-11V5l-8-3z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
+      <div class="exp-content">
+        <h3>Data Scientist · Credit Risk Division</h3>
+        <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
+        <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
+        <p class="exp-desc">
+          Deployed statistical <strong>PD/EAD models</strong> on AWS SageMaker within Synchrony's AtLAS platform — a complementary log-log GLM framework predicting 5-year charge-off probability across 6 retail portfolios that directly informs the <strong>$7.49B CECL loss reserve</strong>. Engineered 13+ longitudinal features driving 75% deviance reduction, validated robustness through multi-snapshot backtesting from 2007–2025, and built PySpark ETL on 900M+ records per snapshot (1hr → 5min, 92% faster).
+        </p>
+        <div class="exp-tags">
+          <span class="tag-v2">PD/EAD Modeling</span>
+          <span class="tag-v2">CECL Reserve</span>
+          <span class="tag-v2">Log-log GLM</span>
+          <span class="tag-v2">AWS SageMaker</span>
+          <span class="tag-v2">PySpark / EMR</span>
+          <span class="tag-v2">Apache Airflow</span>
+          <span class="tag-v2">Backtesting</span>
+          <span class="tag-v2">Hypothesis Testing</span>
         </div>
       </div>
     </div>
 
-    <div class="tl-entry">
-      <div class="tl-dot-wrap"><div class="tl-dot p"></div></div>
-      <div class="exp-card p">
-        <div class="exp-header">
-          <div>
-            <div class="exp-co p">Dept of Statistics · UIUC</div>
-            <div class="exp-role">AI Research Assistant</div>
-          </div>
-          <div class="exp-date">Jan 2025 – Present</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Built a large-scale clinical NLP pipeline processing <strong>1M+ studies</strong> from <strong>ClinicalTrials.gov</strong> to help clinical researchers <strong>predict success/failure</strong> of trials</li>
-          <li>Fine-tuned <strong>Qwen-2.5 with LoRA</strong> on PubMed abstracts — <strong>87% F1</strong>, a 40-point baseline improvement</li>
-          <li>Ran distributed ML training on the <strong>NCSA Delta HPC cluster</strong>; cut inference time by 60% on 100GB+ datasets</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag">LoRA</span><span class="tag">Qwen-2.5</span><span class="tag">PyTorch</span><span class="tag">HPC / Delta</span><span class="tag">NLP Pipeline</span>
+    <!-- Synchrony Financial · Operations Analytics Division -->
+    <div class="exp-card-v2">
+      <div class="exp-image synchrony-ops">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18"/>
+          <path d="M7 14l3-3 4 4 5-6"/>
+          <circle cx="7" cy="14" r="1.5" fill="currentColor"/>
+          <circle cx="10" cy="11" r="1.5" fill="currentColor"/>
+          <circle cx="14" cy="15" r="1.5" fill="currentColor"/>
+          <circle cx="19" cy="9" r="1.5" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="exp-content">
+        <h3>Data Scientist · Operations Analytics Division</h3>
+        <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
+        <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
+        <p class="exp-desc">
+          Replaced an external consulting firm's <strong>NPS model</strong> with an internal solution that customer analytics leadership adopted to redesign survey structure and cut low-signal questions. Migrated legacy SAS/SQL to Python ETL unifying <strong>100M+ records across 11 surveys</strong> (2hr → 15min, 87% faster). Modeled NPS drivers with XGBoost and Lasso regression (R² 0.43); validated causal robustness via <strong>Placebo Refutation Testing</strong> (effect ≈ -0.001), establishing genuine signal rather than correlation.
+        </p>
+        <div class="exp-tags">
+          <span class="tag-v2">XGBoost</span>
+          <span class="tag-v2">Lasso Regression</span>
+          <span class="tag-v2">Causal Inference</span>
+          <span class="tag-v2">Placebo Refutation</span>
+          <span class="tag-v2">SQL Performance Tuning</span>
+          <span class="tag-v2">NPS Driver Modeling</span>
+          <span class="tag-v2">Feature Engineering</span>
         </div>
       </div>
     </div>
 
-    <div class="tl-entry">
-      <div class="tl-dot-wrap"><div class="tl-dot m"></div></div>
-      <div class="exp-card m">
-        <div class="exp-header">
-          <div>
-            <div class="exp-co m">Business Intelligence Group · UIUC</div>
-            <div class="exp-role">Data Consultant</div>
-          </div>
-          <div class="exp-date">Jan 2025 – May 2025</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Designed an end-to-end decision system combining <strong> Python, NLP, & Tableau</strong> dashboards to improve operational planning by 90%.</li>
-          <li>Built & evaluated analytical pipelines for query understanding & information retrieval, reducing <strong> manual analysis time by 35% </strong>. </li>
-          <li>Presented analytical findings to leadership, improving <strong>operational visibility </strong> and accelerating decision turnaround  <strong> by 10%. </strong> </li>
-
-        </ul>
-        <div class="tag-row">
-          <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Tableau</span>
+    <!-- UIUC Research Assistant · AI Engineer -->
+    <div class="exp-card-v2">
+      <div class="exp-image uiuc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+          <path d="M4.93 4.93l2.12 2.12M16.95 16.95l2.12 2.12M4.93 19.07l2.12-2.12M16.95 7.05l2.12-2.12"/>
+          <circle cx="12" cy="12" r="9"/>
+        </svg>
+      </div>
+      <div class="exp-content">
+        <h3>Research Assistant · AI Engineer</h3>
+        <a class="exp-company" href="https://illinois.edu" target="_blank" rel="noopener">University of Illinois Urbana-Champaign</a>
+        <div class="exp-meta">Jan 2025 – Present<span class="exp-meta-sep">·</span>Champaign, IL</div>
+        <p class="exp-desc">
+          Built an end-to-end <strong>LLM-powered data pipeline</strong> converting 100,000 unstructured clinical trial studies into structured model-ready variables using Qwen 2.5 7B-Instruct, entity extraction, prompt engineering, sentence embeddings, and PCA. Benchmarked LLM-derived features against sentence embeddings via Lasso logistic regression — structured <strong>LLM features carried 97.2%</strong> of total feature importance versus 2.8% from embeddings. Led iterative prompt refinement cycles using 0.79 F1 / 0.59 5-fold ROC-AUC as feedback signals.
+        </p>
+        <div class="exp-tags">
+          <span class="tag-v2">LLM Fine-tuning</span>
+          <span class="tag-v2">Qwen 2.5 7B</span>
+          <span class="tag-v2">Entity Extraction</span>
+          <span class="tag-v2">Prompt Engineering</span>
+          <span class="tag-v2">Sentence Embeddings</span>
+          <span class="tag-v2">PCA</span>
+          <span class="tag-v2">Clinical NLP</span>
+          <span class="tag-v2">Lasso Logistic Regression</span>
         </div>
       </div>
     </div>
 
-    <div class="tl-entry">
-      <div class="tl-dot-wrap"><div class="tl-dot k"></div></div>
-      <div class="exp-card k">
-        <div class="exp-header">
-          <div>
-            <div class="exp-co k">Repute India Pvt Limited</div>
-            <div class="exp-role">Data Analyst</div>
-          </div>
-          <div class="exp-date">Feb 2023 – Apr 2023</div>
-        </div>
-        <ul class="exp-bullets">
-          <li>Automated  <strong> KPI dashboards </strong> using SQL Server & Excel, improving  <strong> data accuracy </strong> <strong>by 30%. </strong> </li>
-          <li>Performed reconciliations across production & financial operations data,  <strong> identifying ~30% cost inefficiencies </strong> & supporting data-driven decisions.</li>
-        </ul>
-        <div class="tag-row">
-          <span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">Dashboards</span>
+    <!-- BIG Data Consultant -->
+    <div class="exp-card-v2">
+      <div class="exp-image big">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="9" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="5" rx="1.5"/>
+          <rect x="14" y="12" width="7" height="9" rx="1.5"/>
+          <rect x="3" y="16" width="7" height="5" rx="1.5"/>
+        </svg>
+      </div>
+      <div class="exp-content">
+        <h3>Data Consultant</h3>
+        <a class="exp-company" href="https://gies.illinois.edu/research/centers-institutes/business-analytics" target="_blank" rel="noopener">Business Intelligence Group (BIG) · UIUC</a>
+        <div class="exp-meta">Jan 2025 – May 2025<span class="exp-meta-sep">·</span>Champaign, IL</div>
+        <p class="exp-desc">
+          Designed and shipped a <strong>RAG-based internal decision-support tool</strong> using Python, retrieval-augmented generation, topic modeling, and Power BI dashboards to automate contract / query resolution, resource allocation, and overtime planning — reducing pilot lookup time by 90%. Translated ambiguous business workflow needs into a working AI-powered automation tool, iterating with users on retrieval quality, dashboard usability, and adoption for operational decision-making.
+        </p>
+        <div class="exp-tags">
+          <span class="tag-v2">Python</span>
+          <span class="tag-v2">RAG</span>
+          <span class="tag-v2">Topic Modeling</span>
+          <span class="tag-v2">Power BI</span>
+          <span class="tag-v2">Decision Support Systems</span>
         </div>
       </div>
     </div>
