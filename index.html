@@ -682,22 +682,29 @@ footer {
 }
 
 .edu-icon {
-  width: 48px;
-  height: 48px;
+  width: 100%;
+  height: 80px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  padding: 0.6rem 1rem;
+  background: #ffffff;
+}
+
+.edu-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .edu-card.uiuc .edu-icon {
-  background: rgba(0,212,255,0.1);
+  background: linear-gradient(135deg, #ffffff 0%, #fff0e7 100%);
 }
 
 .edu-card.pune .edu-icon {
-  background: rgba(52,211,153,0.1);
+  background: linear-gradient(135deg, #fff8f0 0%, #fce8d5 100%);
 }
 .edu-top {
   display: flex;
@@ -793,7 +800,7 @@ footer {
   </div>
   <div class="edu-grid">
     <div class="edu-card uiuc">
-      <div class="edu-icon">🎓</div>
+      <div class="edu-icon"><img src="logos/uiuc.svg" alt="University of Illinois Urbana-Champaign"></div>
       <div class="edu-top">
         <div>
           <div class="edu-deg">MS in Information Management</div>
@@ -808,7 +815,7 @@ footer {
       <div class="edu-year">Aug 2024 – May 2026 (expected)</div>
     </div>
     <div class="edu-card pune">
-      <div class="edu-icon">🏛️</div>
+      <div class="edu-icon"><img src="logos/pune.svg" alt="Savitribai Phule Pune University"></div>
       <div class="edu-top">
         <div>
           <div class="edu-deg">BE in Computer Engineering</div>
@@ -830,37 +837,37 @@ footer {
 #experience .exp-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 .exp-card-v2 {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 2rem;
-  padding: 2rem;
+  grid-template-columns: 150px 1fr;
+  gap: 1.4rem;
+  padding: 1.3rem 1.5rem;
   background: rgba(15, 17, 32, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 18px;
+  border-radius: 14px;
   transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 .exp-card-v2:hover {
   border-color: rgba(255, 255, 255, 0.14);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
 }
 .exp-image {
-  width: 220px;
-  height: 220px;
-  border-radius: 14px;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 2rem;
+  padding: 1.2rem;
 }
 .exp-image img {
   width: 100%;
-  max-width: 75%;
+  max-width: 80%;
   max-height: 65%;
   object-fit: contain;
 }
@@ -875,51 +882,71 @@ footer {
 
 .exp-content { display: flex; flex-direction: column; min-width: 0; }
 .exp-content h3 {
-  font-size: 1.22rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: #e2e8f0;
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.25rem;
   line-height: 1.3;
 }
 .exp-company {
   display: inline-block;
   color: var(--cyan);
   font-family: 'JetBrains Mono', 'Menlo', 'SF Mono', monospace;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   text-decoration: none;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   transition: color 0.15s;
 }
 .exp-company:hover { color: #5beaff; text-decoration: underline; }
 .exp-meta {
   color: var(--muted);
   font-family: 'JetBrains Mono', 'Menlo', monospace;
-  font-size: 0.78rem;
-  margin-bottom: 0.9rem;
+  font-size: 0.72rem;
+  margin-bottom: 0.7rem;
 }
-.exp-meta-sep { margin: 0 0.6rem; opacity: 0.5; }
-.exp-desc {
+.exp-meta-sep { margin: 0 0.5rem; opacity: 0.5; }
+.exp-bullets-v2 {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.exp-bullets-v2 li {
+  position: relative;
+  padding-left: 0.95rem;
   color: #cbd5e1;
-  line-height: 1.6;
-  margin: 0 0 1rem;
-  font-size: 0.9rem;
+  font-size: 0.83rem;
+  line-height: 1.5;
 }
-.exp-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.exp-bullets-v2 li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  top: 0;
+  font-size: 0.75rem;
+}
+.exp-bullets-v2 li strong {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+.exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .exp-tags .tag-v2 {
   font-family: 'JetBrains Mono', 'Menlo', monospace;
-  font-size: 0.72rem;
-  padding: 0.35rem 0.7rem;
+  font-size: 0.68rem;
+  padding: 0.3rem 0.6rem;
   background: rgba(52, 211, 153, 0.06);
   border: 1px solid rgba(52, 211, 153, 0.32);
   color: #34d399;
-  border-radius: 8px;
+  border-radius: 6px;
   white-space: nowrap;
 }
 
 @media (max-width: 760px) {
-  .exp-card-v2 { grid-template-columns: 1fr; gap: 1.25rem; padding: 1.5rem; }
-  .exp-image { width: 100%; height: 180px; max-width: 100%; }
-  .exp-image svg { width: 64px; height: 64px; }
+  .exp-card-v2 { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
+  .exp-image { width: 100%; height: 130px; max-width: 100%; }
 }
 </style>
 
@@ -938,9 +965,11 @@ footer {
         <h3>Data Scientist · Credit Risk Division</h3>
         <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
         <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Deployed statistical <strong>PD/EAD models</strong> on AWS SageMaker within Synchrony's AtLAS platform — a complementary log-log GLM framework predicting 5-year charge-off probability across 6 retail portfolios that directly informs the <strong>$7.49B CECL loss reserve</strong>. Engineered 13+ longitudinal features driving 75% deviance reduction, validated robustness through multi-snapshot backtesting from 2007–2025, and built PySpark ETL on 900M+ records per snapshot (1hr → 5min, 92% faster).
-        </p>
+        <ul class="exp-bullets-v2">
+          <li>Deployed <strong>PD/EAD models</strong> on AWS SageMaker informing the <strong>$7.49B CECL loss reserve</strong></li>
+          <li>13+ longitudinal features → <strong>75% deviance reduction</strong>, validated 2007–2025 backtesting</li>
+          <li>PySpark ETL on <strong>900M+ records</strong> per snapshot: 1hr → 5min (<strong>92% faster</strong>)</li>
+        </ul>
         <div class="exp-tags">
           <span class="tag-v2">PD/EAD Modeling</span>
           <span class="tag-v2">CECL Reserve</span>
@@ -963,9 +992,11 @@ footer {
         <h3>Data Scientist · Operations Analytics Division</h3>
         <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
         <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Replaced an external consulting firm's <strong>NPS model</strong> with an internal solution that customer analytics leadership adopted to redesign survey structure and cut low-signal questions. Migrated legacy SAS/SQL to Python ETL unifying <strong>100M+ records across 11 surveys</strong> (2hr → 15min, 87% faster). Modeled NPS drivers with XGBoost and Lasso regression (R² 0.43); validated causal robustness via <strong>Placebo Refutation Testing</strong> (effect ≈ -0.001), establishing genuine signal rather than correlation.
-        </p>
+        <ul class="exp-bullets-v2">
+          <li>Replaced external NPS consultancy with internal <strong>XGBoost + Lasso</strong> model (R² 0.43); adopted by customer analytics leadership</li>
+          <li><strong>100M+ records</strong> across 11 surveys, SAS/SQL → Python ETL: 2hr → 15min (<strong>87% faster</strong>)</li>
+          <li>Validated causal robustness via <strong>Placebo Refutation Testing</strong> (effect ≈ −0.001)</li>
+        </ul>
         <div class="exp-tags">
           <span class="tag-v2">XGBoost</span>
           <span class="tag-v2">Lasso Regression</span>
@@ -987,9 +1018,11 @@ footer {
         <h3>Research Assistant · AI Engineer</h3>
         <a class="exp-company" href="https://illinois.edu" target="_blank" rel="noopener">University of Illinois Urbana-Champaign</a>
         <div class="exp-meta">Jan 2025 – Present<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Built an end-to-end <strong>LLM-powered data pipeline</strong> converting 100,000 unstructured clinical trial studies into structured model-ready variables using Qwen 2.5 7B-Instruct, entity extraction, prompt engineering, sentence embeddings, and PCA. Benchmarked LLM-derived features against sentence embeddings via Lasso logistic regression — structured <strong>LLM features carried 97.2%</strong> of total feature importance versus 2.8% from embeddings. Led iterative prompt refinement cycles using 0.79 F1 / 0.59 5-fold ROC-AUC as feedback signals.
-        </p>
+        <ul class="exp-bullets-v2">
+          <li>Built end-to-end <strong>LLM pipeline</strong> over <strong>100K clinical trial studies</strong> (Qwen 2.5 7B-Instruct + NER + PCA)</li>
+          <li>LLM features captured <strong>97.2% of model importance</strong> vs 2.8% from sentence embeddings</li>
+          <li>Iterative prompt refinement reached <strong>0.79 F1 / 0.59 5-fold ROC-AUC</strong></li>
+        </ul>
         <div class="exp-tags">
           <span class="tag-v2">LLM Fine-tuning</span>
           <span class="tag-v2">Qwen 2.5 7B</span>
@@ -1012,9 +1045,11 @@ footer {
         <h3>Data Consultant</h3>
         <a class="exp-company" href="https://gies.illinois.edu/research/centers-institutes/business-analytics" target="_blank" rel="noopener">Business Intelligence Group (BIG) · UIUC</a>
         <div class="exp-meta">Jan 2025 – May 2025<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Designed and shipped a <strong>RAG-based internal decision-support tool</strong> using Python, retrieval-augmented generation, topic modeling, and Power BI dashboards to automate contract / query resolution, resource allocation, and overtime planning — reducing pilot lookup time by 90%. Translated ambiguous business workflow needs into a working AI-powered automation tool, iterating with users on retrieval quality, dashboard usability, and adoption for operational decision-making.
-        </p>
+        <ul class="exp-bullets-v2">
+          <li>Shipped <strong>RAG decision-support tool</strong> with topic modeling + Power BI dashboards</li>
+          <li><strong>90% reduction</strong> in pilot lookup time across contract resolution, resource allocation, and overtime planning</li>
+          <li>Translated ambiguous business workflows into production AI automation</li>
+        </ul>
         <div class="exp-tags">
           <span class="tag-v2">Python</span>
           <span class="tag-v2">RAG</span>
@@ -1570,8 +1605,8 @@ footer {
 <div class="wrap section" id="contact" style="text-align:center;padding-bottom:7rem">
   <div class="sec-label" style="justify-content:center;display:flex">Contact</div>
   <h2 class="sec-title" style="margin-bottom:0.75rem">Let's Connect</h2>
-  <p class="contact-sub" style="max-width:580px;margin:0 auto 2rem;line-height:1.8;">
-   I’m always open to thoughtful conversations about roles, research ideas, or interesting problems. I’m seeking opportunities starting May 2026 and would be glad to connect.  
+  <p class="contact-sub" style="max-width:560px;margin:0 auto 2rem;line-height:1.7;font-size:0.92rem;">
+    Open to full-time <strong style="color:#e2e8f0;">Data Science, ML, and Analytics</strong> roles starting May 2026. Available for conversations about open positions, research collaborations, or interesting technical problems. Email is the fastest way to reach me.
   </p>
   <div class="contact-links">
     <a href="mailto:br36@illinois.edu" class="btn btn-primary">br36@illinois.edu</a>
