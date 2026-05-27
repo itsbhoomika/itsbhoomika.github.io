@@ -683,28 +683,27 @@ footer {
 
 .edu-icon {
   width: 100%;
-  height: 80px;
+  height: 150px;
   border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   margin-bottom: 1rem;
-  padding: 0.6rem 1rem;
-  background: #ffffff;
+  position: relative;
+  background: #0a0c18;
 }
 
 .edu-icon img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.edu-card.uiuc .edu-icon {
-  background: linear-gradient(135deg, #ffffff 0%, #fff0e7 100%);
-}
-
-.edu-card.pune .edu-icon {
-  background: linear-gradient(135deg, #fff8f0 0%, #fce8d5 100%);
+.edu-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(8,9,16,0.45) 100%);
+  pointer-events: none;
 }
 .edu-top {
   display: flex;
@@ -800,7 +799,7 @@ footer {
   </div>
   <div class="edu-grid">
     <div class="edu-card uiuc">
-      <div class="edu-icon"><img src="logos/uiuc.svg" alt="University of Illinois Urbana-Champaign"></div>
+      <div class="edu-icon"><img src="logos/uiuc-campus.jpg" alt="UIUC Foellinger Auditorium"></div>
       <div class="edu-top">
         <div>
           <div class="edu-deg">MS in Information Management</div>
@@ -815,7 +814,7 @@ footer {
       <div class="edu-year">Aug 2024 – May 2026 (expected)</div>
     </div>
     <div class="edu-card pune">
-      <div class="edu-icon"><img src="logos/pune.svg" alt="Savitribai Phule Pune University"></div>
+      <div class="edu-icon"><img src="logos/sppu-campus.jpg" alt="Savitribai Phule Pune University Main Building"></div>
       <div class="edu-top">
         <div>
           <div class="edu-deg">BE in Computer Engineering</div>
