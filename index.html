@@ -13,15 +13,16 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); }
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
 :root {
+  /* 3-color palette: dark bg + off-white text + cyan accent. */
   --bg:     #080910;
   --bg2:    #0d0f1c;
   --card:   #0f1120;
   --border: rgba(255,255,255,0.07);
-  --cyan:   #00d4ff;
-  --purple: #a78bfa;
-  --mint:   #34d399;
-  --pink:   #f472b6;
-  --amber:  #fbbf24;
+  --cyan:   #00d4ff;  /* sole accent color */
+  --purple: #00d4ff;  /* aliased to cyan (was #a78bfa) */
+  --mint:   #00d4ff;  /* aliased to cyan (was #34d399) */
+  --pink:   #00d4ff;  /* aliased to cyan (was #f472b6) */
+  --amber:  #00d4ff;  /* aliased to cyan (was #fbbf24) */
   --text:   #e2e8f0;
   --muted:  #7c8ca8;
   --subtle: #1a1e2e;
@@ -681,11 +682,11 @@ footer {
 }
 
 .edu-card.uiuc::before {
-  background: linear-gradient(90deg, #00d4ff, #a78bfa);
+  background: linear-gradient(90deg, #00d4ff, rgba(0,212,255,0.3));
 }
 
 .edu-card.pune::before {
-  background: linear-gradient(90deg, #34d399, #fbbf24);
+  background: linear-gradient(90deg, #00d4ff, rgba(0,212,255,0.3));
 }
 
 .edu-icon {
@@ -746,9 +747,9 @@ footer {
 }
 
 .edu-card.pune .edu-gpa {
-  background: rgba(52,211,153,0.1);
-  border: 1px solid rgba(52,211,153,0.25);
-  color: #34d399;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.25);
+  color: #00d4ff;
 }
 
 .edu-school {
@@ -927,9 +928,9 @@ footer {
   font-family: 'JetBrains Mono', 'Menlo', monospace;
   font-size: 0.68rem;
   padding: 0.3rem 0.6rem;
-  background: rgba(52, 211, 153, 0.06);
-  border: 1px solid rgba(52, 211, 153, 0.32);
-  color: #34d399;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.32);
+  color: #00d4ff;
   border-radius: 6px;
   white-space: nowrap;
 }
