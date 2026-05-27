@@ -905,30 +905,13 @@ footer {
   margin-bottom: 0.7rem;
 }
 .exp-meta-sep { margin: 0 0.5rem; opacity: 0.5; }
-.exp-bullets-v2 {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.exp-bullets-v2 li {
-  position: relative;
-  padding-left: 0.95rem;
+.exp-desc {
   color: #cbd5e1;
-  font-size: 0.83rem;
-  line-height: 1.5;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  margin: 0 0 0.85rem;
 }
-.exp-bullets-v2 li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--cyan);
-  top: 0;
-  font-size: 0.75rem;
-}
-.exp-bullets-v2 li strong {
+.exp-desc strong {
   color: #e2e8f0;
   font-weight: 700;
 }
@@ -965,11 +948,9 @@ footer {
         <h3>Data Scientist · Credit Risk Division</h3>
         <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
         <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <ul class="exp-bullets-v2">
-          <li>Deployed <strong>PD/EAD models</strong> on AWS SageMaker informing the <strong>$7.49B CECL loss reserve</strong></li>
-          <li>13+ longitudinal features → <strong>75% deviance reduction</strong>, validated 2007–2025 backtesting</li>
-          <li>PySpark ETL on <strong>900M+ records</strong> per snapshot: 1hr → 5min (<strong>92% faster</strong>)</li>
-        </ul>
+        <p class="exp-desc">
+          Built production <strong>PD/EAD models</strong> on AWS SageMaker that inform Synchrony's <strong>$7.49B CECL reserve</strong>, validating regulatory-grade stability across 2007–2025 stress periods. Re-architected the <strong>PySpark / EMR pipeline</strong> ingesting <strong>900M+ records per snapshot</strong>, cutting runtime from 1 hour to 5 minutes.
+        </p>
         <div class="exp-tags">
           <span class="tag-v2">PD/EAD Modeling</span>
           <span class="tag-v2">CECL Reserve</span>
@@ -992,11 +973,9 @@ footer {
         <h3>Data Scientist · Operations Analytics Division</h3>
         <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
         <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <ul class="exp-bullets-v2">
-          <li>Replaced external NPS consultancy with internal <strong>XGBoost + Lasso</strong> model (R² 0.43); adopted by customer analytics leadership</li>
-          <li><strong>100M+ records</strong> across 11 surveys, SAS/SQL → Python ETL: 2hr → 15min (<strong>87% faster</strong>)</li>
-          <li>Validated causal robustness via <strong>Placebo Refutation Testing</strong> (effect ≈ −0.001)</li>
-        </ul>
+        <p class="exp-desc">
+          Replaced an external consultancy's <strong>NPS model</strong> with an internal <strong>XGBoost + Lasso</strong> solution that customer analytics leadership adopted firm-wide. Resolved schema mismatches across <strong>100M+ records in 11 surveys</strong> and proved driver validity via <strong>Placebo Refutation Testing</strong>.
+        </p>
         <div class="exp-tags">
           <span class="tag-v2">XGBoost</span>
           <span class="tag-v2">Lasso Regression</span>
@@ -1018,11 +997,9 @@ footer {
         <h3>Research Assistant · AI Engineer</h3>
         <a class="exp-company" href="https://illinois.edu" target="_blank" rel="noopener">University of Illinois Urbana-Champaign</a>
         <div class="exp-meta">Jan 2025 – Present<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <ul class="exp-bullets-v2">
-          <li>Built end-to-end <strong>LLM pipeline</strong> over <strong>100K clinical trial studies</strong> (Qwen 2.5 7B-Instruct + NER + PCA)</li>
-          <li>LLM features captured <strong>97.2% of model importance</strong> vs 2.8% from sentence embeddings</li>
-          <li>Iterative prompt refinement reached <strong>0.79 F1 / 0.59 5-fold ROC-AUC</strong></li>
-        </ul>
+        <p class="exp-desc">
+          Built an <strong>LLM-first NLP pipeline</strong> on Qwen 2.5 7B-Instruct that turned <strong>100K unstructured clinical trial studies</strong> into structured predictive features. Proved LLM-derived features carry <strong>97.2% of model importance vs. 2.8% from sentence embeddings</strong>, redirecting the lab's modeling roadmap.
+        </p>
         <div class="exp-tags">
           <span class="tag-v2">LLM Fine-tuning</span>
           <span class="tag-v2">Qwen 2.5 7B</span>
@@ -1045,11 +1022,9 @@ footer {
         <h3>Data Consultant</h3>
         <a class="exp-company" href="https://gies.illinois.edu/research/centers-institutes/business-analytics" target="_blank" rel="noopener">Business Intelligence Group (BIG) · UIUC</a>
         <div class="exp-meta">Jan 2025 – May 2025<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <ul class="exp-bullets-v2">
-          <li>Shipped <strong>RAG decision-support tool</strong> with topic modeling + Power BI dashboards</li>
-          <li><strong>90% reduction</strong> in pilot lookup time across contract resolution, resource allocation, and overtime planning</li>
-          <li>Translated ambiguous business workflows into production AI automation</li>
-        </ul>
+        <p class="exp-desc">
+          Designed and shipped a <strong>RAG decision-support tool</strong> combining retrieval-augmented generation, topic modeling, and Power BI to automate contract resolution and resource planning. Took an ambiguous business workflow from concept to user adoption, <strong>reducing pilot lookup time by 90%</strong>.
+        </p>
         <div class="exp-tags">
           <span class="tag-v2">Python</span>
           <span class="tag-v2">RAG</span>
