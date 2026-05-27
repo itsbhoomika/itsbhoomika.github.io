@@ -1463,6 +1463,76 @@ footer {
       </div>
     </div>
 
+    <!-- 6. ClearLedger — SQL Personal Finance Management System -->
+    <div class="proj-card" onclick="openModal('ledger')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg6" cx="50%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f6"><feGaussianBlur stdDeviation="14"/></filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg6)" filter="url(#f6)"/>
+
+          <!-- 6 stacked table cards on left -->
+          <g font-family="JetBrains Mono, monospace" font-size="8" fill="#00d4ff">
+            <rect x="30"  y="38"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="51">accounts</text>
+            <rect x="30"  y="62"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="75">categories</text>
+            <rect x="30"  y="86"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="99">transactions</text>
+            <rect x="30"  y="110" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="123">budgets</text>
+            <rect x="30"  y="134" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="147">goals</text>
+            <rect x="30"  y="158" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+            <text x="40" y="171">net_worth</text>
+          </g>
+          <text x="76" y="29" text-anchor="middle" font-size="9" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">6 TABLES</text>
+
+          <!-- Arrow -->
+          <path d="M138 108 L185 108" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="185,108 178,104 178,112" fill="#475569"/>
+          <text x="162" y="100" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">JOINs · CASE WHEN</text>
+
+          <!-- 7 reports cluster -->
+          <g font-family="system-ui" font-size="9" fill="#e2e8f0">
+            <rect x="200" y="36"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+            <text x="259" y="51" text-anchor="middle">budget vs actual</text>
+            <rect x="200" y="62"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+            <text x="259" y="77" text-anchor="middle">net worth VIEW</text>
+            <rect x="200" y="88"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+            <text x="259" y="103" text-anchor="middle">spending trends</text>
+            <rect x="200" y="114" width="118" height="22" rx="5" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+            <text x="259" y="129" text-anchor="middle" fill="#7c8ca8">+ 4 more reports</text>
+          </g>
+          <text x="259" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">7 REPORTS</text>
+
+          <!-- Time savings on right -->
+          <rect x="335" y="60" width="80" height="80" rx="10" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="375" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace">~4 HRS</text>
+          <text x="375" y="103" text-anchor="middle" font-size="14" font-weight="800" fill="#00d4ff">↓</text>
+          <text x="375" y="122" text-anchor="middle" font-size="14" font-weight="800" fill="#00d4ff" font-family="JetBrains Mono, monospace">30s</text>
+          <text x="375" y="155" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">per month</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Database · MySQL · Personal Finance · UIUC</div>
+        <div class="proj-title">ClearLedger — Personal Finance DB</div>
+        <div class="proj-desc">Designed and queried a normalized MySQL relational database for a personal finance system, cutting monthly reporting from ~4 hours to under 30 seconds. Delivered 7 analytical reports and 11 CRUD operations across 6 tables.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4hr → 30s</span><span class="pnum-l">Monthly reporting</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">7</span><span class="pnum-l">Analytical reports</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">11</span><span class="pnum-l">CRUD operations</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2040,6 +2110,82 @@ const MODALS = {
         'Created Cypher queries for auditing expenses and improving data accessibility',
         'Built graph-based visualizations to support better decision-making',
         'Implemented data validation and compliance checks for organizational policies'
+      ]}
+    ]
+  },
+
+  ledger: {
+    kind: 'Database · MySQL · Personal Finance · UIUC',
+    title: 'ClearLedger — Personal Finance Database',
+    sub: 'MySQL 8.0 · 6 Tables · 7 Reports · 11 CRUD Ops · Aggregate Functions · CASE WHEN · JOINs',
+    illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.18) 0%, #0d0f1c 70%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g7a"><feGaussianBlur stdDeviation="14"/></filter>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="92" rx="280" ry="100" fill="rgba(0,212,255,0.07)" filter="url(#g7a)"/>
+
+      <text x="100" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">6 TABLES</text>
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#00d4ff">
+        <rect x="40"  y="32"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="46">accounts</text>
+        <rect x="40"  y="56"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="70">categories</text>
+        <rect x="40"  y="80"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="94">transactions</text>
+        <rect x="40"  y="104" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="118">budgets</text>
+        <rect x="40"  y="128" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="142">goals</text>
+        <rect x="40"  y="152" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
+        <text x="52" y="166">net_worth_view</text>
+      </g>
+
+      <path d="M178 100 L240 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <polygon points="240,100 232,95 232,105" fill="#475569"/>
+      <text x="209" y="90" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">JOINs · CASE WHEN</text>
+      <text x="209" y="115" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">aggregate fns</text>
+
+      <text x="320" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">7 ANALYTICAL REPORTS</text>
+      <g font-family="system-ui" font-size="10" fill="#e2e8f0">
+        <rect x="260" y="32"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+        <text x="340" y="47" text-anchor="middle">budget-vs-actual variance</text>
+        <rect x="260" y="58"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+        <text x="340" y="73" text-anchor="middle">net worth VIEW</text>
+        <rect x="260" y="84"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
+        <text x="340" y="99" text-anchor="middle">spending trends</text>
+        <rect x="260" y="110" width="160" height="22" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
+        <text x="340" y="125" text-anchor="middle" fill="#7c8ca8">+ 4 more reports</text>
+        <rect x="260" y="136" width="160" height="22" rx="5" fill="rgba(0,212,255,0.04)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
+        <text x="340" y="151" text-anchor="middle" fill="#7c8ca8" font-family="JetBrains Mono, monospace" font-size="9">11 CRUD operations</text>
+      </g>
+
+      <rect x="470" y="50" width="150" height="105" rx="12" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+      <text x="545" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace">~4 HRS</text>
+      <text x="545" y="105" text-anchor="middle" font-size="20" font-weight="800" fill="#00d4ff">↓</text>
+      <text x="545" y="130" text-anchor="middle" font-size="20" font-weight="800" fill="#00d4ff" font-family="JetBrains Mono, monospace">30s</text>
+      <text x="545" y="148" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">per month</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `Designed and queried a normalized <strong>MySQL relational database</strong> for a personal finance system, reducing manual financial reporting from <strong>~4 hours to under 30 seconds/month</strong>. Delivered 7 analytical reports and 11 CRUD operations across 6 normalized tables.` },
+      { title: 'Approach', list: [
+        'Normalized schema across 6 tables (accounts, categories, transactions, budgets, goals, net-worth view)',
+        'Built 11 CRUD operations supporting full lifecycle of finance data — inserts, updates, soft-deletes, audited reads',
+        'Designed 7 analytical reports: budget-vs-actual variance, net worth VIEW, spending trends, category-level breakdowns, monthly P&amp;L, goal progress, and recurring-transaction detection',
+        'Used aggregate functions (SUM, AVG, COUNT), CASE WHEN conditionals, and multi-table JOINs to drive the reports'
+      ]},
+      { title: 'Results', results: [
+        { val:'~4hr → 30s', label:'Monthly reporting time', color:'var(--cyan)' },
+        { val:'7', label:'Analytical reports', color:'var(--cyan)' },
+        { val:'11', label:'CRUD operations', color:'var(--cyan)' },
+        { val:'6', label:'Normalized tables', color:'var(--cyan)' }
+      ]},
+      { title: 'Technical Details', list: [
+        'MySQL 8.0 with foreign-key constraints, indexes on hot columns, and a persisted VIEW for net worth',
+        'CASE WHEN logic for variance classification (over/under budget bands)',
+        'JOIN patterns across categories ↔ transactions ↔ budgets for variance and trend reports',
+        'Repository: <a href="https://github.com/itsbhoomika/ClearLedger-Personal-Finance-DB" target="_blank" style="color:#00d4ff;">github.com/itsbhoomika/ClearLedger-Personal-Finance-DB ↗</a>'
       ]}
     ]
   },
