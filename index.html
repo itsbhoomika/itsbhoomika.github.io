@@ -1598,6 +1598,72 @@ footer {
       </div>
     </div>
 
+    <!-- 8. Contract Pricing Intelligence -->
+    <div class="proj-card" onclick="openModal('contract')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg8" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.16"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f8"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow8">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg8)" filter="url(#f8)"/>
+
+          <!-- raw contract document on left -->
+          <rect x="28" y="34" width="104" height="132" rx="8" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
+          <text x="44" y="58" font-size="9" font-weight="700" fill="#fbbf24" font-family="JetBrains Mono, monospace">CONTRACT</text>
+          <line x1="44" y1="74" x2="116" y2="74" stroke="rgba(251,191,36,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="44" y1="88" x2="108" y2="88" stroke="rgba(251,191,36,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+          <text x="44" y="108" font-size="9" fill="rgba(52,211,153,0.85)" font-family="JetBrains Mono, monospace">$50,000/yr</text>
+          <text x="44" y="124" font-size="9" fill="rgba(52,211,153,0.6)" font-family="JetBrains Mono, monospace">15% disc.</text>
+          <line x1="44" y1="138" x2="112" y2="138" stroke="rgba(251,191,36,0.18)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="44" y1="152" x2="96" y2="152" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
+
+          <!-- parser arrow -->
+          <path d="M138 100 L182 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <polygon points="182,100 174,96 174,104" fill="#475569"/>
+          <text x="160" y="92" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">parse</text>
+
+          <!-- structured output boxes on right -->
+          <rect x="196" y="38" width="150" height="30" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.3"/>
+          <text x="271" y="57" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">Pricing Terms</text>
+          <rect x="196" y="74" width="150" height="30" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.4)" stroke-width="1.3"/>
+          <text x="271" y="93" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Analytics Engine</text>
+          <rect x="196" y="110" width="150" height="30" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.3" filter="url(#glow8)"/>
+          <text x="271" y="129" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Validation Rules</text>
+
+          <!-- endpoint badge -->
+          <rect x="196" y="150" width="92" height="28" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
+          <text x="242" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#fbbf24" font-family="system-ui">20+ endpoints</text>
+          <rect x="296" y="150" width="50" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="321" y="168" text-anchor="middle" font-size="10" font-weight="800" fill="#00d4ff" font-family="system-ui">DRF</text>
+
+          <!-- dots -->
+          <circle cx="380" cy="44" r="2.5" fill="rgba(251,191,36,0.2)"/>
+          <circle cx="405" cy="62" r="2" fill="rgba(0,212,255,0.2)"/>
+          <circle cx="392" cy="120" r="2.5" fill="rgba(52,211,153,0.2)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">REST API · Django · Pricing Analytics</div>
+        <div class="proj-title">Contract Pricing Intelligence</div>
+        <div class="proj-desc">A production-style Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates contracts against configurable business rules — backed by 20+ endpoints and AWS S3 document storage.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">20+</span><span class="pnum-l">API endpoints</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4</span><span class="pnum-l">Data models</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">5</span><span class="pnum-l">Rule types</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2336,6 +2402,93 @@ const MODALS = {
         'A/B testing framework standardized hypothesis evaluation across teams, reducing time-to-decision significantly',
         'Time-series evaluation revealed seasonal patterns in customer behavior that informed credit limit strategies',
         'Statistical modeling on 100M+ records required careful sampling and distributed computation to maintain performance'
+      ]}
+    ]
+  },
+
+  contract: {
+    kind: 'REST API · Django · Pricing Analytics',
+    title: 'Contract Pricing Intelligence',
+    sub: 'Django 4.2 · Django REST Framework · Pandas · AWS S3 · 20+ endpoints · 4 models',
+    illusGrad: 'radial-gradient(ellipse at 45% 50%, rgba(251,191,36,0.18) 0%, rgba(0,212,255,0.07) 60%, #0d0f1c 80%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="g8a"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="g8b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="ma8" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="92" rx="280" ry="100" fill="rgba(251,191,36,0.06)" filter="url(#g8a)"/>
+
+      <!-- raw contract document -->
+      <rect x="18" y="30" width="120" height="125" rx="8" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
+      <text x="34" y="52" font-size="10" font-weight="700" fill="#fbbf24" font-family="JetBrains Mono, monospace">RAW TEXT</text>
+      <line x1="34" y1="68" x2="122" y2="68" stroke="rgba(251,191,36,0.22)" stroke-width="1.5" stroke-linecap="round"/>
+      <text x="34" y="88" font-size="9" fill="rgba(52,211,153,0.85)" font-family="JetBrains Mono, monospace">$50,000/year</text>
+      <text x="34" y="104" font-size="9" fill="rgba(52,211,153,0.6)" font-family="JetBrains Mono, monospace">tiered 15% off</text>
+      <text x="34" y="120" font-size="9" fill="rgba(0,212,255,0.7)" font-family="JetBrains Mono, monospace">Net 30 · monthly</text>
+      <line x1="34" y1="134" x2="110" y2="134" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+
+      <!-- parser box -->
+      <path d="M138 92 L168 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma8)"/>
+      <rect x="168" y="62" width="120" height="60" rx="9" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
+      <text x="228" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa" font-family="system-ui">Pricing Parser</text>
+      <text x="228" y="102" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">regex extraction</text>
+      <text x="228" y="113" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">type classify</text>
+      <path d="M288 78 L320 50" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M288 92 L320 92" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+      <path d="M288 106 L320 134" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
+
+      <!-- structured pricing term -->
+      <rect x="320" y="32" width="180" height="36" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.3"/>
+      <text x="410" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">PricingTerm</text>
+      <text x="410" y="61" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">base · discount · billing · terms</text>
+
+      <!-- analytics engine -->
+      <rect x="320" y="74" width="180" height="36" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.3" filter="url(#g8b)"/>
+      <text x="410" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Analytics Engine</text>
+      <text x="410" y="103" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">total value · recurring split</text>
+
+      <!-- validation rules -->
+      <rect x="320" y="116" width="180" height="36" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.4)" stroke-width="1.3"/>
+      <text x="410" y="132" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">Validation Rules</text>
+      <text x="410" y="145" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">min price · max discount · BLOCK</text>
+
+      <!-- S3 storage on far right -->
+      <ellipse cx="575" cy="58" rx="34" ry="11" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
+      <path d="M541 58 L541 96 Q541 107 575 107 Q609 107 609 96 L609 58" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
+      <ellipse cx="575" cy="96" rx="34" ry="11" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
+      <text x="575" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">AWS S3</text>
+
+      <!-- bottom metric badges -->
+      <rect x="18" y="160" width="150" height="20" rx="6" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
+      <text x="93" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fbbf24" font-family="system-ui">20+ REST endpoints</text>
+      <rect x="176" y="160" width="120" height="20" rx="6" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
+      <text x="236" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#00d4ff" font-family="system-ui">4 models · 3 ViewSets</text>
+      <rect x="304" y="160" width="120" height="20" rx="6" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="364" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#34d399" font-family="system-ui">5 validation rules</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `A production-style <strong>Django REST Framework API</strong> for contract pricing intelligence. It ingests raw contract text, extracts structured pricing terms with a regex-based parser, runs portfolio-level analytics with Pandas, and validates contracts against configurable JSON business rules — exposed through <strong>20+ REST endpoints</strong> with search, filtering, pagination, and AWS S3 document storage.` },
+      { title: 'Approach', list: [
+        'Modeled the domain with 4 Django models (Contract, PricingTerm, ValidationRule, ContractAnalytics) and 3 DRF ViewSets with full CRUD, search, and filtering',
+        'Built an intelligent pricing parser that extracts prices, discounts, and volume tiers from free text and auto-classifies pricing type (fixed, tiered, usage-based, hybrid)',
+        'Wrote an analytics engine to compute total contract value, recurring-vs-one-time revenue split, and cross-contract portfolio benchmarking',
+        'Designed a JSON rule engine (min_price, max_discount, required_field, currency_check) for real-time, payer-policy-style validation with violation reporting',
+        'Integrated AWS S3 (boto3) for document upload/download and presigned URLs, with environment-based configuration'
+      ]},
+      { title: 'Results', results: [
+        { val:'20+', label:'REST endpoints', color:'var(--amber)' },
+        { val:'4', label:'Data models', color:'var(--cyan)' },
+        { val:'5', label:'Validation rule types', color:'var(--mint)' },
+        { val:'4 types', label:'Pricing classified', color:'var(--purple)' }
+      ]},
+      { title: 'Technical Details', list: [
+        'Django 4.2 + Django REST Framework 3.14, SQLite for dev and PostgreSQL-ready for production',
+        'Pandas-based analytics with per-contract caching via the ContractAnalytics model',
+        'Custom actions: parse_terms, validate_pricing, analytics_summary, and pricing_comparison',
+        'Built-in pagination (50/page), DRF search backends, transaction support, and Django admin for manual data management',
+        'Repository: <a href="https://github.com/itsbhoomika/contract-pricing-intelligence" target="_blank" style="color:#00d4ff;">github.com/itsbhoomika/contract-pricing-intelligence ↗</a>'
       ]}
     ]
   }
