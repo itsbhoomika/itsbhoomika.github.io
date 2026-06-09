@@ -449,7 +449,7 @@ nav {
   background: rgba(0,212,255,0.14);
   transform: translateY(-1px);
 }
-/* Legacy modifier classes — collapsed to the unified highlighted style. */
+/* Legacy modifier classes, collapsed to the unified highlighted style. */
 .stag.hi, .stag.pu, .stag.mi {
   background: rgba(0,212,255,0.07);
   border-color: rgba(0,212,255,0.32);
@@ -571,7 +571,7 @@ footer {
         <span><strong style="color:var(--cyan);">1.1 yrs</strong> Data Science · Synchrony Financial</span>
         <span><strong style="color:var(--mint);">1.5 yrs</strong> Research Assistant · UIUC</span>
       </div>
-      <p class="hero-sub">Data scientist who turns messy, real-world data into things people can use — from teaching language models to ask better questions to forecasting how millions of credit-card accounts spend.</p>
+      <p class="hero-sub">I work with data and AI. I like teaching language models to ask better questions, and figuring out how millions of credit-card accounts will spend.</p>
       <div class="cta-row">
         <a href="Bhoomika_Ravishankar_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">Download Resume ↓</a>
         <a href="#projects" class="btn btn-ghost">View Projects</a>
@@ -1066,7 +1066,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Qwen-2.5 · Python · Logistic Regression</div>
         <div class="proj-title">Closed-Loop Predictive Modeling with LLM Feedback</div>
-        <div class="proj-desc">Used Qwen-2.5 to extract structured data from 115K ClinicalTrials.gov records, feeding a model that predicts trial success — with a feedback loop that refines the LLM's extraction over time.</div>
+        <div class="proj-desc">Used Qwen-2.5 to extract structured data from 115K ClinicalTrials.gov records, feeding a model that predicts trial success, with a feedback loop that refines the LLM's extraction over time.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
@@ -1196,7 +1196,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Python · SQL · PySpark · XGBoost</div>
         <div class="proj-title">NPS Modeling, Customer Segmentation & Survey Intelligence</div>
-        <div class="proj-desc">End-to-end Synchrony customer analytics: built a 500K+ record dataset from 11 surveys, ran segmentation and A/B testing (+23% predictive gain), and replaced an external NPS model with an internal one — migrating 100M+ records from SAS to Python (87% faster) and validating drivers with placebo refutation testing. Adopted to redesign Synchrony's survey. 📄 Full case study included.</div>
+        <div class="proj-desc">End-to-end Synchrony customer analytics: built a 500K+ record dataset from 11 surveys, ran segmentation and A/B testing (+23% predictive gain), and replaced an external NPS model with an internal one, migrating 100M+ records from SAS to Python (87% faster) and validating drivers with placebo refutation testing. Adopted to redesign Synchrony's survey. 📄 Full case study included.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">87%</span><span class="pnum-l">ETL speedup</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">R² 0.43</span><span class="pnum-l">Lasso NPS model</span></div>
@@ -1260,7 +1260,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">PySpark · AWS EMR · S3 · Airflow</div>
         <div class="proj-title">PySpark Credit-Risk Data Pipeline</div>
-        <div class="proj-desc">PySpark ETL on AWS EMR, scheduled with Airflow, transforming 900M+ records per snapshot — 1 hour to 5 minutes (92% faster). Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B CECL loss reserve across 6 retail portfolios.</div>
+        <div class="proj-desc">PySpark ETL on AWS EMR, scheduled with Airflow, transforming 900M+ records per snapshot, from 1 hour to 5 minutes (92% faster). Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B CECL loss reserve across 6 retail portfolios.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">900M+</span><span class="pnum-l">Records / snapshot</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">92%</span><span class="pnum-l">Faster ETL</span></div>
@@ -1323,7 +1323,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">MySQL · Neo4j · Cypher</div>
         <div class="proj-title">Travel Expense Reimbursement System</div>
-        <div class="proj-desc">Designed a MySQL database for 1,000+ travel requests, then migrated to a Neo4j graph DB — cutting 20% data redundancy and enabling relationship visualization across employees, trips, and expenses.</div>
+        <div class="proj-desc">Designed a MySQL database for 1,000+ travel requests, then migrated to a Neo4j graph DB, cutting 20% data redundancy and enabling relationship visualization across employees, trips, and expenses.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">1K+</span><span class="pnum-l">Records managed</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">50%</span><span class="pnum-l">Fewer errors</span></div>
@@ -1333,7 +1333,7 @@ footer {
       </div>
     </div>
 
-    <!-- 6. ClearLedger — SQL Personal Finance Management System -->
+    <!-- 6. ClearLedger: SQL Personal Finance Management System -->
     <div class="proj-card" onclick="openModal('ledger')">
       <div class="proj-illus">
         <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
@@ -1392,8 +1392,8 @@ footer {
       </div>
       <div class="proj-body">
         <div class="proj-kind">MySQL · SQL</div>
-        <div class="proj-title">ClearLedger — Personal Finance DB</div>
-        <div class="proj-desc">Normalized MySQL database for personal finance that cuts monthly reporting from ~4 hours to under 30 seconds — 7 analytical reports and 11 CRUD operations across 6 tables.</div>
+        <div class="proj-title">ClearLedger: Personal Finance DB</div>
+        <div class="proj-desc">Normalized MySQL database for personal finance that cuts monthly reporting from ~4 hours to under 30 seconds, with 7 analytical reports and 11 CRUD operations across 6 tables.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4hr → 30s</span><span class="pnum-l">Monthly reporting</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">7</span><span class="pnum-l">Analytical reports</span></div>
@@ -1459,7 +1459,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Django · DRF · Pandas · AWS S3</div>
         <div class="proj-title">Contract Pricing Intelligence</div>
-        <div class="proj-desc">Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates against configurable business rules — 20+ endpoints, AWS S3 storage.</div>
+        <div class="proj-desc">Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates against configurable business rules, across 20+ endpoints with AWS S3 storage.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">20+</span><span class="pnum-l">API endpoints</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4</span><span class="pnum-l">Data models</span></div>
@@ -1500,14 +1500,14 @@ footer {
   <div class="hf-spaces-row">
     <a href="https://huggingface.co/spaces/itsbhoomika/FP_3" target="_blank" class="hf-space-card">
       <div class="space-status"><div class="dot"></div>Live</div>
-      <div class="space-name">Data Visualization — Final Project</div>
+      <div class="space-name">Data Visualization: Final Project</div>
       <div class="space-desc">Interactive data visualization app built for IS445. Explores complex datasets with dynamic charts and filters.</div>
       <div class="space-link">Open Space ↗</div>
     </a>
     <a href="https://huggingface.co/spaces/itsbhoomika/is445_demo" target="_blank" class="hf-space-card">
       <div class="space-status"><div class="dot"></div>Live</div>
       <div class="space-name">Seattle Weather Visualizer</div>
-      <div class="space-desc">Interactive visualization of Seattle weather data with dynamic Altair charts — temperature, precipitation, and seasonal trends.</div>
+      <div class="space-desc">Interactive visualization of Seattle weather data with dynamic Altair charts for temperature, precipitation, and seasonal trends.</div>
       <div class="space-link">Open Space ↗</div>
     </a>
     <a href="https://huggingface.co/spaces/itsbhoomika/is445-hw6-building-viz" target="_blank" class="hf-space-card">
@@ -1718,12 +1718,12 @@ const MODALS = {
       <text x="266" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vs base model</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `LLMs routinely hallucinate answers to ambiguous questions. This project trains <strong>Qwen-2.5 7B</strong> to detect ambiguity and make a strategic decision — answer directly or ask a targeted clarifying question. The model is grounded in a 3-type ambiguity taxonomy with interpretable facet annotations extracted from the AmbigNQ corpus.` },
+      { title: 'Overview', body: `LLMs routinely hallucinate answers to ambiguous questions. This project trains <strong>Qwen-2.5 7B</strong> to detect ambiguity and make a strategic decision: answer directly or ask a targeted clarifying question. The model is grounded in a 3-type ambiguity taxonomy with interpretable facet annotations extracted from the AmbigNQ corpus.` },
       { title: 'Approach', list: [
         'Derived 10,036 training examples from AmbigNQ (47% ambiguous, 53% clear)',
-        'Extracted <strong>ambiguity facets</strong> — the minimal missing piece (time-period, entity, location) that makes a query ambiguous',
-        'Stage 1 — SFT: teach structured clarify-or-answer output using Qwen-2.5 32B as teacher',
-        'Stage 2 — DPO: align model preferences with chosen vs. rejected response pairs',
+        'Extracted <strong>ambiguity facets</strong>, the minimal missing piece (time-period, entity, location) that makes a query ambiguous',
+        'Stage 1, SFT: teach structured clarify-or-answer output using Qwen-2.5 32B as teacher',
+        'Stage 2, DPO: align model preferences with chosen vs. rejected response pairs',
         'Evaluated across 6 metrics: taxonomy accuracy, facet coverage, ambiguity detection F1, QA alignment'
       ]},
       { title: 'Results', results: [
@@ -1735,7 +1735,7 @@ const MODALS = {
       { title: 'Key Insights', list: [
         'SFT dramatically outperforms base models (0.56 → 0.63); structured format alone drives most of the gain',
         'Alt-SFT with 32B chain-of-thought supervision shows the most balanced clarify-vs-answer behavior',
-        'DPO improves answer precision but reduces clarify recall — clarify-or-act is inherently multi-objective',
+        'DPO improves answer precision but reduces clarify recall, since clarify-or-act is inherently multi-objective',
         'Facet annotations serve as interpretable anchors that ground the model\'s ambiguity decisions',
         'Model published on HuggingFace: <strong>clarifier-dpo-lora</strong>'
       ]}
@@ -1799,7 +1799,7 @@ const MODALS = {
       <text x="256" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">improvement</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `Predicting M&A targets from financial ratios alone misses most of the signal. This project fuses <strong>14 LSEG financial features</strong> with 298K+ news headlines processed through Word2Vec and FinBERT sentiment analysis. The combined model achieves 89% accuracy — a statistically significant 15-point gain (p=0.0001) over the numerical baseline.` },
+      { title: 'Overview', body: `Predicting M&A targets from financial ratios alone misses most of the signal. This project fuses <strong>14 LSEG financial features</strong> with 298K+ news headlines processed through Word2Vec and FinBERT sentiment analysis. The combined model achieves 89% accuracy, a statistically significant 15-point gain (p=0.0001) over the numerical baseline.` },
       { title: 'Approach', list: [
         '3,882 companies: 185 M&A targets vs 3,697 peers from London Stock Exchange Group data',
         'Financial features: EV/EBITDA, Free Cash Flow, Gross Profit Margin, Price-to-Book, and 10 more ratios',
@@ -1815,7 +1815,7 @@ const MODALS = {
         { val:'2.4×', label:'F1 improvement', color:'var(--cyan)' }
       ]},
       { title: 'Key Insights', list: [
-        'Word2Vec embeddings are the most influential features — market language carries predictive signal beyond financials',
+        'Word2Vec embeddings are the most influential features, market language carries predictive signal beyond financials',
         'FinBERT adds value but over-reliance on positive sentiment causes false positives (Cluster 2 error pattern)',
         'Error analysis revealed 3 failure clusters: overlapping signals, sentiment-driven FPs, weak-signal FNs',
         'Recommendation: contextual sentiment scoring and PCA for dimensionality reduction'
@@ -1885,7 +1885,7 @@ const MODALS = {
         { val:'288', label:'High-spend accounts', color:'var(--purple)' }
       ]},
       { title: 'Key Insights', list: [
-        'Account-specific normalization was critical — spending variance across accounts spans orders of magnitude',
+        'Account-specific normalization was critical, spending variance across accounts spans orders of magnitude',
         'High-spending accounts (>$20K predicted) represent just 2% of accounts but require the largest credit adjustments',
         'Model identifies stable baseline spenders vs. surge-risk accounts, supporting differentiated credit strategies',
         'Log-scale training significantly improved numerical stability for accounts with near-zero spending'
@@ -1955,7 +1955,7 @@ const MODALS = {
       <text x="555" y="169" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">LLM feature imp.</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `Clinical trial success is buried in free text — eligibility criteria, intervention descriptions, study design. This project uses <strong>Qwen-2.5 7B as an autonomous feature engineer</strong>, extracting structured attributes from 115K ClinicalTrials.gov records. A supervised ML feedback loop then refines the LLM's extraction prompts, improving feature quality iteratively.` },
+      { title: 'Overview', body: `Clinical trial success is buried in free text: eligibility criteria, intervention descriptions, study design. This project uses <strong>Qwen-2.5 7B as an autonomous feature engineer</strong>, extracting structured attributes from 115K ClinicalTrials.gov records. A supervised ML feedback loop then refines the LLM's extraction prompts, improving feature quality iteratively.` },
       { title: 'Approach', list: [
         '115,480 cancer trials from ClinicalTrials.gov; filtered to binary: completed (79%) vs terminated/withdrawn (21%)',
         'Qwen-2.5 7B autonomously extracts 8–12 features per trial: study design, intervention type, patient eligibility, operational logistics',
@@ -1970,9 +1970,9 @@ const MODALS = {
         { val:'115K', label:'Trials processed', color:'var(--cyan)' }
       ]},
       { title: 'Key Insights', list: [
-        'LLM-extracted structured features carry 97.2% of total predictive importance — far outweighing raw text embeddings',
+        'LLM-extracted structured features carry 97.2% of total predictive importance, far outweighing raw text embeddings',
         'Iterative feedback loop effectively guides prompt refinement; Iteration 2 produced more consistent, granular features',
-        'L1 regularization selected only 5 of 50 embedding dimensions — confirming structured features\'s superiority',
+        'L1 regularization selected only 5 of 50 embedding dimensions, confirming structured features\'s superiority',
         'Demonstrates a generalizable pipeline: unstructured text → LLM feature extraction → interpretable ML model'
       ]}
     ]
@@ -2052,7 +2052,7 @@ const MODALS = {
 
   ledger: {
     kind: 'MySQL · SQL',
-    title: 'ClearLedger — Personal Finance Database',
+    title: 'ClearLedger: Personal Finance Database',
     sub: 'MySQL 8.0 · 6 Tables · 7 Reports · 11 CRUD Ops · Aggregate Functions · CASE WHEN · JOINs',
     illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.18) 0%, #0d0f1c 70%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -2107,7 +2107,7 @@ const MODALS = {
       { title: 'Overview', body: `Designed and queried a normalized <strong>MySQL relational database</strong> for a personal finance system, reducing manual financial reporting from <strong>~4 hours to under 30 seconds/month</strong>. Delivered 7 analytical reports and 11 CRUD operations across 6 normalized tables.` },
       { title: 'Approach', list: [
         'Normalized schema across 6 tables (accounts, categories, transactions, budgets, goals, net-worth view)',
-        'Built 11 CRUD operations supporting full lifecycle of finance data — inserts, updates, soft-deletes, audited reads',
+        'Built 11 CRUD operations supporting full lifecycle of finance data: inserts, updates, soft-deletes, audited reads',
         'Designed 7 analytical reports: budget-vs-actual variance, net worth VIEW, spending trends, category-level breakdowns, monthly P&amp;L, goal progress, and recurring-transaction detection',
         'Used aggregate functions (SUM, AVG, COUNT), CASE WHEN conditionals, and multi-table JOINs to drive the reports'
       ]},
@@ -2274,7 +2274,7 @@ const MODALS = {
       <text x="364" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#34d399" font-family="system-ui">5 validation rules</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `A production-style <strong>Django REST Framework API</strong> for contract pricing intelligence. It ingests raw contract text, extracts structured pricing terms with a regex-based parser, runs portfolio-level analytics with Pandas, and validates contracts against configurable JSON business rules — exposed through <strong>20+ REST endpoints</strong> with search, filtering, pagination, and AWS S3 document storage.` },
+      { title: 'Overview', body: `A production-style <strong>Django REST Framework API</strong> for contract pricing intelligence. It ingests raw contract text, extracts structured pricing terms with a regex-based parser, runs portfolio-level analytics with Pandas, and validates contracts against configurable JSON business rules, exposed through <strong>20+ REST endpoints</strong> with search, filtering, pagination, and AWS S3 document storage.` },
       { title: 'Approach', list: [
         'Modeled the domain with 4 Django models (Contract, PricingTerm, ValidationRule, ContractAnalytics) and 3 DRF ViewSets with full CRUD, search, and filtering',
         'Built an intelligent pricing parser that extracts prices, discounts, and volume tiers from free text and auto-classifies pricing type (fixed, tiered, usage-based, hybrid)',
@@ -2347,11 +2347,11 @@ const MODALS = {
       <text x="408" y="164" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fbbf24" font-family="system-ui">75% deviance reduction</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `The data-engineering backbone of Synchrony's credit-loss modeling. I built <strong>large-scale PySpark ETL pipelines on AWS EMR</strong>, scheduled with <strong>Apache Airflow</strong>, ingesting and transforming <strong>900M+ customer records per snapshot</strong> into model-ready features — then developed and deployed statistical <strong>PD/EAD models</strong> (Probability of Default / Exposure at Default) to production through Synchrony's <strong>AtLAS</strong> platform via AWS. A complementary <strong>log-log GLM</strong> framework predicts 5-year charge-off probability across <strong>6 retail portfolios</strong> (clothing, lawn &amp; garden, lifestyle, luxury, sporting goods), directly informing the <strong>$7.49B CECL loss reserve</strong>.` },
+      { title: 'Overview', body: `The data-engineering backbone of Synchrony's credit-loss modeling. I built <strong>large-scale PySpark ETL pipelines on AWS EMR</strong>, scheduled with <strong>Apache Airflow</strong>, ingesting and transforming <strong>900M+ customer records per snapshot</strong> into model-ready features, then developed and deployed statistical <strong>PD/EAD models</strong> (Probability of Default / Exposure at Default) to production through Synchrony's <strong>AtLAS</strong> platform via AWS. A complementary <strong>log-log GLM</strong> framework predicts 5-year charge-off probability across <strong>6 retail portfolios</strong> (clothing, lawn &amp; garden, lifestyle, luxury, sporting goods), directly informing the <strong>$7.49B CECL loss reserve</strong>.` },
       { title: 'Pipeline & Feature Engineering', list: [
-        'Built PySpark ETL on AWS EMR, orchestrated by Apache Airflow, ingesting 900M+ records per snapshot — runtime cut from 1 hour (Python) to 5 minutes (PySpark), 92% faster',
+        'Built PySpark ETL on AWS EMR, orchestrated by Apache Airflow, ingesting 900M+ records per snapshot, with runtime cut from 1 hour (Python) to 5 minutes (PySpark), 92% faster',
         'Engineered 13+ longitudinal features: credit-bureau scores, utilization groups, and behavioral interactions',
-        'Added macroeconomic signals — unemployment lag, GDP, savings rate, House Price Index (HPI), median income — across 15+ years of snapshots',
+        'Added macroeconomic signals like unemployment lag, GDP, savings rate, House Price Index (HPI), and median income across 15+ years of snapshots',
         'Performed data-quality checks feeding the $7.49B CECL loss reserve'
       ]},
       { title: 'Modeling & Validation', list: [
