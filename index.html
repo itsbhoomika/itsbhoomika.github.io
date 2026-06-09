@@ -544,7 +544,6 @@ footer {
   <a href="#hero" class="nav-logo">BR</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#huggingface">HuggingFace</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -559,6 +558,10 @@ footer {
     <div class="hero-left">
       <div class="hero-chip">UIUC MSIM '26 · Open to full-time roles</div>
       <h1 class="hero-name">Bhoomika<br><span>Ravishankar</span></h1>
+      <div class="hero-exp" style="display:flex;flex-wrap:wrap;gap:0.5rem 1.25rem;margin:0.75rem 0 1.1rem;font-size:0.92rem;color:#a9b6c9;">
+        <span><strong style="color:var(--cyan);">1.1 yrs</strong> Data Science · Synchrony Financial</span>
+        <span><strong style="color:var(--mint);">1.5 yrs</strong> Research Assistant · UIUC</span>
+      </div>
       <p class="hero-sub">Data Scientist & ML Researcher. I build production models, from LLM fine-tuning with preference optimization to financial forecasting at scale. Interpretable, reproducible, and built for the edge cases.</p>
       <div class="cta-row">
         <a href="Bhoomika_Ravishankar_Resume.pdf" target="_blank" rel="noopener" class="btn btn-primary">Download Resume ↓</a>
@@ -958,159 +961,6 @@ footer {
 }
 </style>
 
-<div class="wrap section" id="experience">
-  <div class="sec-label">Experience</div>
-  <h2 class="sec-title">Where I've Worked</h2>
-
-  <div class="exp-list">
-
-    <!-- Synchrony Financial · Credit Risk Division -->
-    <div class="exp-card-v2">
-      <div class="exp-image synchrony-cr">
-        <img src="logos/synchrony.svg" alt="Synchrony Financial logo">
-      </div>
-      <div class="exp-content">
-        <h3>Data Scientist · Credit Risk Division</h3>
-        <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
-        <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Built production <strong>PD/EAD models</strong> on AWS SageMaker that inform Synchrony's <strong>$7.49B CECL reserve</strong>, validating regulatory-grade stability across 2007–2025 stress periods. Re-architected the <strong>PySpark / EMR pipeline</strong> ingesting <strong>900M+ records per snapshot</strong>, cutting runtime from 1 hour to 5 minutes.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">PD/EAD Modeling</span>
-          <span class="tag-v2">CECL Reserve</span>
-          <span class="tag-v2">Log-log GLM</span>
-          <span class="tag-v2">AWS SageMaker</span>
-          <span class="tag-v2">PySpark / EMR</span>
-          <span class="tag-v2">Apache Airflow</span>
-          <span class="tag-v2">Backtesting</span>
-          <span class="tag-v2">Hypothesis Testing</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Synchrony Financial · Operations Analytics Division -->
-    <div class="exp-card-v2">
-      <div class="exp-image synchrony-ops">
-        <img src="logos/synchrony.svg" alt="Synchrony Financial logo">
-      </div>
-      <div class="exp-content">
-        <h3>Data Scientist · Operations Analytics Division</h3>
-        <a class="exp-company" href="https://www.synchrony.com" target="_blank" rel="noopener">Synchrony Financial</a>
-        <div class="exp-meta">May 2025 – May 2026<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Replaced an external consultancy's <strong>NPS model</strong> with an internal <strong>XGBoost + Lasso</strong> solution that customer analytics leadership adopted firm-wide. Resolved schema mismatches across <strong>100M+ records in 11 surveys</strong> and proved driver validity via <strong>Placebo Refutation Testing</strong>.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">XGBoost</span>
-          <span class="tag-v2">Lasso Regression</span>
-          <span class="tag-v2">Causal Inference</span>
-          <span class="tag-v2">Placebo Refutation</span>
-          <span class="tag-v2">SQL Performance Tuning</span>
-          <span class="tag-v2">NPS Driver Modeling</span>
-          <span class="tag-v2">Feature Engineering</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- UIUC TEC · Peer Advisor and Event Support Intern -->
-    <div class="exp-card-v2">
-      <div class="exp-image tec">
-        <img src="logos/tec.jpg" alt="UIUC Technology Entrepreneur Center logo">
-      </div>
-      <div class="exp-content">
-        <h3>Peer Advisor &amp; Event Support Intern</h3>
-        <a class="exp-company" href="https://illinois.edu" target="_blank" rel="noopener">Technology Entrepreneur Center (TEC) · UIUC</a>
-        <div class="exp-meta">Feb 2025 – Aug 2025<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Co-led peer-driven <strong>entrepreneurship workshops</strong> for UIUC's <strong>$500K+ Cozad program</strong>, partnering with TEC staff to design and deliver <strong>15+ sessions</strong> on financial modeling, MVP prototyping, and venture pitching. Increased participant engagement by <strong>40%</strong>.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">Workshop Design</span>
-          <span class="tag-v2">Financial Modeling</span>
-          <span class="tag-v2">MVP Prototyping</span>
-          <span class="tag-v2">Venture Pitching</span>
-          <span class="tag-v2">Entrepreneurship</span>
-          <span class="tag-v2">Peer Advising</span>
-          <span class="tag-v2">Cozad Program</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- UIUC Research Assistant · AI Engineer -->
-    <div class="exp-card-v2">
-      <div class="exp-image uiuc">
-        <img src="logos/uiuc-full.jpg" alt="University of Illinois Urbana-Champaign logo">
-      </div>
-      <div class="exp-content">
-        <h3>Research Assistant · AI Engineer</h3>
-        <a class="exp-company" href="https://illinois.edu" target="_blank" rel="noopener">University of Illinois Urbana-Champaign</a>
-        <div class="exp-meta">Jan 2025 – Present<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Built an <strong>LLM-first NLP pipeline</strong> on Qwen 2.5 7B-Instruct that turned <strong>100K unstructured clinical trial studies</strong> into structured predictive features. Proved LLM-derived features carry <strong>97.2% of model importance vs. 2.8% from sentence embeddings</strong>, redirecting the lab's modeling roadmap.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">LLM Fine-tuning</span>
-          <span class="tag-v2">Qwen 2.5 7B</span>
-          <span class="tag-v2">Entity Extraction</span>
-          <span class="tag-v2">Prompt Engineering</span>
-          <span class="tag-v2">Sentence Embeddings</span>
-          <span class="tag-v2">PCA</span>
-          <span class="tag-v2">Clinical NLP</span>
-          <span class="tag-v2">Lasso Logistic Regression</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- BIG Data Consultant -->
-    <div class="exp-card-v2">
-      <div class="exp-image big">
-        <img src="logos/uiuc-full.jpg" alt="University of Illinois Urbana-Champaign logo">
-      </div>
-      <div class="exp-content">
-        <h3>Data Consultant</h3>
-        <a class="exp-company" href="https://gies.illinois.edu/research/centers-institutes/business-analytics" target="_blank" rel="noopener">Business Intelligence Group (BIG) · UIUC</a>
-        <div class="exp-meta">Jan 2025 – May 2025<span class="exp-meta-sep">·</span>Champaign, IL</div>
-        <p class="exp-desc">
-          Designed and shipped a <strong>RAG decision-support tool</strong> combining retrieval-augmented generation, topic modeling, and Power BI to automate contract resolution and resource planning. Took an ambiguous business workflow from concept to user adoption, <strong>reducing pilot lookup time by 90%</strong>.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">Python</span>
-          <span class="tag-v2">RAG</span>
-          <span class="tag-v2">Topic Modeling</span>
-          <span class="tag-v2">Power BI</span>
-          <span class="tag-v2">Decision Support Systems</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Repute India · Data Analyst -->
-    <div class="exp-card-v2">
-      <div class="exp-image repute">
-        <img src="logos/repute.jpg" alt="Repute India logo">
-      </div>
-      <div class="exp-content">
-        <h3>Data Analyst</h3>
-        <a class="exp-company" href="#" target="_blank" rel="noopener">Repute India Pvt. Ltd.</a>
-        <div class="exp-meta">Feb 2023 – Apr 2023<span class="exp-meta-sep">·</span>India</div>
-        <p class="exp-desc">
-          Automated <strong>financial and operational KPI dashboards</strong> in SQL Server and Excel, improving reporting accuracy and <strong>reducing reporting cycle time by 30%</strong>. Performed reconciliations across cost, production, and financial operations data, surfacing <strong>~30% cost inefficiencies</strong> and translating findings into operational recommendations for business teams.
-        </p>
-        <div class="exp-tags">
-          <span class="tag-v2">SQL Server</span>
-          <span class="tag-v2">Excel</span>
-          <span class="tag-v2">KPI Dashboards</span>
-          <span class="tag-v2">Reporting Automation</span>
-          <span class="tag-v2">Data Reconciliation</span>
-          <span class="tag-v2">Cost Analysis</span>
-          <span class="tag-v2">Operational Analytics</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <!-- PROJECTS -->
 <div class="wrap section" id="projects">
   <div class="sec-label">Projects</div>
@@ -1157,7 +1007,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">NLP · LLM Research · CS546</div>
         <div class="proj-title">Clarification-Seeking LLMs</div>
-        <div class="proj-desc">Trained Qwen-2.5 7B to detect query ambiguity and strategically ask clarifying questions instead of hallucinating an answer — using SFT + Direct Preference Optimization.</div>
+        <div class="proj-desc">Trained Qwen-2.5 7B (an open-source large language model) to detect when a question is ambiguous and ask a clarifying question instead of guessing — using supervised fine-tuning (SFT) and Direct Preference Optimization (DPO), two techniques for teaching an LLM to prefer better answers.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.63</span><span class="pnum-l">Macro F1</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">10K+</span><span class="pnum-l">Training examples</span></div>
@@ -1205,7 +1055,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Finance · ML · NLP</div>
         <div class="proj-title">AI-Driven M&A Prediction</div>
-        <div class="proj-desc">XGBoost model combining 14 financial ratios with Word2Vec embeddings and FinBERT sentiment analysis to predict M&A acquisition targets from 298K+ news articles.</div>
+        <div class="proj-desc">A machine-learning model (XGBoost, a gradient-boosted classifier) that predicts likely M&A acquisition targets by combining 14 financial ratios with signals mined from 298K+ news articles — using Word2Vec (which turns text into numbers a model can learn from) and FinBERT (a finance-tuned language model for reading sentiment).</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">89%</span><span class="pnum-l">Accuracy</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+15%</span><span class="pnum-l">Over baseline</span></div>
@@ -1267,69 +1117,11 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Healthcare · NLP · LLM Research · UIUC Stats</div>
         <div class="proj-title">Closed-Loop Predictive Modeling with LLM Feedback</div>
-        <div class="proj-desc">Used Qwen-2.5 as an autonomous feature engineer on 115K ClinicalTrials.gov records — extracting structured attributes from free text to predict trial success with a supervised feedback loop.</div>
+        <div class="proj-desc">Used Qwen-2.5 (an open-source large language model) to automatically read 115K ClinicalTrials.gov records and pull structured data out of free-form text, then fed those into a model that predicts whether a trial will succeed — with a feedback loop that refines the LLM's extraction over time.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">0.61</span><span class="pnum-l">ROC-AUC</span></div>
-        </div>
-        <div class="proj-more">View details →</div>
-      </div>
-    </div>
-    <!-- 6. Customer Analytics -->
-    <div class="proj-card" onclick="openModal('analytics')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg6" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f6"><feGaussianBlur stdDeviation="15"/></filter>
-            <filter id="glow6">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg6)" filter="url(#f6)"/>
-          <!-- faint axis -->
-          <line x1="40" y1="155" x2="410" y2="155" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <line x1="40" y1="155" x2="40" y2="30" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-          <!-- bars (A/B test groups) -->
-          <rect x="60" y="100" width="30" height="55" rx="4" fill="rgba(244,114,182,0.15)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-          <rect x="100" y="75" width="30" height="80" rx="4" fill="rgba(244,114,182,0.55)" stroke="rgba(244,114,182,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
-          <rect x="155" y="90" width="30" height="65" rx="4" fill="rgba(167,139,250,0.15)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
-          <rect x="195" y="60" width="30" height="95" rx="4" fill="rgba(167,139,250,0.55)" stroke="rgba(167,139,250,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
-          <rect x="250" y="80" width="30" height="75" rx="4" fill="rgba(0,212,255,0.15)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-          <rect x="290" y="50" width="30" height="105" rx="4" fill="rgba(0,212,255,0.55)" stroke="rgba(0,212,255,0.7)" stroke-width="1.5" filter="url(#glow6)"/>
-          <!-- A/B labels -->
-          <text x="75" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
-          <text x="115" y="170" text-anchor="middle" font-size="9" fill="#f472b6" font-family="monospace">B</text>
-          <text x="170" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
-          <text x="210" y="170" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="monospace">B</text>
-          <text x="265" y="170" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">A</text>
-          <text x="305" y="170" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="monospace">B</text>
-          <!-- trend line overlay -->
-          <polyline points="85,125 170,107 255,95 335,72" fill="none" stroke="rgba(251,191,36,0.7)" stroke-width="2" stroke-linecap="round" stroke-dasharray="5 3" filter="url(#glow6)"/>
-          <!-- badge -->
-          <rect x="338" y="55" width="85" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5"/>
-          <text x="380" y="73" text-anchor="middle" font-size="11" font-weight="800" fill="#f472b6" font-family="system-ui">500K+ rows</text>
-          <rect x="338" y="93" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-          <text x="380" y="111" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">+23% perf.</text>
-          <!-- dots -->
-          <circle cx="40" cy="42" r="2.5" fill="rgba(244,114,182,0.2)"/>
-          <circle cx="415" cy="160" r="2" fill="rgba(0,212,255,0.15)"/>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Analytics · A/B Testing · SQL · Python</div>
-        <div class="proj-title">Customer Behavior Analytics & Experimentation</div>
-        <div class="proj-desc">Built a 500K+ record analytical dataset from 10+ survey sources, applied statistical modeling on 100M+ financial records for risk detection, and designed A/B testing frameworks to drive data-driven strategy decisions.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">500K+</span><span class="pnum-l">Record dataset</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">+23%</span><span class="pnum-l">Predictive gain</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">90%</span><span class="pnum-l">Risk detection↑</span></div>
         </div>
         <div class="proj-more">View details →</div>
       </div>
@@ -1374,7 +1166,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Finance · Deep Learning · Datathon · Case Study</div>
         <div class="proj-title">LSTM Credit Card Spend Forecasting</div>
-        <div class="proj-desc">Deep learning time-series forecasting system predicting quarterly spending for 14K+ Synchrony accounts. Achieved 0.76 R² with account-level normalization, seasonal decomposition, and recursive multi-step forecasting. 📄 Full case study included.</div>
+        <div class="proj-desc">A deep-learning forecasting system (LSTM, a neural network built for time-series data) that predicts quarterly spending for 14K+ Synchrony accounts. Reached an R² of 0.76 (a measure of how well the model fits — 1.0 is perfect) using account-level normalization, seasonal patterns, and step-by-step forecasting. 📄 Full case study included.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">14K+</span><span class="pnum-l">Accounts</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.76 R²</span><span class="pnum-l">Model accuracy</span></div>
@@ -1453,15 +1245,79 @@ footer {
         </svg>
       </div>
       <div class="proj-body">
-        <div class="proj-kind">Analytics · Causal Inference · Synchrony · Case Study</div>
-        <div class="proj-title">NPS Driver Modeling & Survey Intelligence</div>
-        <div class="proj-desc">Replaced an external consulting firm's NPS model with an internally built solution — migrating 100M+ records from SAS to Python (87% faster), identifying structural data flaws, and validating survey drivers with Placebo Refutation Testing. Findings adopted to redesign Synchrony's survey structure. 📄 Full case study included.</div>
+        <div class="proj-kind">Analytics · Segmentation · A/B Testing · Causal Inference · Synchrony</div>
+        <div class="proj-title">NPS Modeling, Customer Segmentation & Survey Intelligence</div>
+        <div class="proj-desc">End-to-end Synchrony customer-analytics work: built a 500K+ record dataset from 11 survey sources, segmented customers and ran A/B-testing frameworks (+23% predictive gain), then replaced an external firm's NPS model (Net Promoter Score — how likely customers are to recommend the company) with an internal one — migrating 100M+ records from SAS to Python (87% faster) and confirming the real drivers with Placebo Refutation Testing (a causal check that rules out coincidental correlations). Findings were adopted to redesign Synchrony's survey. 📄 Full case study included.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">87%</span><span class="pnum-l">ETL speedup</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">R² 0.43</span><span class="pnum-l">Lasso NPS model</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">−0.001</span><span class="pnum-l">Placebo effect</span></div>
         </div>
         <div class="proj-more">Read full case study →</div>
+      </div>
+    </div>
+    <!-- PySpark Credit-Risk Data Pipeline -->
+    <div class="proj-card" onclick="openModal('pyspark')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rgPS" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="fPS"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glowPS">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <marker id="arrPS" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(52,211,153,0.7)"/>
+            </marker>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgPS)" filter="url(#fPS)"/>
+          <!-- raw record sources -->
+          <rect x="16" y="48" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+          <text x="58" y="63" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">bureau scores</text>
+          <rect x="16" y="78" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+          <text x="58" y="93" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">behavioral</text>
+          <rect x="16" y="108" width="84" height="22" rx="5" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.2)" stroke-width="1.2"/>
+          <text x="58" y="123" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">macro signals</text>
+          <!-- arrow to PySpark/EMR -->
+          <path d="M100 89 L140 89" stroke="rgba(52,211,153,0.6)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
+          <!-- PySpark / EMR engine -->
+          <rect x="140" y="60" width="96" height="58" rx="9" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
+          <text x="188" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">PySpark</text>
+          <text x="188" y="96" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">AWS EMR · Airflow</text>
+          <text x="188" y="108" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">900M+ / snapshot</text>
+          <!-- arrow to GLM -->
+          <path d="M236 89 L276 89" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
+          <!-- PD/EAD GLM -->
+          <rect x="276" y="62" width="86" height="26" rx="7" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
+          <text x="319" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">PD / EAD GLM</text>
+          <rect x="276" y="94" width="86" height="26" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
+          <text x="319" y="111" text-anchor="middle" font-size="9" font-weight="700" fill="#fbbf24" font-family="system-ui">6 portfolios</text>
+          <!-- CECL badge -->
+          <rect x="368" y="76" width="58" height="30" rx="7" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
+          <text x="397" y="89" text-anchor="middle" font-size="8" font-weight="700" fill="#34d399" font-family="system-ui">CECL</text>
+          <text x="397" y="100" text-anchor="middle" font-size="8.5" font-weight="800" fill="#34d399" font-family="monospace">$7.49B</text>
+          <!-- bottom metric badges -->
+          <rect x="16" y="150" width="100" height="28" rx="7" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="66" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">92% faster</text>
+          <rect x="124" y="150" width="120" height="28" rx="7" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="184" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">1hr → 5min</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Data Engineering · PySpark · AWS EMR · Credit Risk · Synchrony</div>
+        <div class="proj-title">PySpark Credit-Risk Data Pipeline</div>
+        <div class="proj-desc">Built the large-scale data pipeline behind Synchrony's credit-risk models. Engineered PySpark ETL (a distributed big-data processing framework) on AWS EMR, scheduled with Apache Airflow, to ingest and transform 900M+ customer records per snapshot — cutting runtime from 1 hour to 5 minutes (92% faster). The cleaned data feeds log-log GLM PD/EAD models (Probability of Default / Exposure at Default) across 6 retail portfolios that inform Synchrony's $7.49B CECL loss reserve.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">900M+</span><span class="pnum-l">Records / snapshot</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">92%</span><span class="pnum-l">Faster ETL</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">$7.49B</span><span class="pnum-l">CECL reserve</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
       </div>
     </div>
     <!-- 5. Travel Expense Reimbursement -->
@@ -1588,7 +1444,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">Database · MySQL · Personal Finance · UIUC</div>
         <div class="proj-title">ClearLedger — Personal Finance DB</div>
-        <div class="proj-desc">Designed and queried a normalized MySQL relational database for a personal finance system, cutting monthly reporting from ~4 hours to under 30 seconds. Delivered 7 analytical reports and 11 CRUD operations across 6 tables.</div>
+        <div class="proj-desc">Designed and queried a normalized MySQL relational database for a personal finance system, cutting monthly reporting from ~4 hours to under 30 seconds. Delivered 7 analytical reports and 11 CRUD operations (create/read/update/delete — the core actions for managing data) across 6 tables.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4hr → 30s</span><span class="pnum-l">Monthly reporting</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">7</span><span class="pnum-l">Analytical reports</span></div>
@@ -1654,7 +1510,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">REST API · Django · Pricing Analytics</div>
         <div class="proj-title">Contract Pricing Intelligence</div>
-        <div class="proj-desc">A production-style Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates contracts against configurable business rules — backed by 20+ endpoints and AWS S3 document storage.</div>
+        <div class="proj-desc">A production-style REST API (built with Django, a Python web framework) that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates contracts against configurable business rules — backed by 20+ endpoints and AWS S3 cloud storage.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">20+</span><span class="pnum-l">API endpoints</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4</span><span class="pnum-l">Data models</span></div>
@@ -2489,6 +2345,82 @@ const MODALS = {
         'Custom actions: parse_terms, validate_pricing, analytics_summary, and pricing_comparison',
         'Built-in pagination (50/page), DRF search backends, transaction support, and Django admin for manual data management',
         'Repository: <a href="https://github.com/itsbhoomika/contract-pricing-intelligence" target="_blank" style="color:#00d4ff;">github.com/itsbhoomika/contract-pricing-intelligence ↗</a>'
+      ]}
+    ]
+  },
+
+  pyspark: {
+    kind: 'Data Engineering · PySpark · Credit Risk · Synchrony',
+    title: 'PySpark Credit-Risk Data Pipeline',
+    sub: 'PySpark · AWS EMR · Apache Airflow · Log-log GLM · PD/EAD · 900M+ records/snapshot',
+    illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.18) 0%, rgba(0,212,255,0.07) 60%, #0d0f1c 80%)',
+    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gPSa"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="gPSb"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="maPS" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
+      </defs>
+      <rect width="660" height="185" fill="#0d0f1c"/>
+      <ellipse cx="330" cy="92" rx="290" ry="100" fill="rgba(52,211,153,0.06)" filter="url(#gPSa)"/>
+      <!-- sources -->
+      <rect x="18" y="36" width="120" height="22" rx="5" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+      <text x="78" y="51" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="monospace">credit bureau scores</text>
+      <rect x="18" y="64" width="120" height="22" rx="5" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+      <text x="78" y="79" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="monospace">utilization · behavior</text>
+      <rect x="18" y="92" width="120" height="22" rx="5" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+      <text x="78" y="107" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="monospace">macro: GDP · HPI · unemp</text>
+      <text x="78" y="133" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">15+ yrs of snapshots</text>
+      <!-- arrow -->
+      <path d="M138 75 L172 75" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#maPS)"/>
+      <!-- PySpark / EMR -->
+      <rect x="172" y="48" width="130" height="62" rx="9" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#gPSb)"/>
+      <text x="237" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#34d399" font-family="system-ui">PySpark ETL</text>
+      <text x="237" y="88" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">AWS EMR · Airflow</text>
+      <text x="237" y="100" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">900M+ records/snapshot</text>
+      <!-- arrow -->
+      <path d="M302 79 L336 79" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#maPS)"/>
+      <!-- 13+ features -->
+      <rect x="336" y="50" width="150" height="26" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.4)" stroke-width="1.3"/>
+      <text x="411" y="67" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">13+ engineered features</text>
+      <!-- GLM -->
+      <rect x="336" y="82" width="150" height="26" rx="7" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
+      <text x="411" y="99" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">Log-log GLM · PD/EAD</text>
+      <!-- arrow -->
+      <path d="M486 79 L520 79" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#maPS)"/>
+      <!-- CECL -->
+      <rect x="520" y="56" width="122" height="46" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#gPSb)"/>
+      <text x="581" y="76" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">CECL reserve</text>
+      <text x="581" y="93" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">$7.49B</text>
+      <!-- bottom badges -->
+      <rect x="172" y="150" width="150" height="20" rx="6" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
+      <text x="247" y="164" text-anchor="middle" font-size="9.5" font-weight="800" fill="#34d399" font-family="system-ui">1 hr → 5 min · 92% faster</text>
+      <rect x="330" y="150" width="156" height="20" rx="6" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
+      <text x="408" y="164" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fbbf24" font-family="system-ui">75% deviance reduction</text>
+    </svg>`,
+    sections: [
+      { title: 'Overview', body: `The data-engineering backbone of Synchrony's credit-loss modeling. I built <strong>large-scale PySpark ETL pipelines on AWS EMR</strong>, scheduled with <strong>Apache Airflow</strong>, ingesting and transforming <strong>900M+ customer records per snapshot</strong> into model-ready features — then developed and deployed statistical <strong>PD/EAD models</strong> (Probability of Default / Exposure at Default) to production through Synchrony's <strong>AtLAS</strong> platform via AWS. A complementary <strong>log-log GLM</strong> framework predicts 5-year charge-off probability across <strong>6 retail portfolios</strong> (clothing, lawn &amp; garden, lifestyle, luxury, sporting goods), directly informing the <strong>$7.49B CECL loss reserve</strong>.` },
+      { title: 'Pipeline & Feature Engineering', list: [
+        'Built PySpark ETL on AWS EMR, orchestrated by Apache Airflow, ingesting 900M+ records per snapshot — runtime cut from 1 hour (Python) to 5 minutes (PySpark), 92% faster',
+        'Engineered 13+ longitudinal features: credit-bureau scores, utilization groups, and behavioral interactions',
+        'Added macroeconomic signals — unemployment lag, GDP, savings rate, House Price Index (HPI), median income — across 15+ years of snapshots',
+        'Performed data-quality checks feeding the $7.49B CECL loss reserve'
+      ]},
+      { title: 'Modeling & Validation', list: [
+        'Log-log GLM predicting 5-year charge-off probability across 6 retail portfolios, deployed to production via AtLAS / AWS',
+        'Retained variables drove a 75% deviance reduction from the null model, with near-zero p-values (hypothesis testing) and stable VIF ≤ 3 across interaction terms (no harmful multicollinearity)',
+        'Multi-snapshot backtesting from 2007–2025 confirmed robustness: conservative ~10% under-prediction pre-2008 for regulatory compliance, self-correction within ~1 year after the 2008 shock',
+        'Stable charge-off variance across S1–S4 stress periods, including post-COVID behavioral shifts'
+      ]},
+      { title: 'Results', results: [
+        { val:'900M+', label:'Records / snapshot', color:'var(--mint)' },
+        { val:'92%', label:'Faster ETL (1hr→5min)', color:'var(--cyan)' },
+        { val:'$7.49B', label:'CECL reserve informed', color:'var(--purple)' },
+        { val:'75%', label:'Deviance reduction', color:'var(--amber)' }
+      ]},
+      { title: 'Stack', list: [
+        'PySpark · AWS EMR · Apache Airflow · AWS (AtLAS deployment)',
+        'Statistical modeling: log-log GLM, PD/EAD, hypothesis testing, VIF, deviance analysis',
+        'Multi-snapshot backtesting framework spanning 2007–2025'
       ]}
     ]
   }
