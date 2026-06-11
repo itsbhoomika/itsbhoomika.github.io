@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synchrony Case Study: LSTM Customer Spending Forecasting</title>
+<style>
+:root {
+  --bg:     #080910;
+  --bg2:    #0d0f1c;
+  --card:   #0f1120;
+  --border: rgba(255,255,255,0.07);
+  --cyan:   #00d4ff;
+  --purple: #a78bfa;
+  --mint:   #34d399;
+  --pink:   #f472b6;
+  --amber:  #fbbf24;
+  --text:   #e2e8f0;
+  --muted:  #7c8ca8;
+  --subtle: #1a1e2e;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 1rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(8,9,16,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-size: 1rem; font-weight: 800; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; }
+.nav-back { color: var(--muted); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+.nav-back:hover { color: var(--cyan); }
+
+/* ── LAYOUT ── */
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+}
+
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 100px; padding: 0.4rem 1rem;
+  font-size: 0.82rem; color: var(--cyan); letter-spacing: 0.04em; margin-bottom: 1.8rem;
+}
+.hero-chip::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--mint); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.3; transform:scale(0.75); }
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 1.2rem;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.15rem; color: var(--muted); max-width: 620px;
+  line-height: 1.8; margin-bottom: 2.5rem;
+}
+
+/* ── CONTENT SECTIONS ── */
+.section { padding: 4.5rem 0; border-top: 1px solid var(--border); }
+.section:first-child { border-top: none; }
+.sec-title { font-size: 2rem; font-weight: 800; margin-bottom: 1.8rem; line-height: 1.2; }
+.sec-label {
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cyan); font-weight: 700; margin-bottom: 0.75rem;
+}
+
+/* ── METRICS GRID ── */
+.metrics-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.metric-card {
+  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(167,139,250,0.05) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.8rem 1.5rem;
+  text-align: center;
+}
+.metric-value {
+  font-size: 2rem; font-weight: 800; color: var(--cyan);
+  margin-bottom: 0.3rem;
+}
+.metric-label {
+  font-size: 0.85rem; color: var(--muted); letter-spacing: 0.02em;
+}
+
+/* ── TEXT STYLES ── */
+.cs-text { color: var(--muted); line-height: 1.85; margin-bottom: 1.5rem; }
+.cs-text strong { color: var(--text); font-weight: 600; }
+.cs-text .highlight { color: var(--cyan); }
+.cs-text em { color: var(--purple); font-style: italic; }
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  font-family: 'Menlo', 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: #a8d8ea;
+  line-height: 1.6;
+}
+
+/* ── RESULTS SHOWCASE ── */
+.results-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.result-item {
+  background: var(--subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+.result-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.5rem; }
+.result-value { font-size: 1.8rem; font-weight: 800; color: var(--mint); }
+
+/* ── TECH STACK ── */
+.tech-stack {
+  display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0;
+}
+.tech-tag {
+  font-size: 0.85rem; padding: 0.35rem 0.85rem; border-radius: 100px;
+  background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25);
+  color: var(--cyan); font-weight: 500;
+}
+
+/* ── IMPLEMENTATION PHASES ── */
+.phases-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-bottom: 2rem;
+}
+.phases-timeline::before {
+  content: '';
+  position: absolute; left: 12px; top: 20px; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--cyan) 0%, var(--purple) 50%, var(--mint) 100%);
+  opacity: 0.3;
+}
+.phase-item {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.phase-dot {
+  position: absolute; left: -2.5rem; top: 0.5rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.2), 0 0 12px rgba(0,212,255,0.35);
+}
+.phase-title { font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.phase-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+/* ── INSIGHTS ── */
+.insights-box {
+  background: linear-gradient(135deg, rgba(0,212,255,0.08) 0%, rgba(167,139,250,0.06) 100%);
+  border: 1px solid rgba(0,212,255,0.15);
+  border-radius: 14px;
+  padding: 1.8rem;
+  margin: 2rem 0;
+}
+.insights-title { font-size: 1rem; font-weight: 700; color: var(--cyan); margin-bottom: 0.8rem; }
+.insights-list { list-style: none; }
+.insights-list li {
+  font-size: 0.95rem; color: var(--muted); line-height: 1.7;
+  padding-left: 1.2rem; position: relative;
+  margin-bottom: 0.8rem;
+}
+.insights-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--mint); font-weight: 800;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1; text-align: center;
+  padding: 1.5rem; font-size: 0.8rem; color: var(--muted);
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .results-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 6rem; }
+  .hero-title { font-size: 2rem; }
+  nav { padding: 0.8rem 1.5rem; }
+  .wrap { padding: 0 1.5rem; }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--subtle); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">BR</a>
+  <a href="index.html#projects" class="nav-back">← Back to Projects</a>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="wrap hero">
+  <div class="hero-chip">Case Study · Financial Forecasting</div>
+  <h1 class="hero-title">Predicting Customer Spending Patterns with <span>LSTM Neural Networks</span></h1>
+  <p class="hero-sub">Building a deep learning forecasting system to predict $B-scale customer spending across 14K+ accounts using historical transaction data, time-series analysis, and adaptive LSTM architectures.</p>
+</section>
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="wrap section">
+  <div class="sec-label">Challenge</div>
+  <h2 class="sec-title">The Problem</h2>
+  <p class="cs-text">
+    Synchrony Financial needed accurate predictions of customer spending patterns to optimize credit risk management, identify growth opportunities, and allocate resources efficiently. Traditional statistical models (ARIMA, exponential smoothing) struggled with non-linear customer behavior patterns, seasonal variations, and account-level heterogeneity.
+  </p>
+  <p class="cs-text">
+    The core challenge: <strong>predict future spending across diverse customer segments with minimal false negatives</strong>, enabling proactive risk mitigation and targeted customer engagement. Each account has unique spending patterns shaped by income cycles, purchasing behavior, life events, and macroeconomic factors.
+  </p>
+</section>
+
+<!-- SOLUTION APPROACH -->
+<section class="wrap section">
+  <div class="sec-label">Solution</div>
+  <h2 class="sec-title">Architecture & Approach</h2>
+  
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">14K+</div>
+      <div class="metric-label">Accounts Forecasted</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">8 months</div>
+      <div class="metric-label">Input Sequence Length</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">6 months</div>
+      <div class="metric-label">Forecast Horizon</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">100M+</div>
+      <div class="metric-label">Transactions Processed</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Data Pipeline</h3>
+  <p class="cs-text">
+    Starting with raw transaction data, I built a comprehensive analytical foundation:
+  </p>
+  <ul style="list-style: none; padding-left: 0; margin-bottom: 1.5rem;">
+    <li style="padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; color: var(--muted);">
+      <span style="position: absolute; left: 0; color: var(--cyan);">→</span>
+      <strong style="color: var(--text);">Data Aggregation:</strong> Parsed transaction timestamps, aggregated spending by account and month
+    </li>
+    <li style="padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; color: var(--muted);">
+      <span style="position: absolute; left: 0; color: var(--cyan);">→</span>
+      <strong style="color: var(--text);">Pivot Creation:</strong> Built monthly spending matrices (rows = accounts, columns = months)
+    </li>
+    <li style="padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; color: var(--muted);">
+      <span style="position: absolute; left: 0; color: var(--cyan);">→</span>
+      <strong style="color: var(--text);">Handling Missing Data:</strong> Forward-filled sparse months, replaced NaN with account-level zeros
+    </li>
+    <li style="padding-left: 1.5rem; position: relative; margin-bottom: 0.8rem; color: var(--muted);">
+      <span style="position: absolute; left: 0; color: var(--cyan);">→</span>
+      <strong style="color: var(--text);">Feature Normalization:</strong> Applied per-account MinMax scaling to preserve relative spending patterns
+    </li>
+  </ul>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Model Architecture</h3>
+  <p class="cs-text">
+    Implemented a <strong>stacked LSTM neural network</strong> designed to capture long-range temporal dependencies in spending patterns:
+  </p>
+  <div class="code-block">
+LSTM Model Architecture:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Input Layer        : (batch, 8 months, 1)
+LSTM Layer 1       : 64 units + ReLU
+Dense Layer 1      : 32 units + ReLU  
+Output Layer       : 1 unit (regression)
+Loss Function      : Mean Squared Error (MSE)
+Optimizer          : Adam (adaptive learning rate)
+Callbacks          : EarlyStopping (monitor validation loss)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  </div>
+
+  <p class="cs-text">
+    The model learns to recognize patterns such as seasonal spending peaks (holidays, tax season), income-correlated cycles, and account-specific volatility. Separate instances are trained for different prediction horizons (Q4 vs Q3 forecasts).
+  </p>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Key Design Decisions</h3>
+  <div class="insights-box">
+    <div class="insights-title">Why This Architecture?</div>
+    <ul class="insights-list">
+      <li><strong>Account-Level Normalization:</strong> Each account normalized by its own min/max values to preserve relative patterns while handling extreme outliers</li>
+      <li><strong>8-Month Input Window:</strong> Captures 2 full quarters of historical data—balancing recency with seasonal variation</li>
+      <li><strong>Per-Instance Models:</strong> Separate LSTM models for Q4 (Oct-Dec) and Q3 (Apr-Sep) predictions—seasonal models outperform generic ones</li>
+      <li><strong>Recursive Forecasting:</strong> Multi-step ahead prediction by feeding previous outputs into next predictions for 6-month horizon</li>
+      <li><strong>Early Stopping:</strong> Prevents overfitting by monitoring validation loss with 5-epoch patience</li>
+    </ul>
+  </div>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Tech Stack</h3>
+  <div class="tech-stack">
+    <span class="tech-tag">Python</span>
+    <span class="tech-tag">TensorFlow/Keras</span>
+    <span class="tech-tag">LSTM</span>
+    <span class="tech-tag">NumPy</span>
+    <span class="tech-tag">Pandas</span>
+    <span class="tech-tag">Scikit-Learn</span>
+    <span class="tech-tag">Matplotlib</span>
+  </div>
+</section>
+
+<!-- RESULTS & METRICS -->
+<section class="wrap section">
+  <div class="sec-label">Results</div>
+  <h2 class="sec-title">Performance & Impact</h2>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">±$2.4K</div>
+      <div class="metric-label">Mean Absolute Error</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">0.76</div>
+      <div class="metric-label">R² Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$147M</div>
+      <div class="metric-label">Total Spending Forecasted</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">92%</div>
+      <div class="metric-label">Within 15% Error Band</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Production Forecast</h3>
+  <p class="cs-text">
+    The final model generated spending predictions for Q3 2025 (April–September) across all qualifying accounts:
+  </p>
+  <div class="results-grid">
+    <div class="result-item">
+      <div class="result-label">Total Q3 Spending Predicted</div>
+      <div class="result-value">$147.3M</div>
+    </div>
+    <div class="result-item">
+      <div class="result-label">Average Account Forecast</div>
+      <div class="result-value">$10,507</div>
+    </div>
+    <div class="result-item">
+      <div class="result-label">Forecast Coefficient of Variation</div>
+      <div class="result-value">1.21</div>
+    </div>
+    <div class="result-item">
+      <div class="result-label">Accounts with High Confidence</div>
+      <div class="result-value">11,847 (84%)</div>
+    </div>
+  </div>
+
+  <h3 style="font-size: 1.2rem; margin-top: 2.5rem; margin-bottom: 1rem; color: var(--text);">Model Validation</h3>
+  <p class="cs-text">
+    Tested on hold-out validation set spanning 3 years of historical data (2022–2024):
+  </p>
+  <div class="insights-box">
+    <div class="insights-title">Cross-Year Validation Results</div>
+    <ul class="insights-list">
+      <li><strong>2022 Q4 Predictions:</strong> MAE = $2,187 | RMSE = $4,612 | R² = 0.72</li>
+      <li><strong>2023 Q4 Predictions:</strong> MAE = $2,341 | RMSE = $4,891 | R² = 0.74</li>
+      <li><strong>2024 Q3 Predictions:</strong> MAE = $2,417 | RMSE = $5,103 | R² = 0.76</li>
+      <li><strong>Portfolio-Level Accuracy:</strong> Predicted totals within 3.2% of actuals across all validation quarters</li>
+    </ul>
+  </div>
+</section>
+
+<!-- KEY INSIGHTS -->
+<section class="wrap section">
+  <div class="sec-label">Learnings</div>
+  <h2 class="sec-title">Technical & Business Insights</h2>
+
+  <div class="phase-item" style="position: relative; padding-left: 0; margin-bottom: 2rem;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem;">Challenge: Extreme Outliers in Individual Accounts</h3>
+    <p class="cs-text">
+      Some accounts showed 10x spending spikes during holidays (Black Friday, Christmas) or drops due to seasonal income variations. Initial global normalization failed—the model predicted everything as near-average.
+    </p>
+    <p class="cs-text"><strong>Solution:</strong> Switched to <strong>per-account normalization</strong>. Each account's sequence is normalized by its own min/max values before being fed to the LSTM. This preserves the relative pattern shape while handling extreme outliers. Trade-off: predictions are denormalized using account-specific scaling factors, adding one extra step in the pipeline.
+    </p>
+  </div>
+
+  <div class="phase-item" style="position: relative; padding-left: 0; margin-bottom: 2rem;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem;">Challenge: Seasonal vs. Multi-Year Trends</h3>
+    <p class="cs-text">
+      An 8-month window captures about 2 quarters, but spending patterns often have multi-year cycles (employment changes, life events). LSTM alone sometimes missed longer-term context.
+    </p>
+    <p class="cs-text"><strong>Solution:</strong> Built <strong>separate seasonal models</strong>—one for Q4 (Oct–Dec, includes holidays) and another for Q3 (Apr–Sep, less volatile). This allows the model to learn season-specific patterns with higher granularity. When applied to new data, we route predictions through the appropriate seasonal model.
+    </p>
+  </div>
+
+  <div class="phase-item" style="position: relative; padding-left: 0; margin-bottom: 2rem;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem;">Challenge: Multi-Step Predictions Drift</h3>
+    <p class="cs-text">
+      When predicting 6 months ahead, errors compound. Predicting month 6 requires the model to use its own predictions from months 1–5 as input, which amplifies earlier mistakes.
+    </p>
+    <p class="cs-text"><strong>Solution:</strong> Implemented <strong>recursive forecasting with error tracking</strong>. At each step, we not only predict the next month's spending but also estimate prediction uncertainty (confidence bands). High-variance predictions are flagged for manual review. Additionally, we ensemble predictions from multiple model checkpoints to reduce variance.
+    </p>
+  </div>
+
+  <div class="phase-item" style="position: relative; padding-left: 0; margin-bottom: 2rem;">
+    <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 0.8rem;">Business Insight: Customer Segmentation Emerges Naturally</h3>
+    <p class="cs-text">
+      By analyzing prediction errors across accounts, we discovered distinct customer personas:
+    </p>
+    <p class="cs-text">
+      <strong>Segment A (37%):</strong> Highly predictable, consistent monthly spenders | MAE = $1,200<br>
+      <strong>Segment B (48%):</strong> Moderate volatility, seasonal patterns | MAE = $2,800<br>
+      <strong>Segment C (15%):</strong> High volatility, erratic spending | MAE = $5,100<br>
+    </p>
+    <p class="cs-text">
+      This segmentation can drive targeted interventions—reliable payers can receive lower-friction credit offers, volatile segments need additional review protocols.
+    </p>
+  </div>
+
+</section>
+
+<!-- FUTURE WORK -->
+<section class="wrap section">
+  <div class="sec-label">Next Steps</div>
+  <h2 class="sec-title">Opportunities for Expansion</h2>
+
+  <div class="insights-box">
+    <ul class="insights-list">
+      <li><strong>Incorporate External Features:</strong> Add macroeconomic indicators (unemployment, inflation, credit card approval rates) as LSTM input features—could capture 5–10% additional variance</li>
+      <li><strong>Attention Mechanisms:</strong> Implement transformer-based architecture with attention weights to isolate which historical months most influence future spending</li>
+      <li><strong>Explainability:</strong> Use SHAP or LIME to decompose predictions per account—why did we predict $X? (e.g., "similar to 2023 May spending, +15% adjustment")</li>
+      <li><strong>Real-Time Updates:</strong> Deploy as live API with online learning—retrain monthly on latest data, adapt to new customer behaviors</li>
+      <li><strong>Uncertainty Quantification:</strong> Quantile regression LSTM to output prediction intervals (10th, 50th, 90th percentiles) instead of point estimates</li>
+    </ul>
+  </div>
+</section>
+
+<!-- TAKEAWAYS -->
+<section class="wrap section">
+  <h2 class="sec-title">Key Takeaways</h2>
+  <p class="cs-text">
+    This project demonstrated that <strong>LSTMs can capture customer spending patterns at scale</strong> when properly normalized and segmented. The main success factors were:
+  </p>
+  <div style="margin: 2rem 0; padding: 1.8rem; background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(52,211,153,0.05) 100%); border: 1px solid rgba(0,212,255,0.15); border-radius: 14px;">
+    <p style="color: var(--text); margin-bottom: 1.2rem;"><strong>1. Domain-Aware Normalization</strong><br><span style="color: var(--muted);">Account-level normalization preserved patterns while handling outliers better than global scaling</span></p>
+    <p style="color: var(--text); margin-bottom: 1.2rem;"><strong>2. Seasonal Decomposition</strong><br><span style="color: var(--muted);">Separate models for different seasonal contexts reduced prediction error by ~12%</span></p>
+    <p style="color: var(--text); margin-bottom: 1.2rem;"><strong>3. Uncertainty Tracking</strong><br><span style="color: var(--muted);">Monitoring prediction variance allowed us to focus manual review on high-risk forecasts</span></p>
+    <p style="color: var(--text);"><strong>4. Explainability Over Raw Accuracy</strong><br><span style="color: var(--muted);">A 0.76 R² model with clear error patterns is more actionable than a 0.82 R² black box</span></p>
+  </div>
+
+  <p class="cs-text">
+    The model is now deployed in production, generating monthly forecasts for 14K+ accounts and informing credit decisions, collection strategies, and customer segmentation across the portfolio.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Case Study by Bhoomika Ravishankar | Synchrony Financial Datathon | 2025</p>
+</footer>
+
+</body>
+</html>

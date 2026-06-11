@@ -916,212 +916,68 @@ footer {
   <h2 class="sec-title">Things I've Built</h2>
   <div class="projects-grid">
 
-    <!-- 1. LLM Clarification -->
-    <div class="proj-card" onclick="openModal('llm')">
+    <!-- PySpark Credit-Risk Data Pipeline -->
+    <div class="proj-card" onclick="openModal('pyspark')">
       <div class="proj-illus">
         <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="rg1" cx="45%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f1"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow1">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="190" cy="100" rx="160" ry="110" fill="url(#rg1)" filter="url(#f1)"/>
-          <!-- giant faint ? -->
-          <text x="195" y="145" text-anchor="middle" font-size="160" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.05">?</text>
-          <!-- glowing ? -->
-          <text x="195" y="135" text-anchor="middle" font-size="100" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.65" filter="url(#glow1)">?</text>
-          <!-- user bubble -->
-          <rect x="22" y="28" width="148" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-          <circle cx="52" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <circle cx="68" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <circle cx="84" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <text x="105" y="53" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui">…</text>
-          <!-- ai bubble bottom right -->
-          <rect x="268" y="128" width="148" height="44" rx="22" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-          <text x="342" y="154" text-anchor="middle" font-size="13" fill="rgba(0,212,255,0.9)" font-family="system-ui" font-weight="600">Can you clarify?</text>
-          <!-- small dots top right -->
-          <circle cx="380" cy="38" r="3" fill="rgba(0,212,255,0.2)"/>
-          <circle cx="395" cy="52" r="2" fill="rgba(167,139,250,0.25)"/>
-          <circle cx="408" cy="35" r="2.5" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="360" cy="62" r="2" fill="rgba(52,211,153,0.2)"/>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Qwen-2.5 · SFT · DPO · LoRA</div>
-        <div class="proj-title">Clarification-Seeking LLMs</div>
-        <div class="proj-desc">Fine-tuned Qwen-2.5 7B to detect ambiguous questions and ask for clarification instead of guessing, using supervised fine-tuning (SFT) and Direct Preference Optimization (DPO).</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.63</span><span class="pnum-l">Macro F1</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">10K+</span><span class="pnum-l">Training examples</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">+12.5%</span><span class="pnum-l">vs base model</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Clarification-Seeking-LLMs-CS546" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-    <!-- 2. M&A Prediction -->
-    <div class="proj-card" onclick="openModal('ma')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg2" cx="55%" cy="45%" r="55%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f2"><feGaussianBlur stdDeviation="16"/></filter>
-            <filter id="glow2">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="250" cy="95" rx="170" ry="115" fill="url(#rg2)" filter="url(#f2)"/>
-          <!-- two overlapping circles (merger metaphor) -->
-          <circle cx="175" cy="100" r="65" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
-          <circle cx="245" cy="100" r="65" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.2)" stroke-width="1.5"/>
-          <!-- overlap intersection glow -->
-          <ellipse cx="210" cy="100" rx="32" ry="55" fill="rgba(167,139,250,0.08)" filter="url(#f2)"/>
-          <!-- rising chart line -->
-          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.7)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow2)"/>
-          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="7" stroke-linecap="round"/>
-          <!-- endpoint glow dot -->
-          <circle cx="370" cy="42" r="5" fill="#a78bfa" filter="url(#glow2)"/>
-          <!-- 89% badge -->
-          <rect x="290" y="148" width="70" height="30" rx="8" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
-          <text x="325" y="167" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
-          <!-- small dots -->
-          <circle cx="40" cy="40" r="2.5" fill="rgba(167,139,250,0.2)"/>
-          <circle cx="60" cy="28" r="2" fill="rgba(244,114,182,0.2)"/>
-          <circle cx="415" cy="80" r="2.5" fill="rgba(167,139,250,0.25)"/>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">XGBoost · Word2Vec · FinBERT · SMOTE</div>
-        <div class="proj-title">AI-Driven M&A Prediction</div>
-        <div class="proj-desc">XGBoost model that predicts likely M&A acquisition targets by combining 14 financial ratios with sentiment mined from 298K+ news articles using Word2Vec and FinBERT.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">89%</span><span class="pnum-l">Accuracy</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+15%</span><span class="pnum-l">Over baseline</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">3.8K</span><span class="pnum-l">Companies</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/AI-MA-Prediction-UIUC" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-    <!-- 4. LLM Healthcare -->
-    <div class="proj-card" onclick="openModal('health')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg4" cx="40%" cy="40%" r="55%">
-              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="rg4b" cx="70%" cy="65%" r="40%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.12"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f4"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow4">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="170" cy="90" rx="150" ry="110" fill="url(#rg4)" filter="url(#f4)"/>
-          <ellipse cx="310" cy="130" rx="120" ry="80" fill="url(#rg4b)" filter="url(#f4)"/>
-          <!-- document silhouette -->
-          <rect x="90" y="35" width="110" height="140" rx="8" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.15)" stroke-width="1.5"/>
-          <line x1="105" y1="65" x2="185" y2="65" stroke="rgba(251,191,36,0.2)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="80" x2="185" y2="80" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="95" x2="165" y2="95" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="110" x2="175" y2="110" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="125" x2="155" y2="125" stroke="rgba(251,191,36,0.1)" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- arrow pointing right to extracted features -->
-          <path d="M210 105 L250 105" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr4)"/>
-          <defs>
-            <marker id="arr4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(255,255,255,0.2)"/>
-            </marker>
-          </defs>
-          <!-- extracted feature dots floating right -->
-          <circle cx="275" cy="65"  r="6" fill="rgba(251,191,36,0.6)"  filter="url(#glow4)"/>
-          <circle cx="310" cy="88"  r="5" fill="rgba(167,139,250,0.7)" filter="url(#glow4)"/>
-          <circle cx="295" cy="115" r="7" fill="rgba(251,191,36,0.5)"  filter="url(#glow4)"/>
-          <circle cx="340" cy="70"  r="4" fill="rgba(52,211,153,0.6)"  filter="url(#glow4)"/>
-          <circle cx="355" cy="105" r="5" fill="rgba(251,191,36,0.45)" filter="url(#glow4)"/>
-          <circle cx="330" cy="140" r="4" fill="rgba(167,139,250,0.5)" filter="url(#glow4)"/>
-          <circle cx="380" cy="88"  r="3.5" fill="rgba(52,211,153,0.4)" filter="url(#glow4)"/>
-          <circle cx="395" cy="125" r="3" fill="rgba(251,191,36,0.35)" filter="url(#glow4)"/>
-          <!-- badge -->
-          <rect x="20" y="148" width="90" height="30" rx="8" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.25)" stroke-width="1.5"/>
-          <text x="65" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#fbbf24" font-family="system-ui">115K trials</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Qwen-2.5 · Python · Logistic Regression</div>
-        <div class="proj-title">Closed-Loop Predictive Modeling with LLM Feedback</div>
-        <div class="proj-desc">Used Qwen-2.5 to extract structured data from 115K ClinicalTrials.gov records, feeding a model that predicts trial success, with a feedback loop that refines the LLM's extraction over time.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">0.61</span><span class="pnum-l">ROC-AUC</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/LLM-UIUC-Healthcare-Research-Project" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-    <!-- 3. LSTM Datathon -->
-    <div class="proj-card" onclick="window.location.href='synchrony-case-study.html'">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg3" cx="50%" cy="60%" r="60%">
+            <radialGradient id="rgPS" cx="50%" cy="50%" r="60%">
               <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
               <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
             </radialGradient>
-            <filter id="f3"><feGaussianBlur stdDeviation="15"/></filter>
-            <filter id="glow3">
-              <feGaussianBlur stdDeviation="5" result="b"/>
+            <filter id="fPS"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glowPS">
+              <feGaussianBlur stdDeviation="4" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
+            <marker id="arrPS" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(52,211,153,0.7)"/>
+            </marker>
           </defs>
           <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="120" rx="180" ry="100" fill="url(#rg3)" filter="url(#f3)"/>
-          <!-- faint axis line -->
-          <line x1="30" y1="130" x2="410" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <!-- historical wave (past data, muted) -->
-          <path d="M30,110 C60,80 80,130 110,105 C140,80 160,125 190,100 C220,75 240,120 270,95" fill="none" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-linecap="round"/>
-          <!-- prediction wave (future, glowing) -->
-          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow3)"/>
-          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="8" stroke-linecap="round"/>
-          <!-- divider dashed line at cut-off point -->
-          <line x1="270" y1="45" x2="270" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5 4"/>
-          <text x="280" y="60" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui">forecast →</text>
-          <!-- glow end dot -->
-          <circle cx="420" cy="58" r="5" fill="#34d399" filter="url(#glow3)"/>
-          <!-- badge -->
-          <rect x="20" y="148" width="100" height="30" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-          <text x="70" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">14,099 accts</text>
-          <!-- dots -->
-          <circle cx="30" cy="42" r="2.5" fill="rgba(52,211,153,0.2)"/>
-          <circle cx="415" cy="165" r="2" fill="rgba(52,211,153,0.15)"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgPS)" filter="url(#fPS)"/>
+          <!-- raw record sources -->
+          <rect x="16" y="48" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+          <text x="58" y="63" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">bureau scores</text>
+          <rect x="16" y="78" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
+          <text x="58" y="93" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">behavioral</text>
+          <rect x="16" y="108" width="84" height="22" rx="5" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.2)" stroke-width="1.2"/>
+          <text x="58" y="123" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">macro signals</text>
+          <!-- arrow to PySpark/EMR -->
+          <path d="M100 89 L140 89" stroke="rgba(52,211,153,0.6)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
+          <!-- PySpark / EMR engine -->
+          <rect x="140" y="60" width="96" height="58" rx="9" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
+          <text x="188" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">PySpark</text>
+          <text x="188" y="96" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">AWS EMR · Airflow</text>
+          <text x="188" y="108" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">900M+ / snapshot</text>
+          <!-- arrow to GLM -->
+          <path d="M236 89 L276 89" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
+          <!-- PD/EAD GLM -->
+          <rect x="276" y="62" width="86" height="26" rx="7" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
+          <text x="319" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">PD / EAD GLM</text>
+          <rect x="276" y="94" width="86" height="26" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
+          <text x="319" y="111" text-anchor="middle" font-size="9" font-weight="700" fill="#fbbf24" font-family="system-ui">6 portfolios</text>
+          <!-- CECL badge -->
+          <rect x="368" y="76" width="58" height="30" rx="7" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
+          <text x="397" y="89" text-anchor="middle" font-size="8" font-weight="700" fill="#34d399" font-family="system-ui">CECL</text>
+          <text x="397" y="100" text-anchor="middle" font-size="8.5" font-weight="800" fill="#34d399" font-family="monospace">$7.49B</text>
+          <!-- bottom metric badges -->
+          <rect x="16" y="150" width="100" height="28" rx="7" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="66" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">92% faster</text>
+          <rect x="124" y="150" width="120" height="28" rx="7" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="184" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">1hr → 5min</text>
         </svg>
       </div>
       <div class="proj-body">
-        <div class="proj-kind">LSTM · TensorFlow · Keras · Python</div>
-        <div class="proj-title">LSTM Credit Card Spend Forecasting</div>
-        <div class="proj-desc">LSTM model forecasting quarterly spend for 14K+ Synchrony accounts at R² 0.76, using account-level normalization, seasonality, and recursive forecasting. 📄 Full case study included.</div>
+        <div class="proj-kind">PySpark · AWS EMR · S3 · Airflow</div>
+        <div class="proj-title">Distributed Credit-Risk ETL Pipeline (PySpark + EMR)</div>
+        <div class="proj-desc">PySpark ETL on AWS EMR, scheduled with Airflow, transforming 900M+ records per snapshot, from 1 hour to 5 minutes (92% faster). Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B CECL loss reserve across 6 retail portfolios.</div>
         <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">14K+</span><span class="pnum-l">Accounts</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.76 R²</span><span class="pnum-l">Model accuracy</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">$147M</span><span class="pnum-l">Forecasted</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">900M+</span><span class="pnum-l">Records / snapshot</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">92%</span><span class="pnum-l">Faster ETL</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">$7.49B</span><span class="pnum-l">CECL reserve</span></div>
         </div>
-        <div class="proj-foot"><span class="proj-more">Read full case study →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Datathon-UIUC-Synchrony" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+        <div class="proj-more">View details →</div>
       </div>
     </div>
     <!-- 7. NPS Driver Modeling -->
@@ -1195,7 +1051,7 @@ footer {
       </div>
       <div class="proj-body">
         <div class="proj-kind">Python · SQL · PySpark · XGBoost</div>
-        <div class="proj-title">NPS Modeling, Customer Segmentation & Survey Intelligence</div>
+        <div class="proj-title">End-to-End NPS Driver & Segmentation Pipeline</div>
         <div class="proj-desc">End-to-end Synchrony customer analytics: built a 500K+ record dataset from 11 surveys, ran segmentation and A/B testing (+23% predictive gain), and replaced an external NPS model with an internal one, migrating 100M+ records from SAS to Python (87% faster) and validating drivers with placebo refutation testing. Adopted to redesign Synchrony's survey. 📄 Full case study included.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--purple)">87%</span><span class="pnum-l">ETL speedup</span></div>
@@ -1205,204 +1061,214 @@ footer {
         <div class="proj-more">Read full case study →</div>
       </div>
     </div>
-    <!-- PySpark Credit-Risk Data Pipeline -->
-    <div class="proj-card" onclick="openModal('pyspark')">
+    <!-- 3. LSTM Datathon -->
+    <div class="proj-card" onclick="window.location.href='synchrony-case-study.html'">
       <div class="proj-illus">
         <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="rgPS" cx="50%" cy="50%" r="60%">
+            <radialGradient id="rg3" cx="50%" cy="60%" r="60%">
               <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
               <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
             </radialGradient>
-            <filter id="fPS"><feGaussianBlur stdDeviation="15"/></filter>
-            <filter id="glowPS">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <marker id="arrPS" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(52,211,153,0.7)"/>
-            </marker>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgPS)" filter="url(#fPS)"/>
-          <!-- raw record sources -->
-          <rect x="16" y="48" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
-          <text x="58" y="63" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">bureau scores</text>
-          <rect x="16" y="78" width="84" height="22" rx="5" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.2"/>
-          <text x="58" y="93" text-anchor="middle" font-size="8.5" fill="#00d4ff" font-family="monospace">behavioral</text>
-          <rect x="16" y="108" width="84" height="22" rx="5" fill="rgba(0,212,255,0.05)" stroke="rgba(0,212,255,0.2)" stroke-width="1.2"/>
-          <text x="58" y="123" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">macro signals</text>
-          <!-- arrow to PySpark/EMR -->
-          <path d="M100 89 L140 89" stroke="rgba(52,211,153,0.6)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
-          <!-- PySpark / EMR engine -->
-          <rect x="140" y="60" width="96" height="58" rx="9" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
-          <text x="188" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">PySpark</text>
-          <text x="188" y="96" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">AWS EMR · Airflow</text>
-          <text x="188" y="108" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">900M+ / snapshot</text>
-          <!-- arrow to GLM -->
-          <path d="M236 89 L276 89" stroke="rgba(167,139,250,0.5)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrPS)"/>
-          <!-- PD/EAD GLM -->
-          <rect x="276" y="62" width="86" height="26" rx="7" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
-          <text x="319" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">PD / EAD GLM</text>
-          <rect x="276" y="94" width="86" height="26" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
-          <text x="319" y="111" text-anchor="middle" font-size="9" font-weight="700" fill="#fbbf24" font-family="system-ui">6 portfolios</text>
-          <!-- CECL badge -->
-          <rect x="368" y="76" width="58" height="30" rx="7" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glowPS)"/>
-          <text x="397" y="89" text-anchor="middle" font-size="8" font-weight="700" fill="#34d399" font-family="system-ui">CECL</text>
-          <text x="397" y="100" text-anchor="middle" font-size="8.5" font-weight="800" fill="#34d399" font-family="monospace">$7.49B</text>
-          <!-- bottom metric badges -->
-          <rect x="16" y="150" width="100" height="28" rx="7" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-          <text x="66" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">92% faster</text>
-          <rect x="124" y="150" width="120" height="28" rx="7" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-          <text x="184" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">1hr → 5min</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">PySpark · AWS EMR · S3 · Airflow</div>
-        <div class="proj-title">PySpark Credit-Risk Data Pipeline</div>
-        <div class="proj-desc">PySpark ETL on AWS EMR, scheduled with Airflow, transforming 900M+ records per snapshot, from 1 hour to 5 minutes (92% faster). Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B CECL loss reserve across 6 retail portfolios.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">900M+</span><span class="pnum-l">Records / snapshot</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">92%</span><span class="pnum-l">Faster ETL</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">$7.49B</span><span class="pnum-l">CECL reserve</span></div>
-        </div>
-        <div class="proj-more">View details →</div>
-      </div>
-    </div>
-    <!-- 5. Travel Expense Reimbursement -->
-    <div class="proj-card" onclick="openModal('travel')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg5" cx="45%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f5"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow5">
+            <filter id="f3"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glow3">
               <feGaussianBlur stdDeviation="5" result="b"/>
               <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <marker id="arr5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
-            </marker>
           </defs>
           <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg5)" filter="url(#f5)"/>
-          <!-- MySQL cylinder -->
-          <ellipse cx="95" cy="52" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <path d="M55 52 L55 100 Q55 113 95 113 Q135 113 135 100 L135 52" fill="rgba(52,211,153,0.05)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <ellipse cx="95" cy="100" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <text x="95" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">MySQL</text>
-          <!-- Migration arrow -->
-          <path d="M140 78 L185 78" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr5)"/>
-          <text x="163" y="70" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">migrate</text>
-          <!-- Neo4j graph -->
-          <circle cx="232" cy="60" r="22" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.5)" stroke-width="2" filter="url(#glow5)"/>
-          <text x="232" y="65" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="system-ui" font-weight="600">Employee</text>
-          <circle cx="295" cy="95" r="20" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
-          <text x="295" y="100" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="system-ui" font-weight="600">Travel</text>
-          <circle cx="220" cy="128" r="18" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.5)" stroke-width="2"/>
-          <text x="220" y="133" text-anchor="middle" font-size="9" fill="#f472b6" font-family="system-ui" font-weight="600">Vehicle</text>
-          <circle cx="282" cy="145" r="16" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.5)" stroke-width="2"/>
-          <text x="282" y="150" text-anchor="middle" font-size="8.5" fill="#fbbf24" font-family="system-ui" font-weight="600">Expense</text>
-          <line x1="252" y1="74" x2="277" y2="79" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-          <line x1="232" y1="82" x2="225" y2="111" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-          <line x1="236" y1="143" x2="267" y2="140" stroke="rgba(244,114,182,0.5)" stroke-width="1.5"/>
-          <line x1="295" y1="115" x2="288" y2="130" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
-          <text x="260" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Neo4j</text>
-          <!-- result badges -->
-          <rect x="336" y="32" width="85" height="28" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-          <text x="378" y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">50% ↓ errors</text>
-          <rect x="336" y="70" width="85" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
-          <text x="378" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">20% ↓ redun.</text>
-          <rect x="336" y="108" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-          <text x="378" y="126" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">1K+ records</text>
+          <ellipse cx="220" cy="120" rx="180" ry="100" fill="url(#rg3)" filter="url(#f3)"/>
+          <!-- faint axis line -->
+          <line x1="30" y1="130" x2="410" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          <!-- historical wave (past data, muted) -->
+          <path d="M30,110 C60,80 80,130 110,105 C140,80 160,125 190,100 C220,75 240,120 270,95" fill="none" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-linecap="round"/>
+          <!-- prediction wave (future, glowing) -->
+          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow3)"/>
+          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="8" stroke-linecap="round"/>
+          <!-- divider dashed line at cut-off point -->
+          <line x1="270" y1="45" x2="270" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="280" y="60" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui">forecast →</text>
+          <!-- glow end dot -->
+          <circle cx="420" cy="58" r="5" fill="#34d399" filter="url(#glow3)"/>
+          <!-- badge -->
+          <rect x="20" y="148" width="100" height="30" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="70" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">14,099 accts</text>
+          <!-- dots -->
+          <circle cx="30" cy="42" r="2.5" fill="rgba(52,211,153,0.2)"/>
+          <circle cx="415" cy="165" r="2" fill="rgba(52,211,153,0.15)"/>
         </svg>
       </div>
       <div class="proj-body">
-        <div class="proj-kind">MySQL · Neo4j · Cypher</div>
-        <div class="proj-title">Travel Expense Reimbursement System</div>
-        <div class="proj-desc">Designed a MySQL database for 1,000+ travel requests, then migrated to a Neo4j graph DB, cutting 20% data redundancy and enabling relationship visualization across employees, trips, and expenses.</div>
+        <div class="proj-kind">LSTM · TensorFlow · Keras · Python</div>
+        <div class="proj-title">LSTM Spend-Forecasting Pipeline (14K Accounts)</div>
+        <div class="proj-desc">LSTM model forecasting quarterly spend for 14K+ Synchrony accounts at R² 0.76, using account-level normalization, seasonality, and recursive forecasting. 📄 Full case study included.</div>
         <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">1K+</span><span class="pnum-l">Records managed</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">50%</span><span class="pnum-l">Fewer errors</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">20%</span><span class="pnum-l">Less redundancy</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">14K+</span><span class="pnum-l">Accounts</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.76 R²</span><span class="pnum-l">Model accuracy</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">$147M</span><span class="pnum-l">Forecasted</span></div>
         </div>
-        <div class="proj-more">View details →</div>
+        <div class="proj-foot"><span class="proj-more">Read full case study →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Datathon-UIUC-Synchrony" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
       </div>
     </div>
-
-    <!-- 6. ClearLedger: SQL Personal Finance Management System -->
-    <div class="proj-card" onclick="openModal('ledger')">
+    <!-- 2. M&A Prediction -->
+    <div class="proj-card" onclick="openModal('ma')">
       <div class="proj-illus">
         <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <radialGradient id="rg6" cx="50%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
+            <radialGradient id="rg2" cx="55%" cy="45%" r="55%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2"/>
               <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
             </radialGradient>
-            <filter id="f6"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="f2"><feGaussianBlur stdDeviation="16"/></filter>
+            <filter id="glow2">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
           </defs>
           <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg6)" filter="url(#f6)"/>
-
-          <!-- 6 stacked table cards on left -->
-          <g font-family="JetBrains Mono, monospace" font-size="8" fill="#00d4ff">
-            <rect x="30"  y="38"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="51">accounts</text>
-            <rect x="30"  y="62"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="75">categories</text>
-            <rect x="30"  y="86"  width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="99">transactions</text>
-            <rect x="30"  y="110" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="123">budgets</text>
-            <rect x="30"  y="134" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="147">goals</text>
-            <rect x="30"  y="158" width="92" height="20" rx="4" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-            <text x="40" y="171">net_worth</text>
-          </g>
-          <text x="76" y="29" text-anchor="middle" font-size="9" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">6 TABLES</text>
-
-          <!-- Arrow -->
-          <path d="M138 108 L185 108" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="185,108 178,104 178,112" fill="#475569"/>
-          <text x="162" y="100" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">JOINs · CASE WHEN</text>
-
-          <!-- 7 reports cluster -->
-          <g font-family="system-ui" font-size="9" fill="#e2e8f0">
-            <rect x="200" y="36"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-            <text x="259" y="51" text-anchor="middle">budget vs actual</text>
-            <rect x="200" y="62"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-            <text x="259" y="77" text-anchor="middle">net worth VIEW</text>
-            <rect x="200" y="88"  width="118" height="22" rx="5" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-            <text x="259" y="103" text-anchor="middle">spending trends</text>
-            <rect x="200" y="114" width="118" height="22" rx="5" fill="rgba(0,212,255,0.06)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
-            <text x="259" y="129" text-anchor="middle" fill="#7c8ca8">+ 4 more reports</text>
-          </g>
-          <text x="259" y="27" text-anchor="middle" font-size="9" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">7 REPORTS</text>
-
-          <!-- Time savings on right -->
-          <rect x="335" y="60" width="80" height="80" rx="10" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
-          <text x="375" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace">~4 HRS</text>
-          <text x="375" y="103" text-anchor="middle" font-size="14" font-weight="800" fill="#00d4ff">↓</text>
-          <text x="375" y="122" text-anchor="middle" font-size="14" font-weight="800" fill="#00d4ff" font-family="JetBrains Mono, monospace">30s</text>
-          <text x="375" y="155" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">per month</text>
+          <ellipse cx="250" cy="95" rx="170" ry="115" fill="url(#rg2)" filter="url(#f2)"/>
+          <!-- two overlapping circles (merger metaphor) -->
+          <circle cx="175" cy="100" r="65" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
+          <circle cx="245" cy="100" r="65" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.2)" stroke-width="1.5"/>
+          <!-- overlap intersection glow -->
+          <ellipse cx="210" cy="100" rx="32" ry="55" fill="rgba(167,139,250,0.08)" filter="url(#f2)"/>
+          <!-- rising chart line -->
+          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.7)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow2)"/>
+          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="7" stroke-linecap="round"/>
+          <!-- endpoint glow dot -->
+          <circle cx="370" cy="42" r="5" fill="#a78bfa" filter="url(#glow2)"/>
+          <!-- 89% badge -->
+          <rect x="290" y="148" width="70" height="30" rx="8" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
+          <text x="325" y="167" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
+          <!-- small dots -->
+          <circle cx="40" cy="40" r="2.5" fill="rgba(167,139,250,0.2)"/>
+          <circle cx="60" cy="28" r="2" fill="rgba(244,114,182,0.2)"/>
+          <circle cx="415" cy="80" r="2.5" fill="rgba(167,139,250,0.25)"/>
         </svg>
       </div>
       <div class="proj-body">
-        <div class="proj-kind">MySQL · SQL</div>
-        <div class="proj-title">ClearLedger: Personal Finance DB</div>
-        <div class="proj-desc">Normalized MySQL database for personal finance that cuts monthly reporting from ~4 hours to under 30 seconds, with 7 analytical reports and 11 CRUD operations across 6 tables.</div>
+        <div class="proj-kind">XGBoost · Word2Vec · FinBERT · SMOTE</div>
+        <div class="proj-title">Multimodal M&A Target Prediction (XGBoost + FinBERT)</div>
+        <div class="proj-desc">XGBoost model that predicts likely M&A acquisition targets by combining 14 financial ratios with sentiment mined from 298K+ news articles using Word2Vec and FinBERT.</div>
         <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4hr → 30s</span><span class="pnum-l">Monthly reporting</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">7</span><span class="pnum-l">Analytical reports</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">11</span><span class="pnum-l">CRUD operations</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">89%</span><span class="pnum-l">Accuracy</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+15%</span><span class="pnum-l">Over baseline</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">3.8K</span><span class="pnum-l">Companies</span></div>
         </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/ClearLedger-Personal-Finance-DB" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/AI-MA-Prediction-UIUC" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
       </div>
     </div>
-
+    <!-- 1. LLM Clarification -->
+    <div class="proj-card" onclick="openModal('llm')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg1" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f1"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow1">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="190" cy="100" rx="160" ry="110" fill="url(#rg1)" filter="url(#f1)"/>
+          <!-- giant faint ? -->
+          <text x="195" y="145" text-anchor="middle" font-size="160" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.05">?</text>
+          <!-- glowing ? -->
+          <text x="195" y="135" text-anchor="middle" font-size="100" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.65" filter="url(#glow1)">?</text>
+          <!-- user bubble -->
+          <rect x="22" y="28" width="148" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+          <circle cx="52" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="68" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <circle cx="84" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
+          <text x="105" y="53" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui">…</text>
+          <!-- ai bubble bottom right -->
+          <rect x="268" y="128" width="148" height="44" rx="22" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
+          <text x="342" y="154" text-anchor="middle" font-size="13" fill="rgba(0,212,255,0.9)" font-family="system-ui" font-weight="600">Can you clarify?</text>
+          <!-- small dots top right -->
+          <circle cx="380" cy="38" r="3" fill="rgba(0,212,255,0.2)"/>
+          <circle cx="395" cy="52" r="2" fill="rgba(167,139,250,0.25)"/>
+          <circle cx="408" cy="35" r="2.5" fill="rgba(0,212,255,0.15)"/>
+          <circle cx="360" cy="62" r="2" fill="rgba(52,211,153,0.2)"/>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Qwen-2.5 · SFT · DPO · LoRA</div>
+        <div class="proj-title">Ambiguity-Aware LLM Alignment Pipeline (SFT + DPO)</div>
+        <div class="proj-desc">Fine-tuned Qwen-2.5 7B to detect ambiguous questions and ask for clarification instead of guessing, using supervised fine-tuning (SFT) and Direct Preference Optimization (DPO).</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.63</span><span class="pnum-l">Macro F1</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">10K+</span><span class="pnum-l">Training examples</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">+12.5%</span><span class="pnum-l">vs base model</span></div>
+        </div>
+        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Clarification-Seeking-LLMs-CS546" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+      </div>
+    </div>
+    <!-- 4. LLM Healthcare -->
+    <div class="proj-card" onclick="openModal('health')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg4" cx="40%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="rg4b" cx="70%" cy="65%" r="40%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.12"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f4"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow4">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="170" cy="90" rx="150" ry="110" fill="url(#rg4)" filter="url(#f4)"/>
+          <ellipse cx="310" cy="130" rx="120" ry="80" fill="url(#rg4b)" filter="url(#f4)"/>
+          <!-- document silhouette -->
+          <rect x="90" y="35" width="110" height="140" rx="8" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.15)" stroke-width="1.5"/>
+          <line x1="105" y1="65" x2="185" y2="65" stroke="rgba(251,191,36,0.2)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="80" x2="185" y2="80" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="95" x2="165" y2="95" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="110" x2="175" y2="110" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="105" y1="125" x2="155" y2="125" stroke="rgba(251,191,36,0.1)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- arrow pointing right to extracted features -->
+          <path d="M210 105 L250 105" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr4)"/>
+          <defs>
+            <marker id="arr4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(255,255,255,0.2)"/>
+            </marker>
+          </defs>
+          <!-- extracted feature dots floating right -->
+          <circle cx="275" cy="65"  r="6" fill="rgba(251,191,36,0.6)"  filter="url(#glow4)"/>
+          <circle cx="310" cy="88"  r="5" fill="rgba(167,139,250,0.7)" filter="url(#glow4)"/>
+          <circle cx="295" cy="115" r="7" fill="rgba(251,191,36,0.5)"  filter="url(#glow4)"/>
+          <circle cx="340" cy="70"  r="4" fill="rgba(52,211,153,0.6)"  filter="url(#glow4)"/>
+          <circle cx="355" cy="105" r="5" fill="rgba(251,191,36,0.45)" filter="url(#glow4)"/>
+          <circle cx="330" cy="140" r="4" fill="rgba(167,139,250,0.5)" filter="url(#glow4)"/>
+          <circle cx="380" cy="88"  r="3.5" fill="rgba(52,211,153,0.4)" filter="url(#glow4)"/>
+          <circle cx="395" cy="125" r="3" fill="rgba(251,191,36,0.35)" filter="url(#glow4)"/>
+          <!-- badge -->
+          <rect x="20" y="148" width="90" height="30" rx="8" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.25)" stroke-width="1.5"/>
+          <text x="65" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#fbbf24" font-family="system-ui">115K trials</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Qwen-2.5 · Python · Logistic Regression</div>
+        <div class="proj-title">LLM-in-the-Loop Feature Engineering Pipeline</div>
+        <div class="proj-desc">Used Qwen-2.5 to extract structured data from 115K ClinicalTrials.gov records, feeding a model that predicts trial success, with a feedback loop that refines the LLM's extraction over time.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">0.61</span><span class="pnum-l">ROC-AUC</span></div>
+        </div>
+        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/LLM-UIUC-Healthcare-Research-Project" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+      </div>
+    </div>
     <!-- 8. Contract Pricing Intelligence -->
     <div class="proj-card" onclick="openModal('contract')">
       <div class="proj-illus">
@@ -1458,7 +1324,7 @@ footer {
       </div>
       <div class="proj-body">
         <div class="proj-kind">Django · DRF · Pandas · AWS S3</div>
-        <div class="proj-title">Contract Pricing Intelligence</div>
+        <div class="proj-title">Contract-to-Analytics REST Pipeline (Django)</div>
         <div class="proj-desc">Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates against configurable business rules, across 20+ endpoints with AWS S3 storage.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--amber)">20+</span><span class="pnum-l">API endpoints</span></div>
@@ -1468,6 +1334,70 @@ footer {
         <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/contract-pricing-intelligence" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
       </div>
     </div>
+    <!-- 5. Travel Expense Reimbursement -->
+    <div class="proj-card" onclick="openModal('travel')">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg5" cx="45%" cy="50%" r="55%">
+              <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f5"><feGaussianBlur stdDeviation="14"/></filter>
+            <filter id="glow5">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <marker id="arr5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
+            </marker>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg5)" filter="url(#f5)"/>
+          <!-- MySQL cylinder -->
+          <ellipse cx="95" cy="52" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <path d="M55 52 L55 100 Q55 113 95 113 Q135 113 135 100 L135 52" fill="rgba(52,211,153,0.05)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <ellipse cx="95" cy="100" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
+          <text x="95" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">MySQL</text>
+          <!-- Migration arrow -->
+          <path d="M140 78 L185 78" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr5)"/>
+          <text x="163" y="70" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">migrate</text>
+          <!-- Neo4j graph -->
+          <circle cx="232" cy="60" r="22" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.5)" stroke-width="2" filter="url(#glow5)"/>
+          <text x="232" y="65" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="system-ui" font-weight="600">Employee</text>
+          <circle cx="295" cy="95" r="20" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
+          <text x="295" y="100" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="system-ui" font-weight="600">Travel</text>
+          <circle cx="220" cy="128" r="18" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.5)" stroke-width="2"/>
+          <text x="220" y="133" text-anchor="middle" font-size="9" fill="#f472b6" font-family="system-ui" font-weight="600">Vehicle</text>
+          <circle cx="282" cy="145" r="16" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.5)" stroke-width="2"/>
+          <text x="282" y="150" text-anchor="middle" font-size="8.5" fill="#fbbf24" font-family="system-ui" font-weight="600">Expense</text>
+          <line x1="252" y1="74" x2="277" y2="79" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+          <line x1="232" y1="82" x2="225" y2="111" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
+          <line x1="236" y1="143" x2="267" y2="140" stroke="rgba(244,114,182,0.5)" stroke-width="1.5"/>
+          <line x1="295" y1="115" x2="288" y2="130" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="260" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Neo4j</text>
+          <!-- result badges -->
+          <rect x="336" y="32" width="85" height="28" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
+          <text x="378" y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">50% ↓ errors</text>
+          <rect x="336" y="70" width="85" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
+          <text x="378" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">20% ↓ redun.</text>
+          <rect x="336" y="108" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
+          <text x="378" y="126" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">1K+ records</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">MySQL · Neo4j · Cypher</div>
+        <div class="proj-title">Relational-to-Graph Migration Pipeline (MySQL to Neo4j)</div>
+        <div class="proj-desc">Designed a MySQL database for 1,000+ travel requests, then migrated to a Neo4j graph DB, cutting 20% data redundancy and enabling relationship visualization across employees, trips, and expenses.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">1K+</span><span class="pnum-l">Records managed</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">50%</span><span class="pnum-l">Fewer errors</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">20%</span><span class="pnum-l">Less redundancy</span></div>
+        </div>
+        <div class="proj-more">View details →</div>
+      </div>
+    </div>
+
 
   </div>
 </div>
@@ -1664,7 +1594,7 @@ footer {
 const MODALS = {
   llm: {
     kind: 'Qwen-2.5 · SFT · DPO · LoRA',
-    title: 'Clarification-Seeking LLMs',
+    title: 'Ambiguity-Aware LLM Alignment Pipeline (SFT + DPO)',
     sub: 'Qwen-2.5 7B · SFT + DPO · AmbigNQ · 10,036 examples',
     illusGrad: 'radial-gradient(ellipse at 40% 50%, rgba(0,212,255,0.2) 0%, #0d0f1c 65%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -1743,7 +1673,7 @@ const MODALS = {
   },
   ma: {
     kind: 'XGBoost · Word2Vec · FinBERT · SMOTE',
-    title: 'AI-Driven M&A Prediction',
+    title: 'Multimodal M&A Target Prediction (XGBoost + FinBERT)',
     sub: 'XGBoost + Word2Vec + FinBERT · LSEG Data · 3,882 companies · 298K headlines',
     illusGrad: 'radial-gradient(ellipse at 60% 40%, rgba(167,139,250,0.2) 0%, #0d0f1c 65%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -1824,7 +1754,7 @@ const MODALS = {
   },
   lstm: {
     kind: 'LSTM · TensorFlow · Keras · Python',
-    title: 'LSTM Credit Card Spend Forecasting',
+    title: 'LSTM Spend-Forecasting Pipeline (14K Accounts)',
     sub: 'LSTM · 14,099 accounts · 13 months transaction history · Q4 2025 forecast',
     illusGrad: 'radial-gradient(ellipse at 50% 65%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -1894,7 +1824,7 @@ const MODALS = {
   },
   health: {
     kind: 'Qwen-2.5 · Python · Logistic Regression',
-    title: 'Closed-Loop Predictive Modeling with LLM Feedback',
+    title: 'LLM-in-the-Loop Feature Engineering Pipeline',
     sub: 'Qwen-2.5 7B · 115K ClinicalTrials.gov records · Iterative LLM feature engineering',
     illusGrad: 'radial-gradient(ellipse at 40% 40%, rgba(251,191,36,0.2) 0%, rgba(167,139,250,0.1) 60%, #0d0f1c 80%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -1980,7 +1910,7 @@ const MODALS = {
 
   travel: {
     kind: 'MySQL · Neo4j · Cypher',
-    title: 'Travel Expense Reimbursement System',
+    title: 'Relational-to-Graph Migration Pipeline (MySQL to Neo4j)',
     sub: 'MySQL · Neo4j · ER Diagrams · SQL · Cypher · 1,000+ records',
     illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
@@ -2046,82 +1976,6 @@ const MODALS = {
         'Created Cypher queries for auditing expenses and improving data accessibility',
         'Built graph-based visualizations to support better decision-making',
         'Implemented data validation and compliance checks for organizational policies'
-      ]}
-    ]
-  },
-
-  ledger: {
-    kind: 'MySQL · SQL',
-    title: 'ClearLedger: Personal Finance Database',
-    sub: 'MySQL 8.0 · 6 Tables · 7 Reports · 11 CRUD Ops · Aggregate Functions · CASE WHEN · JOINs',
-    illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.18) 0%, #0d0f1c 70%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g7a"><feGaussianBlur stdDeviation="14"/></filter>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="280" ry="100" fill="rgba(0,212,255,0.07)" filter="url(#g7a)"/>
-
-      <text x="100" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">6 TABLES</text>
-      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#00d4ff">
-        <rect x="40"  y="32"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="46">accounts</text>
-        <rect x="40"  y="56"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="70">categories</text>
-        <rect x="40"  y="80"  width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="94">transactions</text>
-        <rect x="40"  y="104" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="118">budgets</text>
-        <rect x="40"  y="128" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="142">goals</text>
-        <rect x="40"  y="152" width="120" height="20" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.45)" stroke-width="1"/>
-        <text x="52" y="166">net_worth_view</text>
-      </g>
-
-      <path d="M178 100 L240 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 3"/>
-      <polygon points="240,100 232,95 232,105" fill="#475569"/>
-      <text x="209" y="90" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">JOINs · CASE WHEN</text>
-      <text x="209" y="115" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">aggregate fns</text>
-
-      <text x="320" y="22" text-anchor="middle" font-size="10" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace" letter-spacing="2">7 ANALYTICAL REPORTS</text>
-      <g font-family="system-ui" font-size="10" fill="#e2e8f0">
-        <rect x="260" y="32"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-        <text x="340" y="47" text-anchor="middle">budget-vs-actual variance</text>
-        <rect x="260" y="58"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-        <text x="340" y="73" text-anchor="middle">net worth VIEW</text>
-        <rect x="260" y="84"  width="160" height="22" rx="5" fill="rgba(0,212,255,0.10)" stroke="rgba(0,212,255,0.5)" stroke-width="1.2"/>
-        <text x="340" y="99" text-anchor="middle">spending trends</text>
-        <rect x="260" y="110" width="160" height="22" rx="5" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1"/>
-        <text x="340" y="125" text-anchor="middle" fill="#7c8ca8">+ 4 more reports</text>
-        <rect x="260" y="136" width="160" height="22" rx="5" fill="rgba(0,212,255,0.04)" stroke="rgba(0,212,255,0.2)" stroke-width="1"/>
-        <text x="340" y="151" text-anchor="middle" fill="#7c8ca8" font-family="JetBrains Mono, monospace" font-size="9">11 CRUD operations</text>
-      </g>
-
-      <rect x="470" y="50" width="150" height="105" rx="12" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
-      <text x="545" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="#7c8ca8" font-family="JetBrains Mono, monospace">~4 HRS</text>
-      <text x="545" y="105" text-anchor="middle" font-size="20" font-weight="800" fill="#00d4ff">↓</text>
-      <text x="545" y="130" text-anchor="middle" font-size="20" font-weight="800" fill="#00d4ff" font-family="JetBrains Mono, monospace">30s</text>
-      <text x="545" y="148" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">per month</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Designed and queried a normalized <strong>MySQL relational database</strong> for a personal finance system, reducing manual financial reporting from <strong>~4 hours to under 30 seconds/month</strong>. Delivered 7 analytical reports and 11 CRUD operations across 6 normalized tables.` },
-      { title: 'Approach', list: [
-        'Normalized schema across 6 tables (accounts, categories, transactions, budgets, goals, net-worth view)',
-        'Built 11 CRUD operations supporting full lifecycle of finance data: inserts, updates, soft-deletes, audited reads',
-        'Designed 7 analytical reports: budget-vs-actual variance, net worth VIEW, spending trends, category-level breakdowns, monthly P&amp;L, goal progress, and recurring-transaction detection',
-        'Used aggregate functions (SUM, AVG, COUNT), CASE WHEN conditionals, and multi-table JOINs to drive the reports'
-      ]},
-      { title: 'Results', results: [
-        { val:'~4hr → 30s', label:'Monthly reporting time', color:'var(--cyan)' },
-        { val:'7', label:'Analytical reports', color:'var(--cyan)' },
-        { val:'11', label:'CRUD operations', color:'var(--cyan)' },
-        { val:'6', label:'Normalized tables', color:'var(--cyan)' }
-      ]},
-      { title: 'Technical Details', list: [
-        'MySQL 8.0 with foreign-key constraints, indexes on hot columns, and a persisted VIEW for net worth',
-        'CASE WHEN logic for variance classification (over/under budget bands)',
-        'JOIN patterns across categories ↔ transactions ↔ budgets for variance and trend reports',
-        'Repository: <a href="https://github.com/itsbhoomika/ClearLedger-Personal-Finance-DB" target="_blank" style="color:#00d4ff;">github.com/itsbhoomika/ClearLedger-Personal-Finance-DB ↗</a>'
       ]}
     ]
   },
@@ -2213,7 +2067,7 @@ const MODALS = {
 
   contract: {
     kind: 'Django · DRF · Pandas · AWS S3',
-    title: 'Contract Pricing Intelligence',
+    title: 'Contract-to-Analytics REST Pipeline (Django)',
     sub: 'Django 4.2 · Django REST Framework · Pandas · AWS S3 · 20+ endpoints · 4 models',
     illusGrad: 'radial-gradient(ellipse at 45% 50%, rgba(251,191,36,0.18) 0%, rgba(0,212,255,0.07) 60%, #0d0f1c 80%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
