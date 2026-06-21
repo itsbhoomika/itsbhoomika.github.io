@@ -2198,8 +2198,7 @@ const MODALS = {
       <text x="408" y="164" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fbbf24" font-family="system-ui">75% deviance reduction</text>
     </svg>`,
     sections: [
-      { title: 'Overview', body: `The data-engineering backbone of Synchrony's credit-loss modeling. I built <strong>large-scale PySpark ETL pipelines on AWS EMR</strong>, scheduled with <strong>Apache Airflow</strong>, ingesting and transforming <strong>900M+ customer records per snapshot</strong> into model-ready features, then developed and deployed statistical <strong>PD/EAD models</strong> (Probability of Default / Exposure at Default) to production through Synchrony's <strong>AtLAS</strong> platform via AWS. A complementary <strong>log-log GLM</strong> framework predicts 5-year charge-off probability across <strong>6 retail portfolios</strong> (clothing, lawn &amp; garden, lifestyle, luxury, sporting goods), directly informing the <strong>$7.49B CECL loss reserve</strong>.` },
-      { title: 'Pipeline & Feature Engineering', list: [
+      { title: 'Overview', body: `Synchrony's credit-loss modeling',
         'Engineered 13+ longitudinal features: credit-bureau scores, utilization groups, and behavioral interactions',
         'Added macroeconomic signals like unemployment lag, GDP, savings rate, House Price Index (HPI), and median income across 15+ years of snapshots',
         'Performed data-quality checks feeding the $7.49B CECL loss reserve'
