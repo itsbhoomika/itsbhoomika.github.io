@@ -915,6 +915,87 @@ footer {
   <div class="projects-grid">
 
 
+    <!-- 7. NPS Driver Modeling -->
+    <div class="proj-card" onclick="window.location.href='synchrony-nps-case-study.html'">
+      <div class="proj-illus">
+        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="rg7" cx="50%" cy="50%" r="60%">
+              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="rg7b" cx="80%" cy="70%" r="40%">
+              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.14"/>
+              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="f7"><feGaussianBlur stdDeviation="15"/></filter>
+            <filter id="glow7">
+              <feGaussianBlur stdDeviation="4" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="440" height="200" fill="#080910"/>
+          <ellipse cx="200" cy="100" rx="180" ry="110" fill="url(#rg7)" filter="url(#f7)"/>
+          <ellipse cx="360" cy="140" rx="100" ry="70" fill="url(#rg7b)" filter="url(#f7)"/>
+          <!-- Survey data sources stacked on left -->
+          <rect x="14" y="30"  width="90" height="20" rx="5" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" stroke-width="1.2"/>
+          <text x="59" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="#a78bfa" font-family="system-ui">Survey 1</text>
+          <rect x="14" y="56"  width="90" height="20" rx="5" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" stroke-width="1.2"/>
+          <text x="59" y="70" text-anchor="middle" font-size="9" font-weight="600" fill="#a78bfa" font-family="system-ui">Survey 2</text>
+          <rect x="14" y="82"  width="90" height="20" rx="5" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.2"/>
+          <text x="59" y="96" text-anchor="middle" font-size="9" font-weight="600" fill="#a78bfa" font-family="system-ui">Survey 3</text>
+          <rect x="14" y="108" width="90" height="20" rx="5" fill="rgba(167,139,250,0.05)" stroke="rgba(167,139,250,0.2)" stroke-width="1.2"/>
+          <text x="59" y="122" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="system-ui">11 sources…</text>
+          <!-- ETL arrow -->
+          <path d="M104 80 L148 80" stroke="rgba(251,191,36,0.6)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrNPS)"/>
+          <defs>
+            <marker id="arrNPS" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(251,191,36,0.7)"/>
+            </marker>
+          </defs>
+          <text x="126" y="73" text-anchor="middle" font-size="8" fill="rgba(251,191,36,0.7)" font-family="monospace">ETL</text>
+          <!-- ETL pipeline box -->
+          <rect x="148" y="55" width="88" height="50" rx="8" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
+          <text x="192" y="75" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fbbf24" font-family="system-ui">Python ETL</text>
+          <text x="192" y="89" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">100M+ records</text>
+          <text x="192" y="99" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">2hr → 15min</text>
+          <!-- arrow to models -->
+          <path d="M236 80 L268 68" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" stroke-dasharray="3 2"/>
+          <path d="M236 80 L268 93" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" stroke-dasharray="3 2"/>
+          <!-- XGBoost box -->
+          <rect x="268" y="50" width="80" height="28" rx="7" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
+          <text x="308" y="62" text-anchor="middle" font-size="9.5" font-weight="700" fill="#a78bfa" font-family="system-ui">XGBoost</text>
+          <text x="308" y="73" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">feat importance</text>
+          <!-- Lasso box -->
+          <rect x="268" y="83" width="80" height="28" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
+          <text x="308" y="95" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fbbf24" font-family="system-ui">Lasso</text>
+          <text x="308" y="106" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">R² 0.43</text>
+          <!-- arrows to causal badge -->
+          <path d="M348 64 L375 85" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-dasharray="3 2"/>
+          <path d="M348 97 L375 95" stroke="rgba(255,255,255,0.15)" stroke-width="1.2" stroke-dasharray="3 2"/>
+          <!-- Causal validation badge -->
+          <rect x="375" y="72" width="52" height="34" rx="7" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5" filter="url(#glow7)"/>
+          <text x="401" y="85" text-anchor="middle" font-size="8" font-weight="700" fill="#34d399" font-family="system-ui">CAUSAL</text>
+          <text x="401" y="97" text-anchor="middle" font-size="7.5" fill="#34d399" font-family="monospace">−0.001</text>
+          <!-- bottom metric badges -->
+          <rect x="14" y="148" width="88" height="28" rx="7" fill="rgba(167,139,250,0.09)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
+          <text x="58" y="166" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa" font-family="system-ui">87% faster</text>
+          <rect x="108" y="148" width="88" height="28" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.25)" stroke-width="1.5"/>
+          <text x="152" y="166" text-anchor="middle" font-size="11" font-weight="800" fill="#fbbf24" font-family="system-ui">11 surveys</text>
+        </svg>
+      </div>
+      <div class="proj-body">
+        <div class="proj-kind">Python · SQL · PySpark · XGBoost</div>
+        <div class="proj-title">End-to-End NPS Driver & Segmentation Pipeline</div>
+        <div class="proj-desc">End-to-end Synchrony customer analytics: built a 500K+ record dataset from 11 surveys, ran segmentation and A/B testing (+23% predictive gain), and replaced an external NPS model with an internal one, migrating 100M+ records from SAS to Python (87% faster) and validating drivers with placebo refutation testing. Adopted to redesign Synchrony's survey. 📄 Full case study included.</div>
+        <div class="proj-nums">
+          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">87%</span><span class="pnum-l">ETL speedup</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">R² 0.43</span><span class="pnum-l">Lasso NPS model</span></div>
+          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">−0.001</span><span class="pnum-l">Placebo effect</span></div>
+        </div>
+        <div class="proj-more">Read full case study →</div>
+      </div>
+    </div>
     <!-- 3. LSTM Datathon -->
     <div class="proj-card" onclick="window.location.href='synchrony-case-study.html'">
       <div class="proj-illus">
@@ -1258,6 +1339,7 @@ footer {
 
 <!-- HUGGINGFACE -->
 <div class="wrap section" id="huggingface">
+  <div class="sec-label">Open Source</div>
   <h2 class="sec-title">On HuggingFace</h2>
 
   <div class="sec-label" style="margin-bottom:1rem">Models</div>
@@ -1279,7 +1361,7 @@ footer {
     </div>
   </div>
 
-  <div class="sec-label" style="margin-bottom:1rem">Visualization Dashboards</div>
+  <div class="sec-label" style="margin-bottom:1rem">Spaces & Demos</div>
   <div class="hf-spaces-row">
     <a href="https://huggingface.co/spaces/itsbhoomika/FP_3" target="_blank" class="hf-space-card">
       <div class="space-status"><div class="dot"></div>Live</div>
@@ -2003,7 +2085,6 @@ const MODALS = {
       ]}
     ]
   },
-
 
 
 function openModal(key) {
