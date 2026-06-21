@@ -969,7 +969,7 @@ footer {
       <div class="proj-body">
         <div class="proj-kind">PySpark · AWS EMR · S3 · Airflow</div>
         <div class="proj-title">Distributed Credit-Risk ETL Pipeline (PySpark + EMR)</div>
-        <div class="proj-desc">PySpark ETL on AWS EMR, scheduled with Airflow, transforming 900M+ records per snapshot, from 1 hour to 5 minutes (92% faster). Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B CECL loss reserve across 6 retail portfolios.</div>
+        <div class="proj-desc">PySpark ETL on AWS EMR, transforming 900M+ records per snapshot. Feeds the log-log GLM PD/EAD models behind Synchrony's $7.49B  loss reserve across 6 retail portfolios.</div>
         <div class="proj-nums">
           <div class="pnum"><span class="pnum-v" style="color:var(--mint)">900M+</span><span class="pnum-l">Records / snapshot</span></div>
           <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">92%</span><span class="pnum-l">Faster ETL</span></div>
@@ -2152,7 +2152,7 @@ const MODALS = {
   pyspark: {
     kind: 'PySpark · AWS EMR · S3 · Airflow',
     title: 'PySpark Credit-Risk Data Pipeline',
-    sub: 'PySpark · AWS EMR · Apache Airflow · Log-log GLM · PD/EAD · 900M+ records/snapshot',
+    sub: 'PySpark · AWS EMR · Log-log GLM · PD/EAD · 900M+ records/snapshot',
     illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.18) 0%, rgba(0,212,255,0.07) 60%, #0d0f1c 80%)',
     illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -2200,25 +2200,22 @@ const MODALS = {
     sections: [
       { title: 'Overview', body: `The data-engineering backbone of Synchrony's credit-loss modeling. I built <strong>large-scale PySpark ETL pipelines on AWS EMR</strong>, scheduled with <strong>Apache Airflow</strong>, ingesting and transforming <strong>900M+ customer records per snapshot</strong> into model-ready features, then developed and deployed statistical <strong>PD/EAD models</strong> (Probability of Default / Exposure at Default) to production through Synchrony's <strong>AtLAS</strong> platform via AWS. A complementary <strong>log-log GLM</strong> framework predicts 5-year charge-off probability across <strong>6 retail portfolios</strong> (clothing, lawn &amp; garden, lifestyle, luxury, sporting goods), directly informing the <strong>$7.49B CECL loss reserve</strong>.` },
       { title: 'Pipeline & Feature Engineering', list: [
-        'Built PySpark ETL on AWS EMR, orchestrated by Apache Airflow, ingesting 900M+ records per snapshot, with runtime cut from 1 hour (Python) to 5 minutes (PySpark), 92% faster',
         'Engineered 13+ longitudinal features: credit-bureau scores, utilization groups, and behavioral interactions',
         'Added macroeconomic signals like unemployment lag, GDP, savings rate, House Price Index (HPI), and median income across 15+ years of snapshots',
         'Performed data-quality checks feeding the $7.49B CECL loss reserve'
       ]},
       { title: 'Modeling & Validation', list: [
-        'Log-log GLM predicting 5-year charge-off probability across 6 retail portfolios, deployed to production via AtLAS / AWS',
         'Retained variables drove a 75% deviance reduction from the null model, with near-zero p-values (hypothesis testing) and stable VIF ≤ 3 across interaction terms (no harmful multicollinearity)',
         'Multi-snapshot backtesting from 2007–2025 confirmed robustness: conservative ~10% under-prediction pre-2008 for regulatory compliance, self-correction within ~1 year after the 2008 shock',
         'Stable charge-off variance across S1–S4 stress periods, including post-COVID behavioral shifts'
       ]},
       { title: 'Results', results: [
         { val:'900M+', label:'Records / snapshot', color:'var(--mint)' },
-        { val:'92%', label:'Faster ETL (1hr→5min)', color:'var(--cyan)' },
         { val:'$7.49B', label:'CECL reserve informed', color:'var(--purple)' },
         { val:'75%', label:'Deviance reduction', color:'var(--amber)' }
       ]},
       { title: 'Stack', list: [
-        'PySpark · AWS EMR · Apache Airflow · AWS (AtLAS deployment)',
+        'PySpark · AWS EMR · AWS (AtLAS deployment)',
         'Statistical modeling: log-log GLM, PD/EAD, hypothesis testing, VIF, deviance analysis',
         'Multi-snapshot backtesting framework spanning 2007–2025'
       ]}
