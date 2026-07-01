@@ -427,35 +427,6 @@ nav {
 .space-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 .space-link { font-size: 0.78rem; color: var(--purple); font-weight: 600; margin-top: 0.6rem; display: block; }
 
-/* ── SKILLS ── */
-.skills-wrap { display: flex; flex-direction: column; gap: 1.8rem; }
-.skill-group-label {
-  font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 0.75rem;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.55rem; }
-.stag {
-  font-size: 0.85rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 9px;
-  background: rgba(0,212,255,0.07);
-  border: 1px solid rgba(0,212,255,0.32);
-  color: var(--cyan);
-  font-weight: 500;
-  transition: border-color 0.2s, background 0.2s, transform 0.2s;
-}
-.stag:hover {
-  border-color: rgba(0,212,255,0.6);
-  background: rgba(0,212,255,0.14);
-  transform: translateY(-1px);
-}
-/* Legacy modifier classes, collapsed to the unified highlighted style. */
-.stag.hi, .stag.pu, .stag.mi {
-  background: rgba(0,212,255,0.07);
-  border-color: rgba(0,212,255,0.32);
-  color: var(--cyan);
-}
-
 /* ── CONTACT ── */
 #contact { text-align: center; padding-bottom: 7rem; }
 #contact .sec-title { margin-bottom: 0.75rem; }
@@ -555,7 +526,6 @@ footer {
   <ul class="nav-links">
     <li><a href="#projects">Projects</a></li>
     <li><a href="#huggingface">HuggingFace</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -1537,77 +1507,6 @@ footer {
       <div class="space-desc">Interactive exploration of building inventory data for Illinois state facilities with linked visualizations.</div>
       <div class="space-link">Open Space ↗</div>
     </a>
-  </div>
-</div>
-
-<!-- SKILLS -->
-<div class="wrap section" id="skills">
-  <div class="sec-label">Skills</div>
-  <h2 class="sec-title">What I Work With</h2>
-  <div class="skills-wrap">
-    <div>
-      <div class="skill-group-label">Languages</div>
-      <div class="skill-tags">
-        <span class="stag hi">Python</span>
-        <span class="stag">R</span>
-        <span class="stag">SQL</span>
-        <span class="stag">PySpark</span>
-        <span class="stag">SAS</span>
-        <span class="stag">C++</span>
-      </div>
-    </div>
-    <div>
-      <div class="skill-group-label">ML & Statistics</div>
-      <div class="skill-tags">
-        <span class="stag hi">XGBoost</span>
-        <span class="stag hi">Random Forest</span>
-        <span class="stag">Logistic Regression</span>
-        <span class="stag">Decision Trees</span>
-        <span class="stag">Time Series</span>
-        <span class="stag">A/B Testing</span>
-        <span class="stag">Anomaly Detection</span>
-        <span class="stag">Hypothesis Testing</span>
-        <span class="stag">SMOTE</span>
-      </div>
-    </div>
-    <div>
-      <div class="skill-group-label">LLMs & NLP</div>
-      <div class="skill-tags">
-        <span class="stag pu">LoRA Fine-tuning</span>
-        <span class="stag pu">SFT & DPO</span>
-        <span class="stag pu">LangChain</span>
-        <span class="stag pu">RAG</span>
-        <span class="stag pu">FinBERT</span>
-        <span class="stag pu">Word2Vec</span>
-        <span class="stag">OpenAI API</span>
-        <span class="stag">TF-IDF</span>
-        <span class="stag">NER</span>
-        <span class="stag">CRF</span>
-      </div>
-    </div>
-    <div>
-      <div class="skill-group-label">Frameworks</div>
-      <div class="skill-tags">
-        <span class="stag mi">PyTorch</span>
-        <span class="stag mi">TensorFlow</span>
-        <span class="stag">Weights & Biases</span>
-        <span class="stag">Docker</span>
-        <span class="stag">Git</span>
-        <span class="stag">Tableau</span>
-        <span class="stag">Power BI</span>
-      </div>
-    </div>
-    <div>
-      <div class="skill-group-label">Cloud & Big Data</div>
-      <div class="skill-tags">
-        <span class="stag">AWS (S3, EMR, Glue, SageMaker)</span>
-        <span class="stag">GCP / BigQuery</span>
-        <span class="stag">Databricks</span>
-        <span class="stag">Snowflake</span>
-        <span class="stag">Hadoop</span>
-        <span class="stag">NCSA Delta HPC</span>
-      </div>
-    </div>
   </div>
 </div>
 
