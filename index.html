@@ -96,6 +96,8 @@
     .edu-row { display:grid; grid-template-columns:1fr auto; gap:20px; padding:12px 0; font-size:13px; }
     .edu-row strong { display:block; margin-bottom:4px; }
     .edu-row span { color:var(--muted); font-size:12px; line-height:1.5; }
+    .course-list { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:7px; margin-top:2px; }
+    .course-list .course-chip { display:inline-flex; align-items:center; min-height:30px; padding:6px 10px; border:1px solid #3d4b65; border-radius:999px; background:#18243a; color:#cbd5e8; font-size:10px; font-weight:600; line-height:1.3; }
     .skills { padding:34px; background:#e6ebfa; border:1px solid #d6ddf1; align-self:start; }
     .skills h3 { font-family:var(--serif); font-size:30px; font-weight:400; margin-bottom:12px; }
     .skill-row { padding:17px 0; border-top:1px solid #cdd6ed; }
@@ -253,8 +255,8 @@
           <p>I enjoy solving real-world problems with practical AI solutions, combining strong analysis, thoughtful system design, and close collaboration with the people who use them.</p>
           <div class="education" id="education">
             <div class="label">Education</div>
-            <div class="edu-row"><div><strong>University of Illinois Urbana-Champaign</strong><span>MS, Information Management · NLP, statistical modeling, databases, text mining</span></div><span>2026 · GPA 4.0</span></div>
-            <div class="edu-row"><div><strong>Savitribai Phule Pune University</strong><span>BE, Computer Engineering</span></div><span>GPA 9.12/10 · Graduated with distinction</span></div>
+            <div class="edu-row"><div><strong>University of Illinois Urbana-Champaign</strong><span>MS, Information Management</span></div><span>2026 · GPA 4.0</span><div class="course-list" aria-label="UIUC relevant coursework"><span class="course-chip">Database Design &amp; Prototyping</span><span class="course-chip">Applied Business Research</span><span class="course-chip">Statistical Models</span><span class="course-chip">Information Modeling</span><span class="course-chip">Advanced NLP</span><span class="course-chip">Text Mining</span></div></div>
+            <div class="edu-row"><div><strong>Savitribai Phule Pune University</strong><span>BE, Computer Engineering</span></div><span>GPA 9.12/10 · Graduated with distinction</span><div class="course-list" aria-label="Undergraduate relevant coursework"><span class="course-chip">Data Structures</span><span class="course-chip">Database Management</span><span class="course-chip">AI &amp; NLP</span><span class="course-chip">Machine Learning</span><span class="course-chip">Data Science &amp; Big Data Analytics</span><span class="course-chip">Cloud Computing</span><span class="course-chip">Computer Network Systems</span></div></div>
           </div>
         </div>
         <div class="skills" id="skills">
