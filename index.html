@@ -102,7 +102,8 @@
     .skills h3 { font-family:var(--serif); font-size:30px; font-weight:400; margin-bottom:12px; }
     .skill-row { padding:17px 0; border-top:1px solid #cdd6ed; }
     .skill-row strong { display:block; color:#4b62a6; text-transform:uppercase; letter-spacing:.1em; font-size:10px; margin-bottom:8px; }
-    .skill-row span { display:block; font-size:13px; line-height:1.8; color:#435168; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .skill-chip { display:inline-flex; align-items:center; min-height:29px; padding:6px 9px; border:1px solid #4a5877; border-radius:999px; background:#1b2941; color:#d0d8e8; font-size:10px; font-weight:600; line-height:1.25; }
     .cert-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 36px; }
     .cert { border-top:1px solid var(--line); padding:22px 0; }
     .cert h3 { font-size:16px; letter-spacing:-.01em; }
@@ -261,10 +262,12 @@
         <div class="skills" id="skills">
           <div class="label">Toolkit</div>
           <h3>What I work with</h3>
-          <div class="skill-row"><strong>Languages &amp; data</strong><span>Python · SQL · R · SAS · PySpark · Pandas</span></div>
-          <div class="skill-row"><strong>Machine learning</strong><span>scikit-learn · XGBoost · Feature engineering · Model validation · SHAP</span></div>
-          <div class="skill-row"><strong>Generative AI &amp; NLP</strong><span>PyTorch · LangChain · RAG · LLM fine-tuning · Embeddings · FinBERT</span></div>
-          <div class="skill-row"><strong>Platforms &amp; tools</strong><span>AWS · Snowflake · BigQuery · Airflow · dbt · Docker · Streamlit</span></div>
+          <div class="skill-row"><strong>Programming languages</strong><div class="skill-tags"><span class="skill-chip">Python</span><span class="skill-chip">SQL</span><span class="skill-chip">R</span><span class="skill-chip">SAS</span><span class="skill-chip">Java</span><span class="skill-chip">JavaScript</span><span class="skill-chip">HTML</span><span class="skill-chip">CSS</span><span class="skill-chip">Bash</span></div></div>
+          <div class="skill-row"><strong>Machine learning &amp; AI</strong><div class="skill-tags"><span class="skill-chip">PyTorch</span><span class="skill-chip">TensorFlow / Keras</span><span class="skill-chip">scikit-learn</span><span class="skill-chip">XGBoost</span><span class="skill-chip">Transformers</span><span class="skill-chip">LLMs</span><span class="skill-chip">RAG</span><span class="skill-chip">LangChain</span><span class="skill-chip">NLP</span><span class="skill-chip">LSTM</span><span class="skill-chip">SHAP</span><span class="skill-chip">Causal Inference</span></div></div>
+          <div class="skill-row"><strong>Data engineering &amp; analytics</strong><div class="skill-tags"><span class="skill-chip">PySpark</span><span class="skill-chip">Pandas</span><span class="skill-chip">NumPy</span><span class="skill-chip">Airflow</span><span class="skill-chip">dbt</span><span class="skill-chip">Redpanda</span><span class="skill-chip">Snowflake</span><span class="skill-chip">BigQuery</span><span class="skill-chip">Data Warehousing</span><span class="skill-chip">Data Quality</span></div></div>
+          <div class="skill-row"><strong>Tools &amp; frameworks</strong><div class="skill-tags"><span class="skill-chip">Node.js</span><span class="skill-chip">Django</span><span class="skill-chip">Django REST Framework</span><span class="skill-chip">Streamlit</span><span class="skill-chip">Power BI</span><span class="skill-chip">Tableau</span><span class="skill-chip">Git / GitHub</span><span class="skill-chip">Docker</span><span class="skill-chip">Jupyter</span></div></div>
+          <div class="skill-row"><strong>Cloud &amp; databases</strong><div class="skill-tags"><span class="skill-chip">AWS</span><span class="skill-chip">Amazon S3</span><span class="skill-chip">AWS Lambda</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">MySQL</span><span class="skill-chip">SQL Server</span><span class="skill-chip">MongoDB</span></div></div>
+          <div class="skill-row"><strong>Specializations</strong><div class="skill-tags"><span class="skill-chip">Agentic AI</span><span class="skill-chip">LLM Fine-Tuning</span><span class="skill-chip">LLM Evaluation</span><span class="skill-chip">Document Intelligence</span><span class="skill-chip">Information Retrieval</span><span class="skill-chip">Feature Engineering</span><span class="skill-chip">Model Validation</span><span class="skill-chip">Predictive Modeling</span><span class="skill-chip">Model Interpretability</span><span class="skill-chip">Data Visualization</span></div></div>
         </div>
       </div>
     </section>
