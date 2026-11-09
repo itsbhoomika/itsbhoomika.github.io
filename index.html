@@ -1,2405 +1,401 @@
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
-</script>
-</body>
-</html>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bhoomika Ravishankar </title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
-<style>
-:root {
-  /* 3-color palette: dark bg + off-white text + cyan accent. */
-  --bg:     #080910;
-  --bg2:    #0d0f1c;
-  --card:   #0f1120;
-  --border: rgba(255,255,255,0.07);
-  --cyan:   #00d4ff;  /* sole accent color */
-  --purple: #00d4ff;  /* aliased to cyan (was #a78bfa) */
-  --mint:   #00d4ff;  /* aliased to cyan (was #34d399) */
-  --pink:   #00d4ff;  /* aliased to cyan (was #f472b6) */
-  --amber:  #00d4ff;  /* aliased to cyan (was #fbbf24) */
-  --text:   #e2e8f0;
-  --muted:  #7c8ca8;
-  --subtle: #1a1e2e;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 14.5px; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 14.5px;
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-  letter-spacing: -0.005em;
-}
-
-/* ── CANVAS ── */
-#canvas {
-  position: fixed; top: 0; left: 0;
-  width: 100%; height: 100%;
-  pointer-events: none; z-index: 0; opacity: 0.3;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 100;
-  padding: 1rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  background: rgba(8,9,16,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo { font-size: 1rem; font-weight: 800; color: var(--cyan); text-decoration: none; letter-spacing: 0.05em; }
-.nav-links { display: flex; gap: 2.2rem; list-style: none; }
-.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.95 rem; transition: color 0.2s; }
-.nav-links a:hover { color: var(--cyan); }
-
-/* ── LAYOUT ── */
-.wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Make sure hero has same max-width */
-#hero {
-  position: relative;
-  z-index: 1;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
-  padding-top: 5rem;
-}
-.hero-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  width: 100%;
-}
-
-.hero-left {
-  flex: 1;
-}
-
-.hero-right {
-  flex-shrink: 0;
-}
-
-.hero-photo {
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid rgba(255,255,255,0.1);
-  box-shadow: 0 0 80px rgba(0,212,255,0.25), 0 0 120px rgba(167,139,250,0.12);
-}
-
-.hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Update hero to not center everything anymore */
-#hero {
-  text-align: left;
-  align-items: flex-start;
-}
-
-.cta-row {
-  justify-content: flex-start;
-}
-
-/* Responsive - stack on mobile */
-@media (max-width: 768px) {
-  .hero-content {
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-  
-  .hero-photo {
-    width: 280px;
-    height: 280px;
-  }
-  
-  .cta-row {
-    justify-content: center;
-  }
-}
-  
-.hero-chip {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.2);
-  border-radius: 100px; padding: 0.4rem 1rem;
-  font-size: 0.82rem; color: var(--cyan); letter-spacing: 0.04em; margin-bottom: 1.8rem;
-  width: fit-content;
-}
-.hero-chip::before {
-  content: ''; width: 7px; height: 7px; border-radius: 50%;
-  background: var(--mint); animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; transform:scale(1); }
-  50% { opacity:0.3; transform:scale(0.75); }
-}
-.hero-name {
-  font-size: clamp(2.2rem, 6.5vw, 4rem);
-  font-weight: 800; letter-spacing: -0.03em; line-height: 0.95; margin-bottom: 1.2rem;
-}
-.hero-name span {
-  background: linear-gradient(135deg, var(--cyan), var(--purple) 55%, var(--pink));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hero-sub {
-  font-size: 0.98rem; color: var(--muted); max-width: 520px;
-  line-height: 1.75; margin-bottom: 2.5rem;
-}
-.cta-row { display: flex; gap: 0.95rem; flex-wrap: wrap; }
-.btn {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  padding: 0.72rem 1.55rem; border-radius: 10px;
-  font-size: 0.95rem; font-weight: 600; text-decoration: none;
-  border: none; cursor: pointer; transition: all 0.2s;
-}
-.btn-primary {
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  color: #07080f;
-}
-.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
-.btn-ghost {
-  background: transparent; border: 1px solid var(--border); color: var(--muted);
-}
-.btn-ghost:hover { border-color: rgba(0,212,255,0.4); color: var(--cyan); transform: translateY(-2px); }
-.hero-stats {
-  display: flex; gap: 2.5rem; flex-wrap: wrap; margin-top: 4rem;
-  padding-top: 2rem; border-top: 1px solid var(--border);
-}
-.stat { display: flex; flex-direction: column; gap: 0.2rem; }
-.stat-n { font-size: 1.7rem; font-weight: 800; line-height: 1; }
-.stat-l { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.04em; }
-
-/* ── SECTION GENERIC ── */
-.section { padding: 5.5rem 0; }
-.sec-label {
-  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--cyan); font-weight: 700; margin-bottom: 0.5rem;
-}
-.sec-title { font-size: 1.65rem; font-weight: 800; margin-bottom: 2rem; line-height: 1.2; }
-
-/* ── ABOUT ── */
-.about-grid {
-  display: grid; grid-template-columns: 320px 1fr; gap: 3.5rem; align-items: start;
-}
-.about-left { display: flex; flex-direction: column; gap: 1.5rem; }
-.photo-wrap {
-  width: 280px; height: 280px; border-radius: 50%;
-  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(167,139,250,0.15));
-  border: 2px solid rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.photo-wrap img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
-}
-.photo-placeholder {
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-  color: var(--muted);
-}
-.photo-placeholder .initials {
-  font-size: 3rem; font-weight: 800;
-  background: linear-gradient(135deg, var(--cyan), var(--purple));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.photo-placeholder .hint { font-size: 0.72rem; color: var(--muted); text-align: center; line-height: 1.4; }
-.about-contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
-.about-link {
-  font-size: 0.82rem; color: var(--muted); text-decoration: none;
-  display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
-}
-.about-link:hover { color: var(--cyan); }
-.about-right { display: flex; flex-direction: column; gap: 1.5rem; }
-.about-bio { font-size: 1rem; color: var(--muted); line-height: 1.8; }
-.about-bio strong { color: var(--text); }
-.edu-stack { display: flex; flex-direction: column; gap: 0.95rem; margin-top: 0.5rem; }
-.edu-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.3rem 1.6rem;  /* was 1.1rem 1.4rem */
-}
-.edu-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
-.edu-deg {
-  font-size: 1.1rem;  /* was 0.95rem */
-  font-weight: 600;
-  color: var(--text);
-}
-  .edu-gpa {
-  font-size: 0.82rem;  /* was 0.75rem */
-  font-weight: 700;
-  color: var(--mint);
-  background: rgba(52,211,153,0.1);
-  border: 1px solid rgba(52,211,153,0.25);
-  padding: 0.2rem 0.6rem;
-  border-radius: 100px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.edu-school {
-  font-size: 0.92rem;  /* was 0.82rem */
-  color: var(--cyan);
-  margin-top: 0.25rem;
-}
-.edu-year {
-  font-size: 0.85rem;  /* was 0.78rem */
-  color: var(--muted);
-  margin-top: 0.15rem;
-}
-.about-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.about-contact-links {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}  
-/* ── EXPERIENCE TIMELINE ── */
-.timeline-wrap {
-  position: relative;
-  padding-left: 2.2rem;
-}
-.timeline-wrap::before {
-  content: '';
-  position: absolute; left: 8px; top: 12px; bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, var(--cyan) 0%, var(--purple) 35%, var(--mint) 65%, var(--pink) 100%);
-  opacity: 0.4; border-radius: 2px;
-}
-.tl-entry { position: relative; margin-bottom: 1.6rem; }
-.tl-entry:last-child { margin-bottom: 0; }
-.tl-dot-wrap {
-  position: absolute; left: -2.2rem; top: 1.4rem;
-  display: flex; align-items: center; justify-content: center;
-  width: 20px;
-}
-.tl-dot {
-  width: 18px; height: 18px; border-radius: 50%;
-  border: 3px solid var(--bg); flex-shrink: 0;
-}
-.tl-dot.c { background: var(--cyan);   box-shadow: 0 0 0 3px rgba(0,212,255,0.2),   0 0 16px rgba(0,212,255,0.4); }
-.tl-dot.p { background: var(--purple); box-shadow: 0 0 0 3px rgba(167,139,250,0.2), 0 0 16px rgba(167,139,250,0.4); }
-.tl-dot.m { background: var(--mint);   box-shadow: 0 0 0 3px rgba(52,211,153,0.2),  0 0 16px rgba(52,211,153,0.4); }
-.tl-dot.k { background: var(--pink);   box-shadow: 0 0 0 3px rgba(244,114,182,0.2), 0 0 16px rgba(244,114,182,0.4); }
-
-.exp-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 14px;
-  padding: 1.5rem 1.75rem;
-}
-.exp-card.c { border-left: 3px solid var(--cyan); }
-.exp-card.p { border-left: 3px solid var(--purple); }
-.exp-card.m { border-left: 3px solid var(--mint); }
-.exp-card.k { border-left: 3px solid var(--pink); }
-
-.exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.95rem; }
-.exp-co { font-size: 0.78rem; color: var(--cyan); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
-.exp-co.p { color: var(--purple); }
-.exp-co.m { color: var(--mint); }
-.exp-co.k { color: var(--pink); }
-.exp-role { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-top: 0.15rem; }
-.exp-date {
-  font-size: 0.78rem; color: var(--muted);
-  background: var(--subtle); border: 1px solid var(--border);
-  padding: 0.2rem 0.65rem; border-radius: 100px; white-space: nowrap; flex-shrink: 0;
-}
-.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.5rem; }
-.exp-bullets li {
-  font-size: 0.952rem; color: var(--muted); line-height: 1.65;
-  padding-left: 1.2rem; position: relative;
-}
-.exp-bullets li::before {
-  content: '→'; position: absolute; left: 0;
-  color: var(--cyan); font-size: 0.8rem; top: 0.05rem;
-}
-.exp-bullets li strong { color: var(--text); }
-.tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-.tag {
-  font-size: 0.75rem; padding: 0.22rem 0.65rem; border-radius: 100px;
-  background: var(--subtle); border: 1px solid var(--border); color: var(--muted);
-}
-
-
-  
-/* ── PROJECTS ── */
-.projects-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.4rem;
-}
-.proj-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
-  cursor: pointer; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-  display: flex; flex-direction: column;
-}
-.proj-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-  border-color: rgba(255,255,255,0.13);
-}
-.proj-illus {
-  width: 100%; height: 200px; position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.proj-illus svg { width: 100%; height: 100%; }
-.proj-body { padding: 1.5rem 1.6rem; flex: 1; display: flex; flex-direction: column; }
-.proj-kind { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
-.proj-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
-.proj-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.2rem; flex: 1; }
-.proj-nums { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-.pnum { display: flex; flex-direction: column; }
-.pnum-v { font-size: 1.25rem; font-weight: 800; line-height: 1; }
-.pnum-l { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 0.15rem; }
-.proj-more {
-  font-size: 0.82rem; font-weight: 600; color: var(--cyan);
-  display: flex; align-items: center; gap: 0.35rem; margin-top: auto;
-}
-.proj-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
-.proj-foot .proj-more { margin-top: 0; }
-.proj-gh {
-  font-size: 0.78rem; font-weight: 600; color: var(--muted);
-  display: inline-flex; align-items: center; gap: 0.32rem;
-  padding: 0.3rem 0.7rem; border: 1px solid var(--border); border-radius: 100px;
-  text-decoration: none; transition: color 0.2s, border-color 0.2s, background 0.2s; white-space: nowrap;
-}
-.proj-gh:hover { color: var(--cyan); border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.06); }
-.proj-gh svg { width: 14px; height: 14px; }
-
-/* ── HF SECTION ── */
-.hf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
-.hf-model-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 1.2rem 1.3rem;
-}
-.hf-model-card:hover { border-color: rgba(255,209,102,0.3); }
-.hf-tag {
-  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--amber); font-weight: 700; margin-bottom: 0.5rem;
-  display: flex; align-items: center; gap: 0.4rem;
-}
-.hf-name { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
-.hf-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
-.hf-spaces-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.hf-space-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 1.2rem 1.3rem; text-decoration: none;
-  transition: border-color 0.2s, transform 0.2s; display: block;
-}
-.hf-space-card:hover { border-color: rgba(167,139,250,0.35); transform: translateY(-2px); }
-.space-status {
-  display: inline-flex; align-items: center; gap: 0.35rem;
-  font-size: 0.68rem; color: var(--mint); margin-bottom: 0.5rem;
-}
-.space-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mint); }
-.space-status.sleeping { color: var(--muted); }
-.space-status.sleeping .dot { background: var(--muted); }
-.space-name { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; }
-.space-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-.space-link { font-size: 0.78rem; color: var(--purple); font-weight: 600; margin-top: 0.6rem; display: block; }
-
-/* ── CONTACT ── */
-#contact { text-align: center; padding-bottom: 7rem; }
-#contact .sec-title { margin-bottom: 0.75rem; }
-.contact-sub { font-size: 1rem; color: var(--muted); margin-bottom: 2rem; }
-.contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-
-/* ── MODAL ── */
-.overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(10px); z-index: 200;
-  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
-  opacity: 0; pointer-events: none; transition: opacity 0.25s;
-}
-.overlay.open { opacity: 1; pointer-events: all; }
-.modal {
-  background: var(--bg2); border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 20px; width: 100%; max-width: 700px; max-height: 90vh;
-  overflow-y: auto; position: relative;
-  transform: translateY(20px); transition: transform 0.25s;
-}
-.overlay.open .modal { transform: translateY(0); }
-.modal-head {
-  padding: 1.8rem 2rem 0; position: sticky; top: 0;
-  background: var(--bg2); z-index: 1;
-  border-bottom: 1px solid var(--border); padding-bottom: 1.4rem;
-}
-.modal-close {
-  position: absolute; top: 1.2rem; right: 1.3rem;
-  width: 34px; height: 34px; border-radius: 50%;
-  background: var(--subtle); border: 1px solid var(--border);
-  color: var(--muted); font-size: 1rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, color 0.2s;
-}
-.modal-close:hover { background: var(--border); color: var(--text); }
-.modal-kind { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 0.4rem; }
-.modal-title { font-size: 1.45rem; font-weight: 800; color: var(--text); line-height: 1.25; padding-right: 2.5rem; }
-.modal-sub { font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
-.modal-body { padding: 1.8rem 2rem; }
-.modal-illus { width: 100%; height: 190px; border-radius: 14px; overflow: hidden; margin-bottom: 1.8rem; }
-.modal-section { margin-bottom: 1.6rem; }
-.modal-section:last-child { margin-bottom: 0; }
-.modal-sec-title {
-  font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 0.75rem;
-}
-.modal-text { font-size: 0.92rem; color: var(--muted); line-height: 1.75; }
-.modal-text strong { color: var(--text); }
-.modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-.modal-list li {
-  font-size: 0.9rem; color: var(--muted); line-height: 1.65;
-  padding-left: 1.3rem; position: relative;
-}
-.modal-list li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-size: 0.78rem; top: 0.08rem; }
-.modal-list li strong { color: var(--text); }
-.results-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
-.res-box {
-  background: var(--subtle); border: 1px solid var(--border); border-radius: 10px;
-  padding: 0.9rem; text-align: center;
-}
-.res-val { font-size: 1.3rem; font-weight: 800; line-height: 1; margin-bottom: 0.3rem; }
-.res-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; }
-
-/* ── FOOTER ── */
-footer {
-  position: relative; z-index: 1; text-align: center;
-  padding: 1.5rem; font-size: 0.8rem; color: var(--muted);
-  border-top: 1px solid var(--border);
-}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--subtle); border-radius: 3px; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 700px) {
-  .about-grid { grid-template-columns: 1fr; }
-  .about-left { align-items: center; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .hf-grid { grid-template-columns: 1fr; }
-  .hf-spaces-row { grid-template-columns: 1fr; }
-  .results-row { grid-template-columns: repeat(2, 1fr); }
-  .nav-links { gap: 1.2rem; }
-  .timeline-wrap { padding-left: 1.8rem; }
-  .timeline-wrap::before { left: 6px; }
-  .tl-dot-wrap { left: -1.8rem; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bhoomika Ravishankar builds applied AI, data science, and analytics solutions.">
+  <meta name="theme-color" content="#0c1220">
+  <title>Bhoomika Ravishankar | Applied AI &amp; Data Science</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#18212a; --muted:#5c6670; --paper:#f5f3ee; --white:#fffefa; --line:#dcded9; --blue:#345bdf; --blue-light:#e5ebff; --green:#687e68; --serif:"Instrument Serif", Georgia, serif; --sans:"DM Sans", sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    button { font:inherit; }
+    button:focus-visible, a:focus-visible { outline:3px solid #ffb847; outline-offset:5px; }
+    .wrap { width:min(1184px, calc(100% - 80px)); margin:auto; }
+    .nav { height:82px; display:flex; align-items:center; justify-content:space-between; gap:24px; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:11px; text-decoration:none; font-weight:700; letter-spacing:-.04em; font-size:16px; white-space:nowrap; }
+    .mark { width:29px; height:29px; display:grid; place-items:center; background:var(--ink); color:var(--white); font-family:var(--serif); font-weight:400; font-size:19px; border-radius:50%; }
+    .nav-links { display:flex; align-items:center; gap:18px; }
+    .nav-links a { text-decoration:none; color:#48545d; font-size:13px; font-weight:600; }
+    .nav-links a:hover { color:var(--blue); }
+    .nav-contact { background:var(--ink); color:white!important; padding:12px 18px; border-radius:4px; }
+    .menu-toggle { display:none; border:1px solid var(--line); border-radius:4px; padding:9px 12px; background:none; color:var(--ink); cursor:pointer; }
+    .hero { display:grid; grid-template-columns:1.07fr .93fr; gap:70px; align-items:center; padding:68px 0 80px; min-height:610px; }
+    .eyebrow { display:flex; align-items:center; gap:9px; color:#5b6a64; font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .eyebrow:before { content:""; display:block; width:7px; height:7px; background:#72936f; border-radius:50%; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font-family:var(--serif); font-weight:400; font-size:clamp(52px,6.4vw,84px); line-height:.95; letter-spacing:-.035em; margin:20px 0 22px; }
+    h1 em { color:var(--blue); font-weight:400; }
+    .hero-focus { color:#d2caff; font-size:16px; font-weight:600; line-height:1.5; }
+    .hero-credentials { list-style:none; padding:0; margin:23px 0 0; display:grid; gap:11px; color:#c9d3e4; font-size:14px; line-height:1.45; }
+    .hero-credentials li { display:flex; gap:10px; align-items:baseline; }
+    .hero-credentials li:before { content:"•"; color:#b2a2ff; }
+    .hero-sub { font-size:18px; line-height:1.7; max-width:530px; color:#53606a; }
+    .hero-sub strong { color:var(--ink); font-weight:600; }
+    .actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:34px; }
+    .btn { min-height:48px; display:inline-flex; align-items:center; justify-content:center; gap:14px; text-decoration:none; border:1px solid var(--ink); border-radius:4px; padding:0 18px; font-weight:600; font-size:13px; transition:transform .2s,background .2s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-primary { background:var(--ink); color:white; }
+    .btn-secondary { background:transparent; }
+    .hero-aside { position:relative; background:#e3e9fb; border:1px solid #d6dff8; padding:38px; min-height:394px; overflow:hidden; }
+    .hero-aside:before { content:""; position:absolute; width:300px; height:300px; border:1px solid rgba(52,91,223,.14); border-radius:50%; right:-85px; top:-105px; box-shadow:0 0 0 52px rgba(52,91,223,.035),0 0 0 104px rgba(52,91,223,.025); }
+    .aside-kicker { color:#415dba; font-size:10px; letter-spacing:.14em; font-weight:700; text-transform:uppercase; position:relative; }
+    .aside-title { font-family:var(--serif); font-weight:400; font-size:36px; line-height:1.05; max-width:260px; margin:16px 0 35px; position:relative; }
+    .flow { position:relative; display:grid; gap:1px; background:#cbd5ef; border:1px solid #cbd5ef; }
+    .flow-row { background:#f5f7ff; display:flex; align-items:center; justify-content:space-between; padding:13px 15px; font-size:12px; font-weight:600; }
+    .flow-row span:last-child { color:#7787ad; font-size:11px; font-weight:400; }
+    .hero-bottom { display:flex; gap:18px; align-items:center; margin-top:25px; font-size:12px; color:#61707b; }
+    .hero-bottom a { text-decoration:none; border-bottom:1px solid #9ba8b3; padding-bottom:3px; }
+    .intro-strip { background:var(--ink); color:white; }
+    .intro-strip .wrap { min-height:110px; display:grid; grid-template-columns:1.1fr 1fr 1fr; align-items:center; gap:28px; }
+    .strip-name { font-family:var(--serif); font-size:28px; }
+    .strip-label { color:#abb8bc; font-size:12px; line-height:1.55; }
+    .strip-label strong { color:white; display:block; font-weight:600; font-size:13px; margin-bottom:3px; }
+    .section { padding:108px 0; scroll-margin-top:30px; }
+    .section-head { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:end; margin-bottom:50px; }
+    .label { color:var(--blue); font-size:11px; text-transform:uppercase; letter-spacing:.14em; font-weight:700; margin-bottom:18px; }
+    h2 { font-family:var(--serif); font-weight:400; font-size:clamp(44px,5vw,66px); line-height:1.02; letter-spacing:-.025em; }
+    .section-intro { font-size:15px; line-height:1.8; color:var(--muted); max-width:480px; justify-self:end; }
+    .project-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .project { background:var(--white); border:1px solid var(--line); display:flex; flex-direction:column; min-width:0; }
+    .project-visual { height:168px; position:relative; overflow:hidden; padding:24px; display:flex; align-items:end; justify-content:space-between; }
+    .visual-blue { background:#dfe6fa; color:#284fb5; }
+    .visual-green { background:#dce9de; color:#496c51; }
+    .visual-sand { background:#eee4d5; color:#8d6544; }
+    .visual-lavender { background:#eae4f4; color:#745b94; }
+    .visual-charcoal { background:#e4e8e7; color:#42615e; }
+    .visual-rose { background:#f3e0db; color:#a36259; }
+    .visual-symbol { font-family:var(--serif); font-size:78px; line-height:.7; letter-spacing:-.06em; opacity:.8; }
+    .visual-category { font-size:10px; letter-spacing:.13em; text-transform:uppercase; font-weight:700; align-self:start; }
+    .project-body { padding:26px 28px 28px; display:flex; flex-direction:column; align-items:start; flex:1; }
+    .project-meta { color:#7b8589; text-transform:uppercase; font-size:10px; letter-spacing:.12em; font-weight:700; margin-bottom:12px; }
+    h3 { font-size:20px; line-height:1.3; letter-spacing:-.035em; font-weight:700; }
+    .project p { color:var(--muted); font-size:13.5px; line-height:1.75; margin-top:10px; }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:20px; }
+    .tag { background:#f0f1ed; padding:6px 9px; font-size:10px; font-weight:600; color:#59636a; }
+    .project-link { margin-top:23px; padding-top:15px; text-decoration:none; color:var(--blue); font-weight:700; font-size:12px; }
+    .project-link:hover { text-decoration:underline; }
+    .experience { background:#eceee9; border-top:1px solid #e2e5df; border-bottom:1px solid #e2e5df; }
+    .experience .section-head { margin-bottom:28px; }
+    .experience-row { display:grid; grid-template-columns:190px 1fr; gap:35px; padding:30px 0; border-top:1px solid #cfd6d0; }
+    .exp-date { color:#6f7a78; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding-top:5px; }
+    .exp-title { font-size:18px; line-height:1.3; }
+    .exp-company { color:#516764; font-size:13px; font-weight:600; margin-top:6px; }
+    .exp-desc { color:#5f6b68; font-size:14px; line-height:1.8; margin-top:14px; max-width:720px; }
+    .exp-points { color:#5f6b68; font-size:13.5px; line-height:1.75; margin:14px 0 0; padding-left:18px; max-width:790px; }
+    .exp-points li + li { margin-top:8px; }
+    .about-grid { display:grid; grid-template-columns:1fr 1.1fr; gap:100px; }
+    .about-copy p { color:#55616a; font-size:16px; line-height:1.9; margin-bottom:18px; }
+    .education { margin-top:32px; padding-top:24px; border-top:1px solid var(--line); }
+    .edu-row { display:grid; grid-template-columns:1fr auto; gap:20px; padding:12px 0; font-size:13px; }
+    .edu-row strong { display:block; margin-bottom:4px; }
+    .edu-row span { color:var(--muted); font-size:12px; line-height:1.5; }
+    .skills { padding:34px; background:#e6ebfa; border:1px solid #d6ddf1; align-self:start; }
+    .skills h3 { font-family:var(--serif); font-size:30px; font-weight:400; margin-bottom:12px; }
+    .skill-row { padding:17px 0; border-top:1px solid #cdd6ed; }
+    .skill-row strong { display:block; color:#4b62a6; text-transform:uppercase; letter-spacing:.1em; font-size:10px; margin-bottom:8px; }
+    .skill-row span { display:block; font-size:13px; line-height:1.8; color:#435168; }
+    .cert-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 36px; }
+    .cert { border-top:1px solid var(--line); padding:22px 0; }
+    .cert h3 { font-size:16px; letter-spacing:-.01em; }
+    .cert p { color:var(--muted); margin-top:7px; font-size:13px; line-height:1.5; }
+    .cert a { display:inline-block; margin-top:10px; color:var(--blue); font-size:12px; font-weight:600; text-decoration:none; }
+    .cert a:hover { text-decoration:underline; }
+    .contact { background:#1c2930; color:white; padding:85px 0; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; }
+    .contact .label { color:#a9bfff; }
+    .contact h2 { max-width:570px; font-size:clamp(47px,5.3vw,70px); }
+    .contact p { font-size:14px; color:#b5c1c1; line-height:1.8; max-width:400px; }
+    .contact-links { display:flex; gap:24px; flex-wrap:wrap; margin-top:26px; }
+    .contact-links a { color:white; font-size:13px; text-decoration:none; padding-bottom:4px; border-bottom:1px solid #849598; }
+    .contact-links a:hover { border-color:white; }
+    footer { background:#172228; color:#a5b4b4; font-size:11px; padding:24px 0; }
+    footer .wrap { display:flex; justify-content:space-between; gap:15px; }
+    @media (max-width:1000px) {
+      .wrap { width:min(100% - 40px, 650px); }
+      .nav { height:70px; position:relative; }
+      .menu-toggle { display:block; }
+      .nav-links { display:none; position:absolute; z-index:5; top:61px; left:0; right:0; background:var(--white); border:1px solid var(--line); padding:18px; align-items:stretch; flex-direction:column; gap:0; }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:12px; }
+      .nav-contact { margin-top:5px; text-align:center; }
+      .hero { grid-template-columns:1fr; gap:40px; padding:70px 0 70px; min-height:0; }
+      .hero-aside { min-height:320px; padding:28px; }
+      .aside-title { margin-bottom:26px; }
+      .intro-strip .wrap { grid-template-columns:1fr 1fr; gap:22px; padding:24px 0; }
+      .strip-name { grid-column:1/-1; }
+      .section { padding:75px 0; }
+      .section-head { grid-template-columns:1fr; gap:15px; margin-bottom:32px; }
+      .section-intro { justify-self:start; }
+      .about-grid { grid-template-columns:1fr; gap:35px; }
+      .contact-grid { grid-template-columns:1fr; gap:28px; }
+    }
+    @media (max-width:560px) {
+      .project-grid { grid-template-columns:1fr; }
+      .cert-grid { grid-template-columns:1fr; }
+      .project-visual { height:140px; }
+      .experience-row { grid-template-columns:1fr; gap:10px; }
+      .exp-desc { margin-top:10px; }
+      .intro-strip .wrap { grid-template-columns:1fr; }
+      .strip-name { grid-column:auto; }
+      .hero-sub { font-size:16px; }
+      .edu-row { grid-template-columns:1fr; gap:3px; }
+      footer .wrap { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .btn { transition:none; } }
+    /* A quiet dark palette keeps attention on the work. */
+    :root { --ink:#f1f3ff; --muted:#adbbcf; --paper:#0c1220; --white:#131e30; --line:#2c3b52; --blue:#a79aff; --blue-light:#293364; }
+    body { background:var(--paper); }
+    header { background:#0c1220; }
+    .mark { background:#a79aff; color:#10172a; }
+    .nav-links a { color:#c2cbe0; }
+    .nav-contact { background:#a79aff; color:#10172a!important; }
+    .eyebrow { color:#b7acd9; }
+    .eyebrow:before { background:#9d8bff; }
+    .hero-sub { color:#afbbd0; }
+    .hero-sub strong { color:#f1f3ff; }
+    .btn { border-color:#a4aed0; }
+    .btn-primary { background:#a695ff; color:#101426; border-color:#a695ff; }
+    .btn-secondary { color:#e9ecf8; }
+    .hero-bottom { color:#a4b2c6; }
+    .hero-aside { background:radial-gradient(circle at 92% 5%,#493c89 0,transparent 55%),linear-gradient(140deg,#202b55,#121d39); border-color:#3b4774; }
+    .hero-aside.portrait { padding:0; min-height:0; aspect-ratio:4 / 4.3; border-radius:8px; }
+    .hero-aside.portrait:before { display:none; }
+    .portrait img { width:100%; height:100%; position:absolute; inset:0; object-fit:cover; object-position:center 32%; }
+    .hero-aside:before { border-color:rgba(190,175,255,.18); box-shadow:0 0 0 52px rgba(164,147,255,.035),0 0 0 104px rgba(164,147,255,.025); }
+    .aside-kicker { color:#bfb0ff; }
+    .flow { background:#3c4a6b; border-color:#3c4a6b; }
+    .flow-row { background:#1b2842; color:#e6eafa; }
+    .flow-row span:last-child { color:#b0bfd6; }
+    .intro-strip { background:#171f34; }
+    .strip-label { color:#b5bfd2; }
+    .project { background:#131e30; border-color:#2c3b52; }
+    .visual-blue { background:linear-gradient(135deg,#26375b,#3c3e80); color:#c9c6ff; }
+    .visual-green { background:linear-gradient(135deg,#183f46,#235967); color:#ade1db; }
+    .visual-sand { background:linear-gradient(135deg,#523e4d,#604659); color:#f0d7c8; }
+    .visual-lavender { background:linear-gradient(135deg,#333253,#514275); color:#e3d2ff; }
+    .visual-charcoal { background:linear-gradient(135deg,#1e424d,#31515c); color:#b5e2dc; }
+    .visual-rose { background:linear-gradient(135deg,#4f334a,#683e57); color:#ffd6db; }
+    .project-meta { color:#adbbd0; }
+    .tag { background:#223048; color:#c1cee2; }
+    .experience { background:#111b2b; border-color:#29364d; }
+    .experience-row { border-color:#324057; }
+    .exp-date { color:#aab8cc; }
+    .exp-company { color:#b6abfb; }
+    .exp-desc { color:#afbbcb; }
+    .exp-points { color:#afbbcb; }
+    .about-copy p { color:#b8c4d6; }
+    .skills { background:linear-gradient(145deg,#202848,#17233c); border-color:#354263; }
+    .skill-row { border-color:#3b4967; }
+    .skill-row strong { color:#b8abff; }
+    .skill-row span { color:#c7d1e2; }
+    .contact { background:linear-gradient(120deg,#27234d,#1a2541); }
+    footer { background:#0b111d; }
+    @media (max-width:800px) { .nav-links { background:#172238; } }
+  </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
-
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nav-logo">BR</a>
-  <ul class="nav-links">
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#huggingface">HuggingFace</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-content">
-    <div class="hero-left">
-      <div class="hero-chip">UIUC MSIM '26 · Open to full-time roles</div>
-      <h1 class="hero-name">Bhoomika<br><span>Ravishankar</span></h1>
-      <div class="hero-exp" style="display:flex;flex-wrap:wrap;gap:0.5rem 1.25rem;margin:0.75rem 0 1.1rem;font-size:0.92rem;color:#a9b6c9;">
-        <span style="font-weight:bold;"><strong style="color:var(--mint);"> </strong> Data @ Synchrony Financial</span>
-        <span style="font-weight:bold;"><strong style="color:var(--mint);"> </strong> Research Assistant @ UIUC</span>
-        <span style="font-weight:bold;"><strong style="color:var(--mint);"> </strong> Senior Technical Consultant @ BIG, UIUC</span>
-        <span style="font-weight:bold;"><strong style="color:var(--mint);"> </strong> Tech Entrepreneur Advisor @ TEC, UIUC</span>
+  <header class="wrap">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true">b.</span> Bhoomika Ravishankar</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-links">Menu</button>
+      <div class="nav-links" id="main-links">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#work">Projects</a>
+        <a href="#honors">Honors</a>
+        <a href="#certifications">Certifications</a>
+        <a class="nav-contact" href="#contact">Contact ↗</a>
       </div>
-      <p class="hero-sub">Hi, I’m a Data & AI professional with 2 YOE who builds scalable data pipelines, cloud-based ETL workflows, and reliable data systems for fintech, healthcare & manufacturing domains. I have experience with Python, SQL, PySpark, AWS, RAG systems, Apache Kafka, Airflow, and Agentic AI to build something reliable.</p>
-      <div class="cta-row">
-        <a href="#projects" class="btn btn-ghost">View Projects</a>
-        <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-        <a href="https://github.com/itsbhoomika" target="_blank" class="btn btn-ghost">Github ↗</a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-photo">
-        <img src="myphoto.jpg" alt="Bhoomika Ravishankar">
-      </div>
-    </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-n" style="color:var(--cyan)">4.0</span><span class="stat-l">MS GPA · UIUC</span></div>
-    <div class="stat"><span class="stat-n" style="color:var(--purple)">$7.49B</span><span class="stat-l">Loss portfolio modeled</span></div>
-    <div class="stat"><span class="stat-n" style="color:var(--mint)">87%</span><span class="stat-l">F1 · Clinical NLP</span></div>
-    <div class="stat"><span class="stat-n" style="color:var(--pink)">14K+</span><span class="stat-l">Accounts forecasted</span></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<style>
-/* ── ABOUT SECTION REDESIGN ── */
-#about {
-  padding: 5rem 0;
-}
-
-.about-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.about-contact-links {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.about-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 100px;
-  color: #7c8ca8;
-  font-size: 0.82rem;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.about-link:hover {
-  background: rgba(0,212,255,0.08);
-  border-color: rgba(0,212,255,0.3);
-  color: #00d4ff;
-  transform: translateY(-2px);
-}
-.about-bio-card {
-  background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(167,139,250,0.05) 50%, rgba(244,114,182,0.03) 100%);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 2rem 2.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.about-bio-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #00d4ff, #a78bfa, #f472b6);
-}
-
-.about-bio {
-  font-size: 1.1rem;
-  color: #e2e8f0;
-  line-height: 1.9;
-  margin: 0;
-}
-
-.about-bio strong {
-  color: #00d4ff;
-  font-weight: 600;
-}
-
-.about-bio .highlight-purple {
-  color: #a78bfa;
-  font-weight: 600;
-}
-/* Education Grid */
-.edu-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.2rem;
-}
-
-.edu-card {
-  background: rgba(15,17,32,0.8);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 16px;
-  padding: 1.5rem 1.8rem;
-  position: relative;
-  transition: all 0.25s;
-  overflow: hidden;
-}
-
-.edu-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255,255,255,0.12);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-}
-
-/* Horizontal gradient bar at TOP */
-.edu-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  width: 100%;
-}
-
-.edu-card.uiuc::before {
-  background: linear-gradient(90deg, #00d4ff, rgba(0,212,255,0.3));
-}
-
-.edu-card.pune::before {
-  background: linear-gradient(90deg, #00d4ff, rgba(0,212,255,0.3));
-}
-
-.edu-icon {
-  width: 100%;
-  height: 150px;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-  position: relative;
-  background: #0a0c18;
-}
-
-.edu-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.edu-icon::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 50%, rgba(8,9,16,0.45) 100%);
-  pointer-events: none;
-}
-.edu-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.5rem;
-}
-
-.edu-deg {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 0.2rem;
-}
-
-.edu-conc {
-  font-size: 0.85rem;
-  color: #7c8ca8;
-}
-
-.edu-gpa {
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 0.3rem 0.75rem;
-  border-radius: 100px;
-  white-space: nowrap;
-}
-
-.edu-card.uiuc .edu-gpa {
-  background: rgba(0,212,255,0.1);
-  border: 1px solid rgba(0,212,255,0.25);
-  color: #00d4ff;
-}
-
-.edu-card.pune .edu-gpa {
-  background: rgba(0,212,255,0.1);
-  border: 1px solid rgba(0,212,255,0.25);
-  color: #00d4ff;
-}
-
-.edu-school {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #a78bfa;
-  margin-top: 0.75rem;
-}
-
-.edu-school svg {
-  width: 16px;
-  height: 16px;
-  opacity: 0.7;
-}
-
-.edu-year {
-  font-size: 0.82rem;
-  color: #7c8ca8;
-  margin-top: 0.3rem;
-}
-@media (max-width: 700px) {
-  .edu-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
-
-<!-- EXPERIENCE -->
-<style>
-/* ── EXPERIENCE V2 (Strider-style cards) ── */
-#experience .exp-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.exp-card-v2 {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 1.4rem;
-  padding: 1.3rem 1.5rem;
-  background: rgba(15, 17, 32, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 14px;
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-.exp-card-v2:hover {
-  border-color: rgba(255, 255, 255, 0.14);
-  transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
-}
-.exp-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 0.75rem;
-}
-.exp-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.exp-image.synchrony-cr,
-.exp-image.synchrony-ops {
-  background: linear-gradient(135deg, #f6f8fc 0%, #e5ebf5 100%);
-}
-.exp-image.uiuc,
-.exp-image.big {
-  background: linear-gradient(135deg, #ffffff 0%, #fff0e7 100%);
-}
-.exp-image.repute {
-  background: linear-gradient(135deg, #f6f8fc 0%, #e5ebf5 100%);
-}
-.exp-image.tec {
-  background: #13294B;
-}
-
-.exp-content { display: flex; flex-direction: column; min-width: 0; }
-.exp-content h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin: 0 0 0.25rem;
-  line-height: 1.3;
-}
-.exp-company {
-  display: inline-block;
-  color: var(--cyan);
-  font-family: 'JetBrains Mono', 'Menlo', 'SF Mono', monospace;
-  font-size: 0.8rem;
-  text-decoration: none;
-  margin-bottom: 0.3rem;
-  transition: color 0.15s;
-}
-.exp-company:hover { color: #5beaff; text-decoration: underline; }
-.exp-meta {
-  color: var(--muted);
-  font-family: 'JetBrains Mono', 'Menlo', monospace;
-  font-size: 0.72rem;
-  margin-bottom: 0.7rem;
-}
-.exp-meta-sep { margin: 0 0.5rem; opacity: 0.5; }
-.exp-desc {
-  color: #cbd5e1;
-  font-size: 0.86rem;
-  line-height: 1.55;
-  margin: 0 0 0.85rem;
-}
-.exp-desc strong {
-  color: #e2e8f0;
-  font-weight: 700;
-}
-.exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.exp-tags .tag-v2 {
-  font-family: 'JetBrains Mono', 'Menlo', monospace;
-  font-size: 0.68rem;
-  padding: 0.3rem 0.6rem;
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.32);
-  color: #00d4ff;
-  border-radius: 6px;
-  white-space: nowrap;
-}
-
-@media (max-width: 760px) {
-  .exp-card-v2 { grid-template-columns: 1fr; gap: 1rem; padding: 1.25rem; }
-  .exp-image { width: 100%; height: 130px; max-width: 100%; }
-}
-</style>
-
-<!-- PROJECTS -->
-<div class="wrap section" id="projects">
-  <div class="sec-label">Projects</div>
-  <h2 class="sec-title">Things I've Built</h2>
-  <div class="projects-grid">
-
-    <!-- Agentic Pipeline Optimizer -->
-    <div class="proj-card" onclick="openModal('agentic')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rgAG" cx="50%" cy="45%" r="60%">
-              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="fAG"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glowAG">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <marker id="arrAG" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
-            </marker>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgAG)" filter="url(#fAG)"/>
-          <!-- Airflow metadata -->
-          <rect x="16" y="34" width="98" height="30" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.2"/>
-          <text x="65" y="53" text-anchor="middle" font-size="9.5" font-weight="700" fill="#34d399" font-family="system-ui">Airflow DAGs</text>
-          <!-- dbt / BigQuery -->
-          <rect x="16" y="80" width="98" height="30" rx="7" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.3)" stroke-width="1.2"/>
-          <text x="65" y="99" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fbbf24" font-family="system-ui">dbt + BigQuery</text>
-          <!-- ChromaDB memory -->
-          <rect x="16" y="126" width="98" height="30" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.2"/>
-          <text x="65" y="145" text-anchor="middle" font-size="9.5" font-weight="700" fill="#f472b6" font-family="system-ui">ChromaDB memory</text>
-          <!-- arrows into orchestrator -->
-          <path d="M114 49 L160 90" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrAG)"/>
-          <path d="M114 95 L160 97" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrAG)"/>
-          <path d="M114 141 L160 104" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrAG)"/>
-          <!-- Orchestrator hub -->
-          <rect x="160" y="72" width="100" height="52" rx="10" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.45)" stroke-width="2" filter="url(#glowAG)"/>
-          <text x="210" y="93" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">Orchestrator</text>
-          <text x="210" y="108" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">LangChain agent</text>
-          <!-- to monitoring -->
-          <path d="M260 84 L300 60" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrAG)"/>
-          <rect x="300" y="34" width="110" height="34" rx="8" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.35)" stroke-width="1.5"/>
-          <text x="355" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Monitoring Agent</text>
-          <text x="355" y="63" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">latency bottlenecks</text>
-          <!-- to repair -->
-          <path d="M260 110 L300 138" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#arrAG)"/>
-          <rect x="300" y="122" width="110" height="34" rx="8" fill="rgba(244,114,182,0.09)" stroke="rgba(244,114,182,0.35)" stroke-width="1.5"/>
-          <text x="355" y="140" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">Repair Agent</text>
-          <text x="355" y="151" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">retrieves past fixes</text>
-          <!-- bottom badge -->
-          <rect x="150" y="166" width="130" height="24" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-          <text x="215" y="182" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">3-agent system</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Python · LangChain · Airflow · BigQuery · dbt · ChromaDB</div>
-        <div class="proj-title">Agentic Pipeline Optimizer</div>
-        <div class="proj-desc">Cut repeated failure resolution time across simulated pipeline runs with a 3-agent LangChain system (orchestrator, monitoring, repair) that identifies DAG task latency bottlenecks across Airflow pipeline configurations, cross-referencing dbt SQL models against BigQuery TPC-H benchmark data and retrieving similar past failures from a ChromaDB vector memory layer.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">3</span><span class="pnum-l">LangChain agents</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">DAG</span><span class="pnum-l">latency bottlenecks</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">Chroma</span><span class="pnum-l">failure memory</span></div>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="wrap hero" aria-labelledby="hero-title">
+      <div>
+        <div class="eyebrow">Applied AI · Machine Learning · Data Science</div>
+        <h1 id="hero-title">Hi, I'm<br><em>Bhoomika.</em></h1>
+        <p class="hero-focus">Forward Deployed Engineer · Data Scientist · Machine Learning Engineer</p>
+        <ul class="hero-credentials">
+          <li>MSc in Information Management @ The University of Illinois, Urbana-Champaign</li>
+          <li>Applied AI @ UIUC, Prev - Synchrony Financial, Repute</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-primary" href="#work">Explore my work <span aria-hidden="true">↘</span></a>
+          <a class="btn btn-secondary" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="proj-more">View details →</div>
+        <div class="hero-bottom"><a href="https://www.linkedin.com/in/bhoomikaravishankar/">LinkedIn ↗</a><a href="https://github.com/itsbhoomika">GitHub ↗</a></div>
+      </div>
+      <div class="hero-aside portrait"><img src="portrait.jpg" alt="Bhoomika Ravishankar at the University of Illinois"></div>
+    </section>
+
+    <div class="intro-strip" aria-label="Selected impact">
+      <div class="wrap">
+        <div class="strip-name">From complex data to decisions people can use.</div>
+        <div class="strip-label"><strong>900M rows</strong>Credit-model analysis across two portfolios</div>
+        <div class="strip-label"><strong>100M+ rows</strong>Customer analytics, modeling, and insight delivery</div>
       </div>
     </div>
 
-    <!-- Real-Time Data Quality & Monitoring Pipeline -->
-    <div class="proj-card" onclick="openModal('dataquality')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rgDQ" cx="45%" cy="50%" r="60%">
-              <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="fDQ"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glowDQ">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <marker id="arrDQ" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
-            </marker>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgDQ)" filter="url(#fDQ)"/>
-          <!-- Kafka -->
-          <rect x="16" y="80" width="86" height="40" rx="8" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.35)" stroke-width="1.5"/>
-          <text x="59" y="98" text-anchor="middle" font-size="10.5" font-weight="700" fill="#00d4ff" font-family="system-ui">Kafka</text>
-          <text x="59" y="111" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">streaming events</text>
-          <path d="M102 100 L138 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrDQ)"/>
-          <!-- Snowflake -->
-          <rect x="138" y="76" width="90" height="48" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.8" filter="url(#glowDQ)"/>
-          <text x="183" y="98" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">Snowflake</text>
-          <text x="183" y="111" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">low-latency ingest</text>
-          <path d="M228 100 L264 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrDQ)"/>
-          <!-- dbt tests -->
-          <rect x="264" y="76" width="80" height="48" rx="8" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
-          <text x="304" y="96" text-anchor="middle" font-size="10.5" font-weight="700" fill="#fbbf24" font-family="system-ui">dbt tests</text>
-          <text x="304" y="109" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">schema checks</text>
-          <path d="M344 100 L380 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrDQ)"/>
-          <!-- alert badge -->
-          <rect x="356" y="34" width="66" height="30" rx="7" fill="rgba(244,114,182,0.09)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-          <text x="389" y="53" text-anchor="middle" font-size="9.5" font-weight="700" fill="#f472b6" font-family="system-ui">Alerts</text>
-          <path d="M389 76 L389 64" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-          <!-- Streamlit dashboard -->
-          <rect x="356" y="130" width="66" height="30" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.28)" stroke-width="1.5"/>
-          <text x="389" y="149" text-anchor="middle" font-size="9" font-weight="700" fill="#00d4ff" font-family="system-ui">Streamlit</text>
-          <path d="M389 124 L389 130" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-          <!-- bottom badge -->
-          <rect x="16" y="152" width="150" height="26" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-          <text x="91" y="169" text-anchor="middle" font-size="9.5" font-weight="700" fill="#34d399" font-family="system-ui">Real-time monitoring</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Apache Kafka · Snowflake · dbt · Streamlit</div>
-        <div class="proj-title">Real-Time Data Quality &amp; Monitoring Pipeline</div>
-        <div class="proj-desc">Reduced data-quality incidents through real-time alerting by building a Kafka-Snowflake streaming pipeline with low-latency ingestion, dbt schema tests, and Streamlit monitoring dashboards.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">Kafka</span><span class="pnum-l">streaming ingest</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">dbt</span><span class="pnum-l">schema tests</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">Streamlit</span><span class="pnum-l">live alerting</span></div>
+    <section class="section wrap" id="about">
+      <div class="about-grid">
+        <div class="about-copy">
+          <div class="label">About me</div>
+          <h2>Curious about<br><em>what's possible.</em></h2>
+          <p style="margin-top:28px">I'm a data scientist and applied AI builder who turns complex, large-scale data into useful and trustworthy systems. My work spans financial modeling at Synchrony, clinical-data research at UIUC, and RAG and language-model applications.</p>
+          <p>I enjoy solving real-world problems with practical AI solutions, combining strong analysis, thoughtful system design, and close collaboration with the people who use them.</p>
+          <div class="education" id="education">
+            <div class="label">Education</div>
+            <div class="edu-row"><div><strong>University of Illinois Urbana-Champaign</strong><span>MS, Information Management · NLP, statistical modeling, databases, text mining</span></div><span>2026 · GPA 4.0</span></div>
+            <div class="edu-row"><div><strong>Savitribai Phule Pune University</strong><span>BE, Computer Engineering</span></div><span>GPA 9.12/10 · Graduated with distinction</span></div>
+          </div>
         </div>
-        <div class="proj-more">View details →</div>
-      </div>
-    </div>
-
-    <!-- Macroeconomic Trend Analysis & Visualization Dashboard -->
-    <div class="proj-card" onclick="openModal('macro')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rgMC" cx="55%" cy="55%" r="60%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="fMC"><feGaussianBlur stdDeviation="14"/></filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgMC)" filter="url(#fMC)"/>
-          <!-- axis -->
-          <line x1="34" y1="150" x2="410" y2="150" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <line x1="34" y1="150" x2="34" y2="40" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-          <text x="30" y="163" font-size="8" fill="#7c8ca8" font-family="monospace">2000</text>
-          <text x="380" y="163" font-size="8" fill="#7c8ca8" font-family="monospace">2020</text>
-          <!-- trend line with 2008 dip -->
-          <path d="M34 110 L120 100 L180 96 L210 140 L245 128 L300 78 L360 66 L410 58" fill="none" stroke="#a78bfa" stroke-width="2.2"/>
-          <circle cx="210" cy="140" r="4" fill="#f472b6"/>
-          <text x="210" y="128" text-anchor="middle" font-size="7.5" fill="#f472b6" font-family="monospace">2008</text>
-          <!-- World Bank API box -->
-          <rect x="16" y="18" width="118" height="26" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.3"/>
-          <text x="75" y="35" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">World Bank API</text>
-          <!-- indicator badges -->
-          <rect x="290" y="18" width="60" height="24" rx="6" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)"/>
-          <text x="320" y="34" text-anchor="middle" font-size="9" font-weight="700" fill="#34d399" font-family="system-ui">6 indic.</text>
-          <rect x="356" y="18" width="66" height="24" rx="6" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.25)"/>
-          <text x="389" y="34" text-anchor="middle" font-size="9" font-weight="700" fill="#fbbf24" font-family="system-ui">20+ ctry</text>
-          <!-- bottom badge -->
-          <rect x="16" y="166" width="140" height="24" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)"/>
-          <text x="86" y="182" text-anchor="middle" font-size="9" font-weight="700" fill="#a78bfa" font-family="system-ui">Pandas + Streamlit</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">HuggingFace · Streamlit · World Bank API · Pandas</div>
-        <div class="proj-title">Macroeconomic Trend Analysis &amp; Visualization Dashboard</div>
-        <div class="proj-desc">Delivered a self-service analytics dashboard visualizing the 2008 crisis by querying the World Bank API for 6 macroeconomic indicators across 20+ countries (2000-2020) and transforming JSON into analysis-ready Pandas DataFrames.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">6</span><span class="pnum-l">macro indicators</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">20+</span><span class="pnum-l">countries</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">2000-20</span><span class="pnum-l">year range</span></div>
+        <div class="skills" id="skills">
+          <div class="label">Toolkit</div>
+          <h3>What I work with</h3>
+          <div class="skill-row"><strong>Languages &amp; data</strong><span>Python · SQL · R · SAS · PySpark · Pandas</span></div>
+          <div class="skill-row"><strong>Machine learning</strong><span>scikit-learn · XGBoost · Feature engineering · Model validation · SHAP</span></div>
+          <div class="skill-row"><strong>Generative AI &amp; NLP</strong><span>PyTorch · LangChain · RAG · LLM fine-tuning · Embeddings · FinBERT</span></div>
+          <div class="skill-row"><strong>Platforms &amp; tools</strong><span>AWS · Snowflake · BigQuery · Airflow · dbt · Docker · Streamlit</span></div>
         </div>
-        <div class="proj-more">View details →</div>
       </div>
-    </div>
+    </section>
 
-    <!-- Intelligent Legal Document Q&A System -->
-    <div class="proj-card" onclick="openModal('legalqa')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rgLG" cx="50%" cy="50%" r="60%">
-              <stop offset="0%" stop-color="#f472b6" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="fLG"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glowLG">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <marker id="arrLG" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
-            </marker>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rgLG)" filter="url(#fLG)"/>
-          <!-- legal docs -->
-          <rect x="16" y="70" width="80" height="60" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.3"/>
-          <text x="56" y="94" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">Legal</text>
-          <text x="56" y="107" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">Documents</text>
-          <path d="M96 100 L132 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrLG)"/>
-          <!-- ChromaDB -->
-          <rect x="132" y="76" width="94" height="48" rx="8" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.35)" stroke-width="1.5"/>
-          <text x="179" y="97" text-anchor="middle" font-size="10.5" font-weight="700" fill="#34d399" font-family="system-ui">ChromaDB</text>
-          <text x="179" y="110" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">vector search</text>
-          <path d="M226 100 L262 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrLG)"/>
-          <!-- PaLM API -->
-          <rect x="262" y="72" width="96" height="56" rx="9" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.4)" stroke-width="1.8" filter="url(#glowLG)"/>
-          <text x="310" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#f472b6" font-family="system-ui">PaLM API</text>
-          <text x="310" y="109" text-anchor="middle" font-size="7.5" fill="#7c8ca8" font-family="monospace">RAG answer</text>
-          <path d="M358 100 L392 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrLG)"/>
-          <text x="399" y="104" text-anchor="middle" font-size="14" fill="#f472b6">✓</text>
-          <!-- metric badges -->
-          <rect x="16" y="20" width="70" height="26" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-          <text x="51" y="37" text-anchor="middle" font-size="10" font-weight="800" fill="#00d4ff" font-family="system-ui">1K users</text>
-          <rect x="94" y="20" width="82" height="26" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-          <text x="135" y="37" text-anchor="middle" font-size="10" font-weight="800" fill="#34d399" font-family="system-ui">&lt;1s response</text>
-          <rect x="184" y="20" width="88" height="26" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.2)"/>
-          <text x="228" y="37" text-anchor="middle" font-size="10" font-weight="800" fill="#f472b6" font-family="system-ui">+25% accuracy</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">GenAI · RAG · Google PaLM API · ChromaDB</div>
-        <div class="proj-title">Intelligent Legal Document Q&amp;A System</div>
-        <div class="proj-desc">Built a GenAI-powered document Q&amp;A system using RAG and ChromaDB vector search; served 1K users with sub-second responses and boosted retrieval accuracy by 25%, reducing time spent on legal research.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">1K</span><span class="pnum-l">users served</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">&lt;1s</span><span class="pnum-l">response time</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+25%</span><span class="pnum-l">retrieval accuracy</span></div>
+    <section class="section experience" id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="label">Experience</div><h2>Work that<br><em>makes a difference.</em></h2></div>
+          <p class="section-intro">From financial services and academic research to consulting, my work has centered on making data and models useful to the people who rely on them.</p>
         </div>
-        <div class="proj-more">View details →</div>
+        <div class="experience-row"><div class="exp-date">Jan 2025 — Present</div><div><h3 class="exp-title">Research Data Scientist</h3><div class="exp-company">Prof. Ruoqing Zhu Lab · UIUC Department of Statistics</div><p class="exp-desc">Build reproducible data and ML infrastructure for research spanning clinical data, language models, and microbiota analysis.</p><ul class="exp-points"><li>Developed configurable Python and Bash pipelines on a high-performance computing cluster to harmonize fragmented clinical sources, including ClinicalTrials.gov data.</li><li>Created reusable workflows for schema mapping, normalization, quality checks, and feature preparation so researchers can analyze inconsistent sources at scale.</li></ul></div></div>
+        <div class="experience-row"><div class="exp-date">May 2025 — May 2026</div><div><h3 class="exp-title">Data Science Intern</h3><div class="exp-company">Synchrony Financial</div><p class="exp-desc">Worked across customer analytics and credit-model development, turning large, imperfect financial datasets into interpretable modeling insights.</p><ul class="exp-points"><li>Rebuilt a customer-satisfaction workflow over 100M+ rows: resolved upstream data issues, transformed warehouse data, and modeled Net Promoter Score using XGBoost, causal inference, Lasso regression, and SHAP.</li><li>Identified five survey and experience factors associated with NPS—including application and survey completion time—and presented the findings to leadership.</li><li>Studied an existing complex credit model, engineered 13+ macroeconomic and risk features, and analyzed how model behavior changed across two retail portfolios using PySpark and AWS on 900M rows.</li><li>Supported model iteration, validation, and backtesting, helping reduce the validation cycle by 25%.</li></ul></div></div>
+        <div class="experience-row"><div class="exp-date">Jan 2025 — May 2025</div><div><h3 class="exp-title">Lead Data Consultant</h3><div class="exp-company">UIUC Business Intelligence Group</div><p class="exp-desc">Led a client-facing team in turning contract documents into a searchable decision-support product.</p><ul class="exp-points"><li>Designed a RAG assistant spanning document ingestion, chunking, intent classification, grounded retrieval, and a Streamlit interface.</li><li>Translated stakeholder questions into product requirements and evaluation criteria, reducing manual reporting effort by 20%.</li></ul></div></div>
+        <div class="experience-row"><div class="exp-date">Feb 2023 — Apr 2023</div><div><h3 class="exp-title">Data Analytics Intern</h3><div class="exp-company">Repute Engineers</div><p class="exp-desc">Connected operational data to business decisions across a portfolio of 500+ engineering projects.</p><ul class="exp-points"><li>Built reporting workflows across ERP, finance, and production systems and automated 50+ KPIs with SQL Server and Power BI.</li><li>Analyzed cost and delivery patterns and presented findings to leadership to support project planning and operational visibility.</li></ul></div></div>
       </div>
-    </div>
+    </section>
 
-    <!-- 3. LSTM Datathon -->
-    <div class="proj-card" onclick="window.location.href='synchrony-case-study.html'">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg3" cx="50%" cy="60%" r="60%">
-              <stop offset="0%" stop-color="#34d399" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f3"><feGaussianBlur stdDeviation="15"/></filter>
-            <filter id="glow3">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="120" rx="180" ry="100" fill="url(#rg3)" filter="url(#f3)"/>
-          <!-- faint axis line -->
-          <line x1="30" y1="130" x2="410" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-          <!-- historical wave (past data, muted) -->
-          <path d="M30,110 C60,80 80,130 110,105 C140,80 160,125 190,100 C220,75 240,120 270,95" fill="none" stroke="rgba(52,211,153,0.3)" stroke-width="2" stroke-linecap="round"/>
-          <!-- prediction wave (future, glowing) -->
-          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow3)"/>
-          <path d="M270,95 C300,70 320,108 350,82 C375,62 395,75 420,58" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="8" stroke-linecap="round"/>
-          <!-- divider dashed line at cut-off point -->
-          <line x1="270" y1="45" x2="270" y2="170" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" stroke-dasharray="5 4"/>
-          <text x="280" y="60" font-size="10" fill="rgba(255,255,255,0.3)" font-family="system-ui">forecast →</text>
-          <!-- glow end dot -->
-          <circle cx="420" cy="58" r="5" fill="#34d399" filter="url(#glow3)"/>
-          <!-- badge -->
-          <rect x="20" y="148" width="100" height="30" rx="8" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-          <text x="70" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">14,099 accts</text>
-          <!-- dots -->
-          <circle cx="30" cy="42" r="2.5" fill="rgba(52,211,153,0.2)"/>
-          <circle cx="415" cy="165" r="2" fill="rgba(52,211,153,0.15)"/>
-        </svg>
+    <section class="section wrap" id="work">
+      <div class="section-head">
+        <div><div class="label">Selected projects</div><h2>Ideas made<br><em>useful.</em></h2></div>
+        <p class="section-intro">A selection of work across generative AI, language models, and data systems—built to make information easier to find, evaluate, and use.</p>
       </div>
-      <div class="proj-body">
-        <div class="proj-kind">LSTM · TensorFlow · Keras · Python</div>
-        <div class="proj-title">LSTM Spend-Forecasting Pipeline (14K Accounts)</div>
-        <div class="proj-desc">LSTM model forecasting quarterly spend for 14K+ Synchrony accounts at R² 0.76, using account-level normalization, seasonality, and recursive forecasting. 📄 Full case study included.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">14K+</span><span class="pnum-l">Accounts</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.76 R²</span><span class="pnum-l">Model accuracy</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">$147M</span><span class="pnum-l">Forecasted</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">Read full case study →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Datathon-UIUC-Synchrony" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+      <div class="project-grid">
+        <article class="project">
+          <div class="project-visual visual-blue"><span class="visual-category">LLM fine-tuning · Evaluation</span><span class="visual-symbol" aria-hidden="true">?</span></div>
+          <div class="project-body">
+            <div class="project-meta">Language models</div>
+            <h3>Ambiguity-Clarifying LLM</h3>
+            <p>Fine-tuned Qwen to generate context-aware clarification questions for ambiguous inputs, and built an LLM-as-a-judge evaluation workflow to surface failure modes.</p>
+            <div class="tags"><span class="tag">PyTorch</span><span class="tag">SFT &amp; DPO</span><span class="tag">Hugging Face</span><span class="tag">LLM evaluation</span></div>
+            <a class="project-link" href="https://github.com/itsbhoomika/Clarification-Seeking-LLMs-CS546">View repository ↗</a>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual visual-green"><span class="visual-category">Agents · Data systems</span><span class="visual-symbol" aria-hidden="true">↗</span></div>
+          <div class="project-body">
+            <div class="project-meta">Developer tooling</div>
+            <h3>Agentic Pipeline Optimizer</h3>
+            <p>A local three-agent system that investigates simulated pipeline failures. It uses Airflow metadata, dbt models, and a vector memory of prior incidents to identify task-latency bottlenecks.</p>
+            <div class="tags"><span class="tag">LangChain</span><span class="tag">Ollama</span><span class="tag">Airflow</span><span class="tag">BigQuery</span></div>
+            <a class="project-link" href="https://github.com/itsbhoomika/pipeline-optimizer">View repository ↗</a>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual visual-sand"><span class="visual-category">Generative AI · Retrieval</span><span class="visual-symbol" aria-hidden="true">Aa</span></div>
+          <div class="project-body">
+            <div class="project-meta">Document intelligence</div>
+            <h3>Intelligent Document Q&amp;A</h3>
+            <p>Designed an ingestion and retrieval workflow that combines document chunking, embeddings, and vector search to answer questions over documents. The project improved retrieval accuracy over keyword search.</p>
+            <div class="tags"><span class="tag">LangChain</span><span class="tag">RAG</span><span class="tag">MongoDB</span><span class="tag">Embeddings</span></div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual visual-lavender"><span class="visual-category">NLP · Predictive modeling</span><span class="visual-symbol" aria-hidden="true">∑</span></div>
+          <div class="project-body">
+            <div class="project-meta">Financial data</div>
+            <h3>Multi-Modal NLP for M&amp;A</h3>
+            <p>Combined news headlines and financial ratios in an end-to-end modeling pipeline. Applied entity extraction, text embeddings, class balancing, and XGBoost to support M&amp;A analysis.</p>
+            <div class="tags"><span class="tag">FinBERT</span><span class="tag">Word2Vec</span><span class="tag">XGBoost</span><span class="tag">NER</span></div>
+            <a class="project-link" href="https://github.com/itsbhoomika/AI-MA-Prediction-UIUC">View repository ↗</a>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual visual-charcoal"><span class="visual-category">Streaming · Data quality</span><span class="visual-symbol" aria-hidden="true">≈</span></div>
+          <div class="project-body">
+            <div class="project-meta">Data engineering</div>
+            <h3>Real-Time Data Quality Pipeline</h3>
+            <p>A prototype that streams synthetic order events into Snowflake, tests data quality with dbt, and presents live metrics and alerts in Streamlit.</p>
+            <div class="tags"><span class="tag">Redpanda</span><span class="tag">Snowflake</span><span class="tag">dbt</span><span class="tag">Streamlit</span></div>
+            <a class="project-link" href="https://github.com/itsbhoomika/rt-dq-pipeline">View repository ↗</a>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-visual visual-rose"><span class="visual-category">RAG · Product delivery</span><span class="visual-symbol" aria-hidden="true">§</span></div>
+          <div class="project-body">
+            <div class="project-meta">Client-facing analytics</div>
+            <h3>Contract Analysis Assistant</h3>
+            <p>Led development of a RAG chatbot that lets stakeholders query contract data in natural language. Built its ingestion, chunking, intent classification, and grounded retrieval workflow, alongside a Streamlit interface.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">RAG</span><span class="tag">Streamlit</span><span class="tag">Document analysis</span></div>
+          </div>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <!-- 2. M&A Prediction -->
-    <div class="proj-card" onclick="openModal('ma')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg2" cx="55%" cy="45%" r="55%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f2"><feGaussianBlur stdDeviation="16"/></filter>
-            <filter id="glow2">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="250" cy="95" rx="170" ry="115" fill="url(#rg2)" filter="url(#f2)"/>
-          <!-- two overlapping circles (merger metaphor) -->
-          <circle cx="175" cy="100" r="65" fill="rgba(167,139,250,0.06)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
-          <circle cx="245" cy="100" r="65" fill="rgba(244,114,182,0.06)" stroke="rgba(244,114,182,0.2)" stroke-width="1.5"/>
-          <!-- overlap intersection glow -->
-          <ellipse cx="210" cy="100" rx="32" ry="55" fill="rgba(167,139,250,0.08)" filter="url(#f2)"/>
-          <!-- rising chart line -->
-          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.7)" stroke-width="2.5" stroke-linecap="round" filter="url(#glow2)"/>
-          <polyline points="50,165 90,145 140,130 190,108 250,88 310,65 370,42" fill="none" stroke="rgba(167,139,250,0.25)" stroke-width="7" stroke-linecap="round"/>
-          <!-- endpoint glow dot -->
-          <circle cx="370" cy="42" r="5" fill="#a78bfa" filter="url(#glow2)"/>
-          <!-- 89% badge -->
-          <rect x="290" y="148" width="70" height="30" rx="8" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
-          <text x="325" y="167" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
-          <!-- small dots -->
-          <circle cx="40" cy="40" r="2.5" fill="rgba(167,139,250,0.2)"/>
-          <circle cx="60" cy="28" r="2" fill="rgba(244,114,182,0.2)"/>
-          <circle cx="415" cy="80" r="2.5" fill="rgba(167,139,250,0.25)"/>
-        </svg>
+    <section class="section wrap" id="honors">
+      <div class="section-head">
+        <div><div class="label">Recognition &amp; community</div><h2>Honors &amp; Community</h2></div>
       </div>
-      <div class="proj-body">
-        <div class="proj-kind">XGBoost · Word2Vec · FinBERT · SMOTE</div>
-        <div class="proj-title">Multimodal M&A Target Prediction (XGBoost + FinBERT)</div>
-        <div class="proj-desc">XGBoost model that predicts likely M&A acquisition targets by combining 14 financial ratios with sentiment mined from 298K+ news articles using Word2Vec and FinBERT.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">89%</span><span class="pnum-l">Accuracy</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--pink)">+15%</span><span class="pnum-l">Over baseline</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">3.8K</span><span class="pnum-l">Companies</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/AI-MA-Prediction-UIUC" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
+      <div class="cert-grid">
+        <article class="cert"><h3>Phi Kappa Phi Honor Society</h3><p>University of Illinois Urbana-Champaign · 2026</p><p>Recognized among the top 10% of graduate students, with a 4.0 GPA.</p></article>
+        <article class="cert"><h3>AI Hackathon Winner</h3><p>University AI Hackathon · 2024</p><p>Recognized for developing and presenting a winning AI solution in a university-wide competition.</p></article>
+        <article class="cert"><h3>Technology Entrepreneurship Workshop Co-Lead</h3><p>Technology Entrepreneur Center, UIUC · 2025</p><p>Co-led 15+ workshops on financial modeling, MVP prototyping, and pitching, increasing participant engagement by 40%.</p></article>
+        <article class="cert"><h3>Community Fundraising Volunteer</h3><p>Bhumi NGO · 2022</p><p>Analyzed donor and outreach data across five fundraising events to identify effective messaging, helping raise $1,000 for children's education. Tracked donor engagement and volunteer participation to inform future outreach.</p></article>
+        <article class="cert"><h3>Top Five Student · 10/10 GPA</h3><p>Undergraduate college · 2021</p><p>Earned a perfect GPA and ranked among the top five of 1,000 students.</p></article>
+        <article class="cert"><h3>Certificate of Merit · Top 0.01%</h3><p>CBSE · 2018</p><p>Recognized for exceptional academic performance at the national level.</p></article>
       </div>
-    </div>
-
-    <!-- 5. Travel Expense Reimbursement -->
-    <div class="proj-card" onclick="openModal('travel')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg5" cx="45%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f5"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow5">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <marker id="arr5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/>
-            </marker>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg5)" filter="url(#f5)"/>
-          <!-- MySQL cylinder -->
-          <ellipse cx="95" cy="52" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <path d="M55 52 L55 100 Q55 113 95 113 Q135 113 135 100 L135 52" fill="rgba(52,211,153,0.05)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <ellipse cx="95" cy="100" rx="40" ry="13" fill="rgba(52,211,153,0.12)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-          <text x="95" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">MySQL</text>
-          <!-- Migration arrow -->
-          <path d="M140 78 L185 78" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr5)"/>
-          <text x="163" y="70" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">migrate</text>
-          <!-- Neo4j graph -->
-          <circle cx="232" cy="60" r="22" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.5)" stroke-width="2" filter="url(#glow5)"/>
-          <text x="232" y="65" text-anchor="middle" font-size="9" fill="#a78bfa" font-family="system-ui" font-weight="600">Employee</text>
-          <circle cx="295" cy="95" r="20" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
-          <text x="295" y="100" text-anchor="middle" font-size="9" fill="#00d4ff" font-family="system-ui" font-weight="600">Travel</text>
-          <circle cx="220" cy="128" r="18" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.5)" stroke-width="2"/>
-          <text x="220" y="133" text-anchor="middle" font-size="9" fill="#f472b6" font-family="system-ui" font-weight="600">Vehicle</text>
-          <circle cx="282" cy="145" r="16" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.5)" stroke-width="2"/>
-          <text x="282" y="150" text-anchor="middle" font-size="8.5" fill="#fbbf24" font-family="system-ui" font-weight="600">Expense</text>
-          <line x1="252" y1="74" x2="277" y2="79" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-          <line x1="232" y1="82" x2="225" y2="111" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-          <line x1="236" y1="143" x2="267" y2="140" stroke="rgba(244,114,182,0.5)" stroke-width="1.5"/>
-          <line x1="295" y1="115" x2="288" y2="130" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
-          <text x="260" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Neo4j</text>
-          <!-- result badges -->
-          <rect x="336" y="32" width="85" height="28" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-          <text x="378" y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">50% ↓ errors</text>
-          <rect x="336" y="70" width="85" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
-          <text x="378" y="88" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">20% ↓ redun.</text>
-          <rect x="336" y="108" width="85" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-          <text x="378" y="126" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">1K+ records</text>
-        </svg>
+    </section>
+    <section class="section wrap" id="certifications">
+      <div class="section-head">
+        <div><div class="label">Learning</div><h2>Certifications</h2></div>
       </div>
-      <div class="proj-body">
-        <div class="proj-kind">MySQL · Neo4j · Cypher</div>
-        <div class="proj-title">Relational-to-Graph Migration Pipeline (MySQL to Neo4j)</div>
-        <div class="proj-desc">Designed a MySQL database for 1,000+ travel requests, then migrated to a Neo4j graph DB, cutting 20% data redundancy and enabling relationship visualization across employees, trips, and expenses.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">1K+</span><span class="pnum-l">Records managed</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">50%</span><span class="pnum-l">Fewer errors</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">20%</span><span class="pnum-l">Less redundancy</span></div>
-        </div>
-        <div class="proj-more">View details →</div>
+      <div class="cert-grid">
+        <article class="cert"><h3>AI Agent Fundamentals Accreditation</h3><p>Databricks · October 2026</p></article>
+        <article class="cert"><h3>Certified SAFe® Scrum Master</h3><p>SAFe by Scaled Agile, Inc. · August 2025</p><a href="https://www.linkedin.com/in/bhoomikaravishankar/overlay/Certifications/2098809905/treasury/">View credential ↗</a></article>
+        <article class="cert"><h3>Introduction to Business Analytics: Communicating with Data</h3><p>University of Illinois Urbana-Champaign · January 2025</p><a href="https://www.coursera.org/account/accomplishments/records/JM17C2IUI3JG">View credential ↗</a></article>
+        <article class="cert"><h3>Leading Teams: Developing as a Leader</h3><p>University of Illinois Urbana-Champaign · December 2023</p><a href="https://www.coursera.org/share/3c76f220f48a553377f23ac0fd6d0f49">View credential ↗</a></article>
+        <article class="cert"><h3>Excel Basics for Data Analysis</h3><p>IBM · April 2023</p><a href="https://www.coursera.org/share/4d013d0c38f1e6d429100ab8f759bb20">View credential ↗</a></article>
+        <article class="cert"><h3>Foundations: Data, Data, Everywhere</h3><p>Google · November 2022</p><a href="https://www.coursera.org/account/accomplishments/verify/72C7MRH36SD8">View credential ↗</a></article>
       </div>
-    </div>
-
-    <!-- 1. LLM Clarification -->
-    <div class="proj-card" onclick="openModal('llm')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg1" cx="45%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f1"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow1">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="190" cy="100" rx="160" ry="110" fill="url(#rg1)" filter="url(#f1)"/>
-          <!-- giant faint ? -->
-          <text x="195" y="145" text-anchor="middle" font-size="160" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.05">?</text>
-          <!-- glowing ? -->
-          <text x="195" y="135" text-anchor="middle" font-size="100" font-weight="900" font-family="Georgia,serif" fill="#00d4ff" opacity="0.65" filter="url(#glow1)">?</text>
-          <!-- user bubble -->
-          <rect x="22" y="28" width="148" height="42" rx="21" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-          <circle cx="52" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <circle cx="68" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <circle cx="84" cy="49" r="4" fill="rgba(255,255,255,0.3)"/>
-          <text x="105" y="53" font-size="11" fill="rgba(255,255,255,0.35)" font-family="system-ui">…</text>
-          <!-- ai bubble bottom right -->
-          <rect x="268" y="128" width="148" height="44" rx="22" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-          <text x="342" y="154" text-anchor="middle" font-size="13" fill="rgba(0,212,255,0.9)" font-family="system-ui" font-weight="600">Can you clarify?</text>
-          <!-- small dots top right -->
-          <circle cx="380" cy="38" r="3" fill="rgba(0,212,255,0.2)"/>
-          <circle cx="395" cy="52" r="2" fill="rgba(167,139,250,0.25)"/>
-          <circle cx="408" cy="35" r="2.5" fill="rgba(0,212,255,0.15)"/>
-          <circle cx="360" cy="62" r="2" fill="rgba(52,211,153,0.2)"/>
-        </svg>
+    </section>
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div><div class="label">Get in touch</div><h2>Have a problem<br><em>worth solving?</em></h2></div>
+        <div><p>I'm interested in applied AI, data science, and building useful tools with people. I'd love to hear what you're working on.</p><div class="contact-links"><a href="mailto:itsbhoomika.r@gmail.com">Email ↗</a><a href="https://www.linkedin.com/in/bhoomikaravishankar/">LinkedIn ↗</a><a href="https://github.com/itsbhoomika">GitHub ↗</a><a href="https://huggingface.co/itsbhoomika">Hugging Face ↗</a></div></div>
       </div>
-      <div class="proj-body">
-        <div class="proj-kind">Qwen-2.5 · SFT · DPO · LoRA</div>
-        <div class="proj-title">Ambiguity-Aware LLM Alignment Pipeline (SFT + DPO)</div>
-        <div class="proj-desc">Fine-tuned Qwen-2.5 7B to detect ambiguous questions and ask for clarification instead of guessing, using supervised fine-tuning (SFT) and Direct Preference Optimization (DPO).</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">0.63</span><span class="pnum-l">Macro F1</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">10K+</span><span class="pnum-l">Training examples</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">+12.5%</span><span class="pnum-l">vs base model</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/Clarification-Seeking-LLMs-CS546" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-
-    <!-- 4. LLM Healthcare -->
-    <div class="proj-card" onclick="openModal('health')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg4" cx="40%" cy="40%" r="55%">
-              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.18"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="rg4b" cx="70%" cy="65%" r="40%">
-              <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.12"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f4"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow4">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="170" cy="90" rx="150" ry="110" fill="url(#rg4)" filter="url(#f4)"/>
-          <ellipse cx="310" cy="130" rx="120" ry="80" fill="url(#rg4b)" filter="url(#f4)"/>
-          <!-- document silhouette -->
-          <rect x="90" y="35" width="110" height="140" rx="8" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.15)" stroke-width="1.5"/>
-          <line x1="105" y1="65" x2="185" y2="65" stroke="rgba(251,191,36,0.2)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="80" x2="185" y2="80" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="95" x2="165" y2="95" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="110" x2="175" y2="110" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="105" y1="125" x2="155" y2="125" stroke="rgba(251,191,36,0.1)" stroke-width="1.5" stroke-linecap="round"/>
-          <!-- arrow pointing right to extracted features -->
-          <path d="M210 105 L250 105" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arr4)"/>
-          <defs>
-            <marker id="arr4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-              <path d="M0,0 L7,3.5 L0,7 Z" fill="rgba(255,255,255,0.2)"/>
-            </marker>
-          </defs>
-          <!-- extracted feature dots floating right -->
-          <circle cx="275" cy="65"  r="6" fill="rgba(251,191,36,0.6)"  filter="url(#glow4)"/>
-          <circle cx="310" cy="88"  r="5" fill="rgba(167,139,250,0.7)" filter="url(#glow4)"/>
-          <circle cx="295" cy="115" r="7" fill="rgba(251,191,36,0.5)"  filter="url(#glow4)"/>
-          <circle cx="340" cy="70"  r="4" fill="rgba(52,211,153,0.6)"  filter="url(#glow4)"/>
-          <circle cx="355" cy="105" r="5" fill="rgba(251,191,36,0.45)" filter="url(#glow4)"/>
-          <circle cx="330" cy="140" r="4" fill="rgba(167,139,250,0.5)" filter="url(#glow4)"/>
-          <circle cx="380" cy="88"  r="3.5" fill="rgba(52,211,153,0.4)" filter="url(#glow4)"/>
-          <circle cx="395" cy="125" r="3" fill="rgba(251,191,36,0.35)" filter="url(#glow4)"/>
-          <!-- badge -->
-          <rect x="20" y="148" width="90" height="30" rx="8" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.25)" stroke-width="1.5"/>
-          <text x="65" y="167" text-anchor="middle" font-size="12" font-weight="800" fill="#fbbf24" font-family="system-ui">115K trials</text>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Qwen-2.5 · Python · Logistic Regression</div>
-        <div class="proj-title">LLM-in-the-Loop Feature Engineering Pipeline</div>
-        <div class="proj-desc">Used Qwen-2.5 to extract structured data from 115K ClinicalTrials.gov records, feeding a model that predicts trial success, with a feedback loop that refines the LLM's extraction over time.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">115K</span><span class="pnum-l">Clinical trials</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--purple)">97.2%</span><span class="pnum-l">Feature importance</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">0.61</span><span class="pnum-l">ROC-AUC</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/LLM-UIUC-Healthcare-Research-Project" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-
-    <!-- 8. Contract Pricing Intelligence -->
-    <div class="proj-card" onclick="openModal('contract')">
-      <div class="proj-illus">
-        <svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="rg8" cx="45%" cy="50%" r="55%">
-              <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.16"/>
-              <stop offset="100%" stop-color="#080910" stop-opacity="0"/>
-            </radialGradient>
-            <filter id="f8"><feGaussianBlur stdDeviation="14"/></filter>
-            <filter id="glow8">
-              <feGaussianBlur stdDeviation="4" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <rect width="440" height="200" fill="#080910"/>
-          <ellipse cx="220" cy="100" rx="190" ry="110" fill="url(#rg8)" filter="url(#f8)"/>
-
-          <!-- raw contract document on left -->
-          <rect x="28" y="34" width="104" height="132" rx="8" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
-          <text x="44" y="58" font-size="9" font-weight="700" fill="#fbbf24" font-family="JetBrains Mono, monospace">CONTRACT</text>
-          <line x1="44" y1="74" x2="116" y2="74" stroke="rgba(251,191,36,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="44" y1="88" x2="108" y2="88" stroke="rgba(251,191,36,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-          <text x="44" y="108" font-size="9" fill="rgba(52,211,153,0.85)" font-family="JetBrains Mono, monospace">$50,000/yr</text>
-          <text x="44" y="124" font-size="9" fill="rgba(52,211,153,0.6)" font-family="JetBrains Mono, monospace">15% disc.</text>
-          <line x1="44" y1="138" x2="112" y2="138" stroke="rgba(251,191,36,0.18)" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="44" y1="152" x2="96" y2="152" stroke="rgba(251,191,36,0.12)" stroke-width="1.5" stroke-linecap="round"/>
-
-          <!-- parser arrow -->
-          <path d="M138 100 L182 100" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <polygon points="182,100 174,96 174,104" fill="#475569"/>
-          <text x="160" y="92" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">parse</text>
-
-          <!-- structured output boxes on right -->
-          <rect x="196" y="38" width="150" height="30" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.3"/>
-          <text x="271" y="57" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">Pricing Terms</text>
-          <rect x="196" y="74" width="150" height="30" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.4)" stroke-width="1.3"/>
-          <text x="271" y="93" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Analytics Engine</text>
-          <rect x="196" y="110" width="150" height="30" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.3" filter="url(#glow8)"/>
-          <text x="271" y="129" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Validation Rules</text>
-
-          <!-- endpoint badge -->
-          <rect x="196" y="150" width="92" height="28" rx="7" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
-          <text x="242" y="168" text-anchor="middle" font-size="11" font-weight="800" fill="#fbbf24" font-family="system-ui">20+ endpoints</text>
-          <rect x="296" y="150" width="50" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-          <text x="321" y="168" text-anchor="middle" font-size="10" font-weight="800" fill="#00d4ff" font-family="system-ui">DRF</text>
-
-          <!-- dots -->
-          <circle cx="380" cy="44" r="2.5" fill="rgba(251,191,36,0.2)"/>
-          <circle cx="405" cy="62" r="2" fill="rgba(0,212,255,0.2)"/>
-          <circle cx="392" cy="120" r="2.5" fill="rgba(52,211,153,0.2)"/>
-        </svg>
-      </div>
-      <div class="proj-body">
-        <div class="proj-kind">Django · DRF · Pandas · AWS S3</div>
-        <div class="proj-title">Contract-to-Analytics REST Pipeline (Django)</div>
-        <div class="proj-desc">Django REST API that parses raw contract text into structured pricing terms, runs portfolio analytics, and validates against configurable business rules, across 20+ endpoints with AWS S3 storage.</div>
-        <div class="proj-nums">
-          <div class="pnum"><span class="pnum-v" style="color:var(--amber)">20+</span><span class="pnum-l">API endpoints</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--cyan)">4</span><span class="pnum-l">Data models</span></div>
-          <div class="pnum"><span class="pnum-v" style="color:var(--mint)">5</span><span class="pnum-l">Rule types</span></div>
-        </div>
-        <div class="proj-foot"><span class="proj-more">View details →</span><a class="proj-gh" href="https://github.com/itsbhoomika/contract-pricing-intelligence" target="_blank" rel="noopener" onclick="event.stopPropagation()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub ↗</a></div>
-      </div>
-    </div>
-
-
-
-  </div>
-</div>
-
-<!-- HUGGINGFACE -->
-<div class="wrap section" id="huggingface">
-  <div class="sec-label">Open Source</div>
-  <h2 class="sec-title">On HuggingFace</h2>
-
-  <div class="sec-label" style="margin-bottom:1rem">Models</div>
-  <div class="hf-grid">
-    <div class="hf-model-card">
-      <div class="hf-tag">🤖 Text Generation</div>
-      <div class="hf-name">clarifier-dpo-lora</div>
-      <div class="hf-desc">Fine-tuned Qwen-2.5 with DPO + LoRA for ambiguity-aware response generation. From the Clarification-Seeking LLMs project.</div>
-    </div>
-    <div class="hf-model-card">
-      <div class="hf-tag">📊 Text Classification</div>
-      <div class="hf-name">adv-nlp-hw1-bhoomika.r</div>
-      <div class="hf-desc">67M parameter text classification model from Advanced NLP coursework at UIUC.</div>
-    </div>
-    <div class="hf-model-card">
-      <div class="hf-tag">📦 Model Outputs</div>
-      <div class="hf-name">anlp-hw2-outputs</div>
-      <div class="hf-desc">Output artifacts from UIUC Advanced NLP homework 2, including predictions and evaluation results.</div>
-    </div>
-  </div>
-
-  <div class="sec-label" style="margin-bottom:1rem">Dashboards</div>
-  <div class="hf-spaces-row">
-    <a href="https://huggingface.co/spaces/itsbhoomika/FP_3" target="_blank" class="hf-space-card">
-      <div class="space-status"><div class="dot"></div>Live</div>
-      <div class="space-name">Data Visualization: Final Project</div>
-      <div class="space-desc">Interactive data visualization app built for IS445. Explores complex datasets with dynamic charts and filters.</div>
-      <div class="space-link">Open Space ↗</div>
-    </a>
-    <a href="https://huggingface.co/spaces/itsbhoomika/is445_demo" target="_blank" class="hf-space-card">
-      <div class="space-status"><div class="dot"></div>Live</div>
-      <div class="space-name">Seattle Weather Visualizer</div>
-      <div class="space-desc">Interactive visualization of Seattle weather data with dynamic Altair charts for temperature, precipitation, and seasonal trends.</div>
-      <div class="space-link">Open Space ↗</div>
-    </a>
-    <a href="https://huggingface.co/spaces/itsbhoomika/is445-hw6-building-viz" target="_blank" class="hf-space-card">
-      <div class="space-status sleeping"><div class="dot"></div>Sleeping</div>
-      <div class="space-name">Building Inventory Viz</div>
-      <div class="space-desc">Interactive exploration of building inventory data for Illinois state facilities with linked visualizations.</div>
-      <div class="space-link">Open Space ↗</div>
-    </a>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div class="wrap section" id="contact" style="text-align:center;padding-bottom:7rem">
-  <div class="sec-label" style="justify-content:center;display:flex">Contact</div>
-  <h2 class="sec-title" style="margin-bottom:0.75rem">Let's connect.</h2>
-  <p class="contact-sub" style="max-width:560px;margin:0 auto 2rem;line-height:1.7;font-size:0.92rem;">
-    You can reach out to me via email. If you're building something interesting in data or AI, I love a good problem and I'm always up for learning something new. I'd genuinely love to hear from you.
-  </p>
-  <div class="contact-links">
-    <a href="mailto:itsbhoomika.r@gmail.com" class="btn btn-primary">itsbhoomika.r@gmail.com</a>
-    <a href="https://www.linkedin.com/in/bhoomikaravishankar/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-    <a href="https://huggingface.co/itsbhoomika" target="_blank" class="btn btn-ghost">HuggingFace ↗</a>
-  </div>
-</div>
-
-<footer>Bhoomika Ravishankar · UIUC 2026</footer>
-
-<!-- MODAL OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeModal(event)">
-  <div class="modal" id="modalBox"></div>
-</div>
-
-<script>
-/* ── Canvas neural net ── */
-(function(){
-  const c = document.getElementById('canvas');
-  const ctx = c.getContext('2d');
-  let W,H,nodes;
-  const colors = ['#00d4ff','#a78bfa','#34d399','#f472b6'];
-  function resize(){W=c.width=innerWidth;H=c.height=innerHeight;}
-  function init(){
-    const n=Math.min(Math.floor(W*H/13000),60);
-    nodes=Array.from({length:n},()=>({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.38, vy:(Math.random()-.5)*.3,
-      r:1.5+Math.random()*2.5,
-      color:colors[Math.floor(Math.random()*4)]
-    }));
-  }
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<190){
-          ctx.beginPath();
-          ctx.strokeStyle=`rgba(100,116,139,${(1-d/190)*.3})`;
-          ctx.lineWidth=.7;
-          ctx.moveTo(nodes[i].x,nodes[i].y);
-          ctx.lineTo(nodes[j].x,nodes[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-    nodes.forEach(n=>{
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
-      ctx.fillStyle=n.color+'85';
-      ctx.fill();
-      n.x+=n.vx; n.y+=n.vy;
-      if(n.x<0||n.x>W)n.vx*=-1;
-      if(n.y<0||n.y>H)n.vy*=-1;
+    </section>
+  </main>
+  <footer><div class="wrap"><span>© Bhoomika Ravishankar</span></div></footer>
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('#main-links');
+    menuButton.addEventListener('click', () => {
+      const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('open', !expanded);
     });
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',()=>{resize();init();});
-  resize(); init(); draw();
-})();
-
-/* ── Modal data ── */
-const MODALS = {
-  llm: {
-    kind: 'Qwen-2.5 · SFT · DPO · LoRA',
-    title: 'Ambiguity-Aware LLM Alignment Pipeline (SFT + DPO)',
-    sub: 'Qwen-2.5 7B · SFT + DPO · AmbigNQ · 10,036 examples',
-    illusGrad: 'radial-gradient(ellipse at 40% 50%, rgba(0,212,255,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="mg1"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="mg2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma1" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="250" ry="100" fill="rgba(0,212,255,0.07)" filter="url(#mg1)"/>
-      <!-- Stage 1 -->
-      <rect x="12" y="28" width="130" height="55" rx="9" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="30" y="50" font-size="11" font-weight="700" fill="#00d4ff" font-family="system-ui">Stage 1: SFT</text>
-      <text x="22" y="66" font-size="9.5" fill="#7c8ca8" font-family="monospace">AmbigNQ → facets</text>
-      <text x="22" y="78" font-size="9.5" fill="#7c8ca8" font-family="monospace">structured output</text>
-      <path d="M142 55 L175 55" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma1)"/>
-      <!-- Qwen box -->
-      <rect x="175" y="18" width="120" height="75" rx="10" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
-      <text x="235" y="50" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">Qwen-2.5</text>
-      <text x="235" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#a78bfa" font-family="system-ui">7B</text>
-      <text x="235" y="83" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">32B teacher signals</text>
-      <path d="M295 55 L330 55" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma1)"/>
-      <!-- Stage 2 -->
-      <rect x="330" y="28" width="130" height="55" rx="9" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-      <text x="348" y="50" font-size="11" font-weight="700" fill="#f472b6" font-family="system-ui">Stage 2: DPO</text>
-      <text x="340" y="66" font-size="9.5" fill="#7c8ca8" font-family="monospace">chosen vs rejected</text>
-      <text x="340" y="78" font-size="9.5" fill="#7c8ca8" font-family="monospace">preference pairs</text>
-      <path d="M460 43 L490 32" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M460 65 L490 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <!-- outputs -->
-      <rect x="490" y="16" width="155" height="30" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-      <text x="568" y="35" text-anchor="middle" font-size="11" fill="#34d399" font-family="system-ui">→ Answer directly (clear)</text>
-      <rect x="490" y="60" width="155" height="30" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="568" y="79" text-anchor="middle" font-size="11" fill="#00d4ff" font-family="system-ui">→ Ask to clarify (ambiguous)</text>
-      <!-- Ambiguity types row -->
-      <rect x="12" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
-      <text x="22" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">entity-reference</text>
-      <rect x="165" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
-      <text x="175" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">underspecified noun</text>
-      <rect x="318" y="108" width="145" height="22" rx="6" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
-      <text x="328" y="123" font-size="9" fill="#7c8ca8" font-family="monospace">degree of action</text>
-      <!-- metrics row -->
-      <rect x="12" y="142" width="88" height="32" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-      <text x="56" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#00d4ff" font-family="system-ui">F1: 0.63</text>
-      <text x="56" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Macro F1 (SFT)</text>
-      <rect x="108" y="142" width="100" height="32" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
-      <text x="158" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa" font-family="system-ui">10,036 ex.</text>
-      <text x="158" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">AmbigNQ split</text>
-      <rect x="216" y="142" width="100" height="32" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="266" y="156" text-anchor="middle" font-size="11" font-weight="800" fill="#34d399" font-family="system-ui">+12.5% acc</text>
-      <text x="266" y="168" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vs base model</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `LLMs routinely hallucinate answers to ambiguous questions. This project trains <strong>Qwen-2.5 7B</strong> to detect ambiguity and make a strategic decision: answer directly or ask a targeted clarifying question. The model is grounded in a 3-type ambiguity taxonomy with interpretable facet annotations extracted from the AmbigNQ corpus.` },
-      { title: 'Approach', list: [
-        'Derived 10,036 training examples from AmbigNQ (47% ambiguous, 53% clear)',
-        'Extracted <strong>ambiguity facets</strong>, the minimal missing piece (time-period, entity, location) that makes a query ambiguous',
-        'Stage 1, SFT: teach structured clarify-or-answer output using Qwen-2.5 32B as teacher',
-        'Stage 2, DPO: align model preferences with chosen vs. rejected response pairs',
-        'Evaluated across 6 metrics: taxonomy accuracy, facet coverage, ambiguity detection F1, QA alignment'
-      ]},
-      { title: 'Results', results: [
-        { val:'0.63', label:'Macro F1 (SFT)', color:'var(--cyan)' },
-        { val:'0.70', label:'Clarify F1 (DPO)', color:'var(--purple)' },
-        { val:'+12.5%', label:'Accuracy vs base', color:'var(--mint)' },
-        { val:'3 types', label:'Ambiguity taxonomy', color:'var(--pink)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'SFT dramatically outperforms base models (0.56 → 0.63); structured format alone drives most of the gain',
-        'Alt-SFT with 32B chain-of-thought supervision shows the most balanced clarify-vs-answer behavior',
-        'DPO improves answer precision but reduces clarify recall, since clarify-or-act is inherently multi-objective',
-        'Facet annotations serve as interpretable anchors that ground the model\'s ambiguity decisions',
-        'Model published on HuggingFace: <strong>clarifier-dpo-lora</strong>'
-      ]}
-    ]
-  },
-  ma: {
-    kind: 'XGBoost · Word2Vec · FinBERT · SMOTE',
-    title: 'Multimodal M&A Target Prediction (XGBoost + FinBERT)',
-    sub: 'XGBoost + Word2Vec + FinBERT · LSEG Data · 3,882 companies · 298K headlines',
-    illusGrad: 'radial-gradient(ellipse at 60% 40%, rgba(167,139,250,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g2a"><feGaussianBlur stdDeviation="13"/></filter>
-        <filter id="g2b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="90" rx="260" ry="100" fill="rgba(167,139,250,0.07)" filter="url(#g2a)"/>
-      <!-- data sources -->
-      <rect x="10" y="12" width="120" height="28" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
-      <text x="70" y="30" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Financial Ratios</text>
-      <rect x="10" y="48" width="120" height="28" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-      <text x="70" y="66" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">298K Headlines</text>
-      <rect x="10" y="84" width="120" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="70" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">FinBERT Sentiment</text>
-      <!-- arrows to NLP box -->
-      <path d="M130 26 L165 60" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M130 62 L165 68" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M130 98 L165 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <!-- NLP pipeline box -->
-      <rect x="165" y="42" width="105" height="52" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-      <text x="217" y="62" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">NLP Pipeline</text>
-      <text x="217" y="76" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Word2Vec · NER</text>
-      <text x="217" y="87" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">TF-IDF · FastText</text>
-      <path d="M270 68 L305 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma2)"/>
-      <!-- SMOTE -->
-      <rect x="305" y="50" width="90" height="36" rx="9" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.25)" stroke-width="1.5"/>
-      <text x="350" y="67" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">SMOTE</text>
-      <text x="350" y="80" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">1.7K → 3.2K rows</text>
-      <path d="M395 68 L428 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma2)"/>
-      <!-- XGBoost -->
-      <rect x="428" y="40" width="100" height="56" rx="9" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
-      <text x="478" y="63" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">XGBoost</text>
-      <text x="478" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">5-fold CV · p=0.0001</text>
-      <path d="M528 55 L560 36" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M528 80 L560 100" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <!-- outputs -->
-      <rect x="560" y="18" width="90" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-      <text x="605" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">M&A Target ✓</text>
-      <rect x="560" y="85" width="90" height="28" rx="7" fill="rgba(30,34,53,0.8)" stroke="rgba(255,255,255,0.08)" stroke-width="1.5"/>
-      <text x="605" y="102" text-anchor="middle" font-size="10" fill="#7c8ca8" font-family="system-ui">Peer company</text>
-      <!-- metrics -->
-      <rect x="10" y="138" width="90" height="36" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
-      <text x="55" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#a78bfa" font-family="system-ui">89%</text>
-      <text x="55" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Accuracy</text>
-      <rect x="108" y="138" width="90" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="153" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">+15%</text>
-      <text x="153" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vs numeric-only</text>
-      <rect x="206" y="138" width="100" height="36" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.2)"/>
-      <text x="256" y="153" text-anchor="middle" font-size="13" font-weight="800" fill="#f472b6" font-family="system-ui">2.4× F1</text>
-      <text x="256" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">improvement</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Predicting M&A targets from financial ratios alone misses most of the signal. This project fuses <strong>14 LSEG financial features</strong> with 298K+ news headlines processed through Word2Vec and FinBERT sentiment analysis. The combined model achieves 89% accuracy, a statistically significant 15-point gain (p=0.0001) over the numerical baseline.` },
-      { title: 'Approach', list: [
-        '3,882 companies: 185 M&A targets vs 3,697 peers from London Stock Exchange Group data',
-        'Financial features: EV/EBITDA, Free Cash Flow, Gross Profit Margin, Price-to-Book, and 10 more ratios',
-        'Text pipeline: FastText language filter → NER → Word2Vec embeddings + TF-IDF vectorization',
-        'FinBERT for domain-specific financial sentiment scoring across all news per company',
-        'SMOTE to handle class imbalance (185 vs 3,697) → balanced 3,252-row training set',
-        'XGBoost with 5-fold CV; paired t-test confirms significance (t=14.19, p=0.0001)'
-      ]},
-      { title: 'Results', results: [
-        { val:'89%', label:'Accuracy (full)', color:'var(--purple)' },
-        { val:'0.40', label:'F1-Score', color:'var(--pink)' },
-        { val:'+15%', label:'Over baseline', color:'var(--mint)' },
-        { val:'2.4×', label:'F1 improvement', color:'var(--cyan)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Word2Vec embeddings are the most influential features, market language carries predictive signal beyond financials',
-        'FinBERT adds value but over-reliance on positive sentiment causes false positives (Cluster 2 error pattern)',
-        'Error analysis revealed 3 failure clusters: overlapping signals, sentiment-driven FPs, weak-signal FNs',
-        'Recommendation: contextual sentiment scoring and PCA for dimensionality reduction'
-      ]}
-    ]
-  },
-  lstm: {
-    kind: 'LSTM · TensorFlow · Keras · Python',
-    title: 'LSTM Spend-Forecasting Pipeline (14K Accounts)',
-    sub: 'LSTM · 14,099 accounts · 13 months transaction history · Q4 2025 forecast',
-    illusGrad: 'radial-gradient(ellipse at 50% 65%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g3a"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="g3b"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma3" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="120" rx="280" ry="90" fill="rgba(52,211,153,0.07)" filter="url(#g3a)"/>
-      <!-- axis lines -->
-      <line x1="30" y1="145" x2="630" y2="145" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-      <line x1="30" y1="145" x2="30" y2="25" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-      <!-- x labels -->
-      <text x="55" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Apr'24</text>
-      <text x="135" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Jul'24</text>
-      <text x="215" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Oct'24</text>
-      <text x="305" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Jan'25</text>
-      <text x="390" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Apr'25</text>
-      <text x="475" y="162" font-size="8.5" fill="#7c8ca8" font-family="monospace">Q4'25 ↓</text>
-      <!-- historical data (muted) -->
-      <polyline points="45,120 80,108 115,122 155,100 195,115 235,98 275,110 315,92 355,105" fill="none" stroke="rgba(52,211,153,0.25)" stroke-width="2" stroke-linecap="round"/>
-      <!-- cutoff line -->
-      <line x1="355" y1="30" x2="355" y2="148" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="5 4"/>
-      <text x="360" y="44" font-size="9" fill="rgba(255,255,255,0.4)" font-family="monospace">forecast</text>
-      <!-- prediction (glowing) -->
-      <polyline points="355,105 395,88 435,72 475,58 515,44 555,35 595,28" fill="none" stroke="rgba(52,211,153,0.85)" stroke-width="2.5" stroke-linecap="round" filter="url(#g3b)"/>
-      <polyline points="355,105 395,88 435,72 475,58 515,44 555,35 595,28" fill="none" stroke="rgba(52,211,153,0.2)" stroke-width="9" stroke-linecap="round"/>
-      <circle cx="595" cy="28" r="5.5" fill="#34d399" filter="url(#g3b)"/>
-      <!-- LSTM model badge -->
-      <rect x="440" y="100" width="90" height="32" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-      <text x="485" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">LSTM Model</text>
-      <text x="485" y="126" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">64→32 units</text>
-      <!-- metrics row -->
-      <rect x="30" y="28" width="100" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="80" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">14,099</text>
-      <text x="80" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">accounts</text>
-      <rect x="138" y="28" width="100" height="36" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-      <text x="188" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#00d4ff" font-family="system-ui">13 mo.</text>
-      <text x="188" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">history window</text>
-      <rect x="246" y="28" width="100" height="36" rx="7" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
-      <text x="296" y="43" text-anchor="middle" font-size="13" font-weight="800" fill="#fbbf24" font-family="system-ui">Q4 2025</text>
-      <text x="296" y="57" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">forecast horizon</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Built for the UIUC × Synchrony Financial datathon. The goal: forecast Q4 2025 quarterly credit card spending for <strong>14,099 accounts</strong> using 13 months of transaction history, then generate actionable credit line adjustment recommendations based on predicted spend.` },
-      { title: 'Approach', list: [
-        'Pivoted raw transaction data into 14,099 account × 13 month spending sequences',
-        'Per-account min-max normalization + log1p transform to handle high variance and improve stability',
-        'LSTM architecture: 2 stacked layers (64 → 32 units), dense head, trained on 6-month input → 3-month target windows',
-        'Backtested on Q4 2024 historical data to validate before deploying for Q4 2025 predictions',
-        'Credit line recommendation = 20% × predicted quarterly spend per account'
-      ]},
-      { title: 'Results', results: [
-        { val:'14,099', label:'Accounts forecasted', color:'var(--mint)' },
-        { val:'$2,444', label:'MAE (backtest)', color:'var(--cyan)' },
-        { val:'97.96%', label:'Low-spend segment', color:'var(--amber)' },
-        { val:'288', label:'High-spend accounts', color:'var(--purple)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Account-specific normalization was critical, spending variance across accounts spans orders of magnitude',
-        'High-spending accounts (>$20K predicted) represent just 2% of accounts but require the largest credit adjustments',
-        'Model identifies stable baseline spenders vs. surge-risk accounts, supporting differentiated credit strategies',
-        'Log-scale training significantly improved numerical stability for accounts with near-zero spending'
-      ]}
-    ]
-  },
-  health: {
-    kind: 'Qwen-2.5 · Python · Logistic Regression',
-    title: 'LLM-in-the-Loop Feature Engineering Pipeline',
-    sub: 'Qwen-2.5 7B · 115K ClinicalTrials.gov records · Iterative LLM feature engineering',
-    illusGrad: 'radial-gradient(ellipse at 40% 40%, rgba(251,191,36,0.2) 0%, rgba(167,139,250,0.1) 60%, #0d0f1c 80%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g4a"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="g4b"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma4" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="280" cy="90" rx="240" ry="100" fill="rgba(251,191,36,0.07)" filter="url(#g4a)"/>
-      <!-- unstructured text box -->
-      <rect x="12" y="20" width="145" height="145" rx="10" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.2)" stroke-width="1.5"/>
-      <text x="85" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">Clinical Trial Text</text>
-      <line x1="24" y1="54" x2="148" y2="54" stroke="rgba(251,191,36,0.15)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="66" x2="140" y2="66" stroke="rgba(251,191,36,0.12)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="78" x2="130" y2="78" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="90" x2="145" y2="90" stroke="rgba(251,191,36,0.12)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="102" x2="120" y2="102" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="114" x2="138" y2="114" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="126" x2="110" y2="126" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="138" x2="142" y2="138" stroke="rgba(251,191,36,0.1)" stroke-width="1" stroke-linecap="round"/>
-      <line x1="24" y1="150" x2="125" y2="150" stroke="rgba(251,191,36,0.08)" stroke-width="1" stroke-linecap="round"/>
-      <!-- arrow to LLM -->
-      <path d="M157 92 L193 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
-      <!-- LLM extractor -->
-      <rect x="193" y="64" width="110" height="56" rx="10" fill="rgba(167,139,250,0.1)" stroke="rgba(167,139,250,0.4)" stroke-width="2"/>
-      <text x="248" y="87" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">Qwen-2.5</text>
-      <text x="248" y="103" text-anchor="middle" font-size="10" fill="#a78bfa" font-family="system-ui">7B Feature Extractor</text>
-      <text x="248" y="114" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">27 structured features</text>
-      <!-- arrow to features -->
-      <path d="M303 92 L338 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
-      <!-- feature dots scatter -->
-      <circle cx="355" cy="45"  r="7" fill="rgba(251,191,36,0.7)"  filter="url(#g4b)"/>
-      <circle cx="390" cy="72"  r="6" fill="rgba(167,139,250,0.8)" filter="url(#g4b)"/>
-      <circle cx="372" cy="100" r="8" fill="rgba(251,191,36,0.6)"  filter="url(#g4b)"/>
-      <circle cx="415" cy="55"  r="5" fill="rgba(52,211,153,0.7)"  filter="url(#g4b)"/>
-      <circle cx="400" cy="120" r="6" fill="rgba(251,191,36,0.55)" filter="url(#g4b)"/>
-      <circle cx="432" cy="88"  r="5" fill="rgba(167,139,250,0.6)" filter="url(#g4b)"/>
-      <circle cx="450" cy="45"  r="4" fill="rgba(52,211,153,0.5)"  filter="url(#g4b)"/>
-      <circle cx="460" cy="108" r="5" fill="rgba(251,191,36,0.45)" filter="url(#g4b)"/>
-      <!-- arrow to model -->
-      <path d="M475 92 L510 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma4)"/>
-      <!-- logistic regression -->
-      <rect x="510" y="68" width="110" height="48" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-      <text x="565" y="88" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Logistic Reg.</text>
-      <text x="565" y="101" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">L1 regularized</text>
-      <text x="565" y="112" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">4,474 features</text>
-      <!-- feedback loop arrow -->
-      <path d="M565 116 Q565 155 248 155 Q193 155 193 120" stroke="rgba(167,139,250,0.3)" stroke-width="1.5" stroke-dasharray="5 4" fill="none" marker-end="url(#ma4)"/>
-      <text x="380" y="170" text-anchor="middle" font-size="9" fill="rgba(167,139,250,0.6)" font-family="system-ui">iterative feedback loop</text>
-      <!-- metrics -->
-      <rect x="12" y="28" width="0" height="0"/>
-      <rect x="510" y="22" width="90" height="36" rx="7" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
-      <text x="555" y="37" text-anchor="middle" font-size="11" font-weight="800" fill="#fbbf24" font-family="system-ui">115,480</text>
-      <text x="555" y="51" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">clinical trials</text>
-      <rect x="510" y="140" width="90" height="36" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.2)"/>
-      <text x="555" y="155" text-anchor="middle" font-size="11" font-weight="800" fill="#a78bfa" font-family="system-ui">97.2%</text>
-      <text x="555" y="169" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">LLM feature imp.</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Clinical trial success is buried in free text: eligibility criteria, intervention descriptions, study design. This project uses <strong>Qwen-2.5 7B as an autonomous feature engineer</strong>, extracting structured attributes from 115K ClinicalTrials.gov records. A supervised ML feedback loop then refines the LLM's extraction prompts, improving feature quality iteratively.` },
-      { title: 'Approach', list: [
-        '115,480 cancer trials from ClinicalTrials.gov; filtered to binary: completed (79%) vs terminated/withdrawn (21%)',
-        'Qwen-2.5 7B autonomously extracts 8–12 features per trial: study design, intervention type, patient eligibility, operational logistics',
-        'One-hot encoding of 27 LLM-standardized features → 4,424 dimensions; combined with all-MiniLM-L6-v2 embeddings (384→50 via PCA)',
-        'Logistic regression with L1 (Lasso) regularization for automatic feature selection on 4,474-dimensional space',
-        'Model feedback loop: feature importance analysis informs Iteration 2 prompt refinement'
-      ]},
-      { title: 'Results', results: [
-        { val:'0.61', label:'ROC-AUC', color:'var(--amber)' },
-        { val:'97.2%', label:'LLM feature importance', color:'var(--purple)' },
-        { val:'27', label:'Extracted features', color:'var(--mint)' },
-        { val:'115K', label:'Trials processed', color:'var(--cyan)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'LLM-extracted structured features carry 97.2% of total predictive importance, far outweighing raw text embeddings',
-        'Iterative feedback loop effectively guides prompt refinement; Iteration 2 produced more consistent, granular features',
-        'L1 regularization selected only 5 of 50 embedding dimensions, confirming structured features\'s superiority',
-        'Demonstrates a generalizable pipeline: unstructured text → LLM feature extraction → interpretable ML model'
-      ]}
-    ]
-  },
-
-  travel: {
-    kind: 'MySQL · Neo4j · Cypher',
-    title: 'Relational-to-Graph Migration Pipeline (MySQL to Neo4j)',
-    sub: 'MySQL · Neo4j · ER Diagrams · SQL · Cypher · 1,000+ records',
-    illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g5a"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="g5b"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma5" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="280" ry="100" fill="rgba(52,211,153,0.07)" filter="url(#g5a)"/>
-      <!-- MySQL Database -->
-      <ellipse cx="120" cy="50" rx="55" ry="18" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-      <path d="M65 50 L65 110 Q65 128 120 128 Q175 128 175 110 L175 50" fill="rgba(52,211,153,0.05)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-      <ellipse cx="120" cy="110" rx="55" ry="18" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.4)" stroke-width="1.5"/>
-      <text x="120" y="85" text-anchor="middle" font-size="13" font-weight="700" fill="#34d399" font-family="system-ui">MySQL</text>
-      <text x="120" y="145" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">1,000+ records</text>
-      <!-- Arrow -->
-      <path d="M180 90 L250 90" stroke="#475569" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#ma5)"/>
-      <text x="215" y="80" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">migrate</text>
-      <!-- Neo4j Graph -->
-      <circle cx="320" cy="60" r="28" fill="rgba(167,139,250,0.12)" stroke="rgba(167,139,250,0.5)" stroke-width="2" filter="url(#g5b)"/>
-      <text x="320" y="65" text-anchor="middle" font-size="10" fill="#a78bfa" font-family="system-ui" font-weight="600">Employee</text>
-      <circle cx="400" cy="100" r="24" fill="rgba(0,212,255,0.12)" stroke="rgba(0,212,255,0.5)" stroke-width="2"/>
-      <text x="400" y="105" text-anchor="middle" font-size="10" fill="#00d4ff" font-family="system-ui" font-weight="600">Travel</text>
-      <circle cx="300" cy="130" r="22" fill="rgba(244,114,182,0.12)" stroke="rgba(244,114,182,0.5)" stroke-width="2"/>
-      <text x="300" y="135" text-anchor="middle" font-size="10" fill="#f472b6" font-family="system-ui" font-weight="600">Vehicle</text>
-      <circle cx="380" cy="155" r="20" fill="rgba(251,191,36,0.12)" stroke="rgba(251,191,36,0.5)" stroke-width="2"/>
-      <text x="380" y="160" text-anchor="middle" font-size="9" fill="#fbbf24" font-family="system-ui" font-weight="600">Expense</text>
-      <!-- Graph connections -->
-      <line x1="340" y1="78" x2="380" y2="82" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-      <line x1="320" y1="88" x2="305" y2="110" stroke="rgba(167,139,250,0.5)" stroke-width="1.5"/>
-      <line x1="318" y1="148" x2="362" y2="145" stroke="rgba(244,114,182,0.5)" stroke-width="1.5"/>
-      <line x1="400" y1="124" x2="388" y2="138" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
-      <text x="350" y="45" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa" font-family="system-ui">Neo4j</text>
-      <!-- Results boxes -->
-      <rect x="480" y="35" width="100" height="36" rx="8" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)" stroke-width="1.5"/>
-      <text x="530" y="52" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">50%</text>
-      <text x="530" y="65" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">fewer errors</text>
-      <rect x="480" y="80" width="100" height="36" rx="8" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)" stroke-width="1.5"/>
-      <text x="530" y="97" text-anchor="middle" font-size="12" font-weight="800" fill="#a78bfa" font-family="system-ui">20%</text>
-      <text x="530" y="110" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">less redundancy</text>
-      <rect x="480" y="125" width="100" height="36" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)" stroke-width="1.5"/>
-      <text x="530" y="142" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">100+</text>
-      <text x="530" y="155" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">records migrated</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Designed and implemented a comprehensive database system for managing travel expense reimbursements at UIUC. Started with a <strong>MySQL relational database</strong> with ER diagrams, then migrated to <strong>Neo4j graph database</strong> to better visualize and analyze relationships between employees, travel plans, vehicles, and reimbursements.` },
-      { title: 'Approach', list: [
-        'Designed MySQL relational database with ER diagrams to manage 1,000+ travel requests and expense records',
-        'Streamlined workflows and reduced processing errors by 50% while ensuring compliance with organizational policies',
-        'Migrated 100+ records from MySQL to Neo4j graph database',
-        'Resolved 20% data redundancy through graph-based data modeling',
-        'Enabled visualization and analysis of relationships between employees, travel plans, vehicle usage, and reimbursements'
-      ]},
-      { title: 'Results', results: [
-        { val:'1K+', label:'Travel requests managed', color:'var(--mint)' },
-        { val:'50%', label:'Reduction in errors', color:'var(--purple)' },
-        { val:'20%', label:'Less data redundancy', color:'var(--cyan)' },
-        { val:'100+', label:'Records migrated', color:'var(--amber)' }
-      ]},
-      { title: 'Technical Details', list: [
-        'Developed SQL queries for tracking approvals and calculating reimbursements',
-        'Created Cypher queries for auditing expenses and improving data accessibility',
-        'Built graph-based visualizations to support better decision-making',
-        'Implemented data validation and compliance checks for organizational policies'
-      ]}
-    ]
-  },
-
-  analytics: {
-    kind: 'Python · SQL · PySpark · XGBoost',
-    title: 'Customer Behavior Analytics & Experimentation',
-    sub: 'SQL · Python · PySpark · XGBoost · 500K+ records · 100M+ financial records',
-    illusGrad: 'radial-gradient(ellipse at 55% 40%, rgba(244,114,182,0.2) 0%, rgba(0,212,255,0.08) 60%, #0d0f1c 80%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g6a"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="g6b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma6" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="90" rx="270" ry="100" fill="rgba(244,114,182,0.06)" filter="url(#g6a)"/>
-      <!-- data ingestion box -->
-      <rect x="10" y="18" width="125" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-      <text x="72" y="36" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">10+ Survey Datasets</text>
-      <rect x="10" y="54" width="125" height="28" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="72" y="72" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">100M+ Financial Records</text>
-      <rect x="10" y="90" width="125" height="28" rx="7" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.3)" stroke-width="1.5"/>
-      <text x="72" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#a78bfa" font-family="system-ui">Transaction-Level Data</text>
-      <!-- arrows to pipeline -->
-      <path d="M135 32 L168 60" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M135 68 L168 68" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M135 104 L168 76" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <!-- pipeline box -->
-      <rect x="168" y="44" width="115" height="48" rx="9" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.3)" stroke-width="1.5"/>
-      <text x="225" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">ETL Pipeline</text>
-      <text x="225" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">SQL · Python · PySpark</text>
-      <text x="225" y="88" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">500K+ record dataset</text>
-      <path d="M283 68 L318 68" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma6)"/>
-      <!-- feature engineering box -->
-      <rect x="318" y="44" width="115" height="48" rx="9" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-      <text x="375" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Feature Engineering</text>
-      <text x="375" y="78" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">Statistical modeling</text>
-      <text x="375" y="88" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">+23% predictive gain</text>
-      <path d="M433 55 L463 38" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M433 80 L463 95" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <!-- outputs -->
-      <rect x="463" y="18" width="175" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="550" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">Risk Model · 90% Early Detection ↑</text>
-      <rect x="463" y="78" width="175" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.5"/>
-      <text x="550" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">A/B Tests · Time-Series Evals</text>
-      <!-- A/B test mini chart -->
-      <rect x="10" y="138" width="145" height="36" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.07)"/>
-      <rect x="20" y="150" width="18" height="16" rx="3" fill="rgba(244,114,182,0.2)" stroke="rgba(244,114,182,0.4)" stroke-width="1"/>
-      <rect x="42" y="143" width="18" height="23" rx="3" fill="rgba(244,114,182,0.55)" stroke="rgba(244,114,182,0.7)" stroke-width="1" filter="url(#g6b)"/>
-      <rect x="66" y="147" width="18" height="19" rx="3" fill="rgba(167,139,250,0.2)" stroke="rgba(167,139,250,0.4)" stroke-width="1"/>
-      <rect x="88" y="140" width="18" height="26" rx="3" fill="rgba(167,139,250,0.55)" stroke="rgba(167,139,250,0.7)" stroke-width="1" filter="url(#g6b)"/>
-      <text x="120" y="160" font-size="9" fill="#7c8ca8" font-family="monospace">A/B variants</text>
-      <!-- metrics -->
-      <rect x="163" y="138" width="90" height="36" rx="7" fill="rgba(244,114,182,0.07)" stroke="rgba(244,114,182,0.2)"/>
-      <text x="208" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#f472b6" font-family="system-ui">500K+</text>
-      <text x="208" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">analytical records</text>
-      <rect x="261" y="138" width="90" height="36" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-      <text x="306" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">90%</text>
-      <text x="306" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">risk detection↑</text>
-      <rect x="359" y="138" width="90" height="36" rx="7" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="404" y="153" text-anchor="middle" font-size="12" font-weight="800" fill="#34d399" font-family="system-ui">+23%</text>
-      <text x="404" y="167" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">predictive gain</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Built a comprehensive customer analytics and experimentation platform by integrating <strong>10+ survey datasets</strong> and <strong>100M+ financial records</strong> using SQL and Python into a unified 500K+ record analytical dataset. Applied statistical modeling and feature engineering to surface behavioral patterns, improve predictive performance by <strong>23%</strong>, and enable early risk detection with a <strong>90% improvement</strong>.` },
-      { title: 'Approach', list: [
-        'Queried, cleaned, and integrated 10+ survey datasets using SQL and Python to build a 500K+ record analytical dataset for customer behavior analysis, KPI tracking, and cross-functional decision support',
-        'Built predictive models on 100M+ financial records using Python and statistical learning methods, improving early risk detection by 90% and model accuracy by 12% through careful metric selection and feature evaluation',
-        'Applied feature engineering and statistical modeling on transaction-level data to improve predictive performance by 23%, surfacing behavioral patterns on noisy real-world data',
-        'Designed and analyzed A/B tests and time-series evaluations to assess business initiatives, define success metrics, and translate results into actionable strategy decisions',
-        'Partnered with cross-functional teams to define hypotheses, select evaluation metrics, and standardize analytical workflows for recurring reporting and experimentation'
-      ]},
-      { title: 'Results', results: [
-        { val:'500K+', label:'Analytical records', color:'var(--pink)' },
-        { val:'+23%', label:'Predictive improvement', color:'var(--mint)' },
-        { val:'90%', label:'Early risk detection↑', color:'var(--cyan)' },
-        { val:'+12%', label:'Model accuracy gain', color:'var(--purple)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Integrating survey data with transaction records unlocked behavioral signals unavailable in either dataset alone',
-        'Feature engineering on noisy transaction data was the primary driver of the 23% predictive improvement',
-        'A/B testing framework standardized hypothesis evaluation across teams, reducing time-to-decision significantly',
-        'Time-series evaluation revealed seasonal patterns in customer behavior that informed credit limit strategies',
-        'Statistical modeling on 100M+ records required careful sampling and distributed computation to maintain performance'
-      ]}
-    ]
-  },
-
-  contract: {
-    kind: 'Django · DRF · Pandas · AWS S3',
-    title: 'Contract-to-Analytics REST Pipeline (Django)',
-    sub: 'Django 4.2 · Django REST Framework · Pandas · AWS S3 · 20+ endpoints · 4 models',
-    illusGrad: 'radial-gradient(ellipse at 45% 50%, rgba(251,191,36,0.18) 0%, rgba(0,212,255,0.07) 60%, #0d0f1c 80%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="g8a"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="g8b"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="ma8" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="280" ry="100" fill="rgba(251,191,36,0.06)" filter="url(#g8a)"/>
-
-      <!-- raw contract document -->
-      <rect x="18" y="30" width="120" height="125" rx="8" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
-      <text x="34" y="52" font-size="10" font-weight="700" fill="#fbbf24" font-family="JetBrains Mono, monospace">RAW TEXT</text>
-      <line x1="34" y1="68" x2="122" y2="68" stroke="rgba(251,191,36,0.22)" stroke-width="1.5" stroke-linecap="round"/>
-      <text x="34" y="88" font-size="9" fill="rgba(52,211,153,0.85)" font-family="JetBrains Mono, monospace">$50,000/year</text>
-      <text x="34" y="104" font-size="9" fill="rgba(52,211,153,0.6)" font-family="JetBrains Mono, monospace">tiered 15% off</text>
-      <text x="34" y="120" font-size="9" fill="rgba(0,212,255,0.7)" font-family="JetBrains Mono, monospace">Net 30 · monthly</text>
-      <line x1="34" y1="134" x2="110" y2="134" stroke="rgba(251,191,36,0.15)" stroke-width="1.5" stroke-linecap="round"/>
-
-      <!-- parser box -->
-      <path d="M138 92 L168 92" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ma8)"/>
-      <rect x="168" y="62" width="120" height="60" rx="9" fill="rgba(167,139,250,0.07)" stroke="rgba(167,139,250,0.4)" stroke-width="1.5"/>
-      <text x="228" y="86" text-anchor="middle" font-size="11" font-weight="700" fill="#a78bfa" font-family="system-ui">Pricing Parser</text>
-      <text x="228" y="102" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">regex extraction</text>
-      <text x="228" y="113" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">type classify</text>
-      <path d="M288 78 L320 50" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M288 92 L320 92" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-      <path d="M288 106 L320 134" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2"/>
-
-      <!-- structured pricing term -->
-      <rect x="320" y="32" width="180" height="36" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.4)" stroke-width="1.3"/>
-      <text x="410" y="48" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">PricingTerm</text>
-      <text x="410" y="61" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">base · discount · billing · terms</text>
-
-      <!-- analytics engine -->
-      <rect x="320" y="74" width="180" height="36" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.4)" stroke-width="1.3" filter="url(#g8b)"/>
-      <text x="410" y="90" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Analytics Engine</text>
-      <text x="410" y="103" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">total value · recurring split</text>
-
-      <!-- validation rules -->
-      <rect x="320" y="116" width="180" height="36" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.4)" stroke-width="1.3"/>
-      <text x="410" y="132" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">Validation Rules</text>
-      <text x="410" y="145" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">min price · max discount · BLOCK</text>
-
-      <!-- S3 storage on far right -->
-      <ellipse cx="575" cy="58" rx="34" ry="11" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
-      <path d="M541 58 L541 96 Q541 107 575 107 Q609 107 609 96 L609 58" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
-      <ellipse cx="575" cy="96" rx="34" ry="11" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.4)" stroke-width="1.3"/>
-      <text x="575" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">AWS S3</text>
-
-      <!-- bottom metric badges -->
-      <rect x="18" y="160" width="150" height="20" rx="6" fill="rgba(251,191,36,0.07)" stroke="rgba(251,191,36,0.2)"/>
-      <text x="93" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#fbbf24" font-family="system-ui">20+ REST endpoints</text>
-      <rect x="176" y="160" width="120" height="20" rx="6" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.2)"/>
-      <text x="236" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#00d4ff" font-family="system-ui">4 models · 3 ViewSets</text>
-      <rect x="304" y="160" width="120" height="20" rx="6" fill="rgba(52,211,153,0.07)" stroke="rgba(52,211,153,0.2)"/>
-      <text x="364" y="174" text-anchor="middle" font-size="9.5" font-weight="800" fill="#34d399" font-family="system-ui">5 validation rules</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `A production-style <strong>Django REST Framework API</strong> for contract pricing intelligence. It ingests raw contract text, extracts structured pricing terms with a regex-based parser, runs portfolio-level analytics with Pandas, and validates contracts against configurable JSON business rules, exposed through <strong>20+ REST endpoints</strong> with search, filtering, pagination, and AWS S3 document storage.` },
-      { title: 'Approach', list: [
-        'Modeled the domain with 4 Django models (Contract, PricingTerm, ValidationRule, ContractAnalytics) and 3 DRF ViewSets with full CRUD, search, and filtering',
-        'Built an intelligent pricing parser that extracts prices, discounts, and volume tiers from free text and auto-classifies pricing type (fixed, tiered, usage-based, hybrid)',
-        'Wrote an analytics engine to compute total contract value, recurring-vs-one-time revenue split, and cross-contract portfolio benchmarking',
-        'Designed a JSON rule engine (min_price, max_discount, required_field, currency_check) for real-time, payer-policy-style validation with violation reporting',
-        'Integrated AWS S3 (boto3) for document upload/download and presigned URLs, with environment-based configuration'
-      ]},
-      { title: 'Results', results: [
-        { val:'20+', label:'REST endpoints', color:'var(--amber)' },
-        { val:'4', label:'Data models', color:'var(--cyan)' },
-        { val:'5', label:'Validation rule types', color:'var(--mint)' },
-        { val:'4 types', label:'Pricing classified', color:'var(--purple)' }
-      ]},
-      { title: 'Technical Details', list: [
-        'Django 4.2 + Django REST Framework 3.14, SQLite for dev and PostgreSQL-ready for production',
-        'Pandas-based analytics with per-contract caching via the ContractAnalytics model',
-        'Custom actions: parse_terms, validate_pricing, analytics_summary, and pricing_comparison',
-        'Built-in pagination (50/page), DRF search backends, transaction support, and Django admin for manual data management',
-        'Repository: <a href="https://github.com/itsbhoomika/contract-pricing-intelligence" target="_blank" style="color:#00d4ff;">github.com/itsbhoomika/contract-pricing-intelligence ↗</a>'
-      ]}
-    ]
-  },
-  agentic: {
-    kind: 'Python · LangChain · Airflow · BigQuery · dbt · ChromaDB',
-    title: 'Agentic Pipeline Optimizer',
-    sub: '3-agent LangChain system · Orchestrator · Monitoring · Repair',
-    illusGrad: 'radial-gradient(ellipse at 45% 45%, rgba(0,212,255,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="agA"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="agB"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="agM" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="260" ry="100" fill="rgba(0,212,255,0.07)" filter="url(#agA)"/>
-      <!-- sources -->
-      <rect x="14" y="24" width="140" height="30" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.3)" stroke-width="1.3"/>
-      <text x="84" y="43" text-anchor="middle" font-size="10" font-weight="700" fill="#34d399" font-family="system-ui">Airflow metadata</text>
-      <rect x="14" y="62" width="140" height="30" rx="7" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.3)" stroke-width="1.3"/>
-      <text x="84" y="81" text-anchor="middle" font-size="10" font-weight="700" fill="#fbbf24" font-family="system-ui">dbt SQL models</text>
-      <rect x="14" y="100" width="140" height="30" rx="7" fill="rgba(0,212,255,0.07)" stroke="rgba(0,212,255,0.28)" stroke-width="1.3"/>
-      <text x="84" y="119" text-anchor="middle" font-size="10" font-weight="700" fill="#00d4ff" font-family="system-ui">BigQuery TPC-H</text>
-      <rect x="14" y="138" width="140" height="30" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.3)" stroke-width="1.3"/>
-      <text x="84" y="157" text-anchor="middle" font-size="10" font-weight="700" fill="#f472b6" font-family="system-ui">ChromaDB memory</text>
-      <path d="M154 39 L215 80" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <path d="M154 77 L215 88" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <path d="M154 115 L215 100" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <path d="M154 153 L215 110" stroke="#475569" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <!-- Orchestrator -->
-      <rect x="215" y="66" width="130" height="60" rx="11" fill="rgba(0,212,255,0.1)" stroke="rgba(0,212,255,0.45)" stroke-width="2" filter="url(#agB)"/>
-      <text x="280" y="92" text-anchor="middle" font-size="13" font-weight="800" fill="#00d4ff" font-family="system-ui">Orchestrator</text>
-      <text x="280" y="108" text-anchor="middle" font-size="9" fill="#7c8ca8" font-family="monospace">LangChain agent</text>
-      <path d="M345 82 L400 55" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <path d="M345 110 L400 138" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#agM)"/>
-      <!-- Monitoring agent -->
-      <rect x="400" y="30" width="130" height="46" rx="9" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.35)" stroke-width="1.6"/>
-      <text x="465" y="50" text-anchor="middle" font-size="11" font-weight="700" fill="#34d399" font-family="system-ui">Monitoring Agent</text>
-      <text x="465" y="64" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">DAG latency bottlenecks</text>
-      <!-- Repair agent -->
-      <rect x="400" y="118" width="130" height="46" rx="9" fill="rgba(244,114,182,0.09)" stroke="rgba(244,114,182,0.35)" stroke-width="1.6"/>
-      <text x="465" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#f472b6" font-family="system-ui">Repair Agent</text>
-      <text x="465" y="152" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">retrieves similar failures</text>
-      <path d="M530 50 L560 60" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#agM)"/>
-      <path d="M530 138 L560 128" stroke="#475569" stroke-width="1.2" stroke-dasharray="3 2" marker-end="url(#agM)"/>
-      <rect x="560" y="42" width="86" height="26" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)"/>
-      <text x="603" y="59" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">3-agent system</text>
-      <rect x="560" y="112" width="86" height="26" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)"/>
-      <text x="603" y="129" text-anchor="middle" font-size="9.5" font-weight="700" fill="#00d4ff" font-family="system-ui">Faster resolution</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Repeated pipeline failures burn engineering time on the same root causes over and over. This project builds a <strong>3-agent LangChain system</strong>, orchestrator, monitoring, and repair, that identifies DAG task latency bottlenecks across Airflow pipeline configurations and cuts repeated failure-resolution time across simulated pipeline runs.` },
-      { title: 'Approach', list: [
-        'Orchestrator agent coordinates the monitoring and repair agents across the pipeline lifecycle',
-        'Monitoring agent queries Airflow metadata to surface DAG task latency bottlenecks',
-        'Cross-references dbt SQL models against BigQuery TPC-H benchmark data to isolate slow transformations',
-        'Repair agent retrieves similar past failures from a ChromaDB vector memory layer to ground its fix suggestions'
-      ]},
-      { title: 'Results', results: [
-        { val:'3-agent', label:'LangChain system', color:'var(--cyan)' },
-        { val:'Airflow + dbt', label:'metadata + SQL models', color:'var(--mint)' },
-        { val:'BigQuery', label:'TPC-H benchmark data', color:'var(--purple)' },
-        { val:'ChromaDB', label:'vector failure memory', color:'var(--pink)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Retrieving similar past incidents from vector memory cut repeated failure-resolution time across simulated pipeline runs',
-        'Separating monitoring from repair into distinct agents keeps root-cause detection independent from remediation logic'
-      ]}
-    ]
-  },
-  dataquality: {
-    kind: 'Apache Kafka · Snowflake · dbt · Streamlit',
-    title: 'Real-Time Data Quality & Monitoring Pipeline',
-    sub: 'Kafka → Snowflake streaming · dbt schema tests · Streamlit dashboards',
-    illusGrad: 'radial-gradient(ellipse at 50% 50%, rgba(52,211,153,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="dqA"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="dqB"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="dqM" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="260" ry="100" fill="rgba(52,211,153,0.07)" filter="url(#dqA)"/>
-      <rect x="20" y="70" width="110" height="50" rx="9" fill="rgba(0,212,255,0.09)" stroke="rgba(0,212,255,0.35)" stroke-width="1.6"/>
-      <text x="75" y="93" text-anchor="middle" font-size="12" font-weight="800" fill="#00d4ff" font-family="system-ui">Kafka</text>
-      <text x="75" y="107" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">streaming events</text>
-      <path d="M130 95 L178 95" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#dqM)"/>
-      <rect x="178" y="64" width="120" height="62" rx="10" fill="rgba(52,211,153,0.1)" stroke="rgba(52,211,153,0.45)" stroke-width="2" filter="url(#dqB)"/>
-      <text x="238" y="90" text-anchor="middle" font-size="13" font-weight="800" fill="#34d399" font-family="system-ui">Snowflake</text>
-      <text x="238" y="105" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">low-latency ingest</text>
-      <path d="M298 95 L340 95" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#dqM)"/>
-      <rect x="340" y="68" width="110" height="54" rx="9" fill="rgba(251,191,36,0.09)" stroke="rgba(251,191,36,0.35)" stroke-width="1.6"/>
-      <text x="395" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#fbbf24" font-family="system-ui">dbt tests</text>
-      <text x="395" y="106" text-anchor="middle" font-size="8" fill="#7c8ca8" font-family="monospace">schema · not-null</text>
-      <path d="M450 85 L494 55" stroke="#475569" stroke-width="1.3" stroke-dasharray="3 2" marker-end="url(#dqM)"/>
-      <path d="M450 105 L494 135" stroke="#475569" stroke-width="1.3" stroke-dasharray="3 2" marker-end="url(#dqM)"/>
-      <rect x="494" y="34" width="130" height="34" rx="8" fill="rgba(244,114,182,0.09)" stroke="rgba(244,114,182,0.32)" stroke-width="1.5"/>
-      <text x="559" y="55" text-anchor="middle" font-size="10.5" font-weight="700" fill="#f472b6" font-family="system-ui">Real-time alerts</text>
-      <rect x="494" y="124" width="130" height="34" rx="8" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.28)" stroke-width="1.5"/>
-      <text x="559" y="145" text-anchor="middle" font-size="10.5" font-weight="700" fill="#00d4ff" font-family="system-ui">Streamlit dashboard</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Data-quality issues caught after the fact are expensive to unwind. This project reduces data-quality incidents through real-time alerting by streaming records through <strong>Apache Kafka</strong> into <strong>Snowflake</strong>, validating them with <strong>dbt schema tests</strong>, and surfacing pipeline health in a <strong>Streamlit</strong> monitoring dashboard.` },
-      { title: 'Approach', list: [
-        'Streamed source records through Apache Kafka topics for low-latency ingestion into Snowflake',
-        'Landed raw events in Snowflake staging tables ahead of transformation',
-        'Enforced data contracts with dbt schema tests, not-null, uniqueness, and referential checks, on incoming batches',
-        'Surfaced pipeline health and test failures in a Streamlit monitoring dashboard for real-time visibility'
-      ]},
-      { title: 'Results', results: [
-        { val:'Real-time', label:'Kafka ingestion', color:'var(--cyan)' },
-        { val:'Automated', label:'dbt schema tests', color:'var(--mint)' },
-        { val:'Live', label:'Streamlit alerting', color:'var(--pink)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Catching schema violations at ingestion time reduced downstream data-quality incidents',
-        'Alerting directly from dbt test results kept monitoring logic co-located with the transformation layer instead of a separate rules engine'
-      ]}
-    ]
-  },
-  macro: {
-    kind: 'HuggingFace · Streamlit · World Bank API · Pandas',
-    title: 'Macroeconomic Trend Analysis & Visualization Dashboard',
-    sub: 'World Bank API · 6 indicators · 20+ countries · 2000–2020',
-    illusGrad: 'radial-gradient(ellipse at 55% 55%, rgba(167,139,250,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs><filter id="mcA"><feGaussianBlur stdDeviation="14"/></filter></defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="260" ry="100" fill="rgba(167,139,250,0.07)" filter="url(#mcA)"/>
-      <line x1="40" y1="140" x2="620" y2="140" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-      <line x1="40" y1="140" x2="40" y2="30" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-      <text x="36" y="153" font-size="9" fill="#7c8ca8" font-family="monospace">2000</text>
-      <text x="596" y="153" font-size="9" fill="#7c8ca8" font-family="monospace">2020</text>
-      <path d="M40 100 L160 90 L260 84 L310 130 L360 116 L440 66 L520 52 L620 42" fill="none" stroke="#a78bfa" stroke-width="2.4"/>
-      <circle cx="310" cy="130" r="5" fill="#f472b6"/>
-      <text x="310" y="118" text-anchor="middle" font-size="9" fill="#f472b6" font-family="monospace">2008 crisis</text>
-      <rect x="40" y="16" width="150" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.4"/>
-      <text x="115" y="35" text-anchor="middle" font-size="10.5" font-weight="700" fill="#00d4ff" font-family="system-ui">World Bank API</text>
-      <rect x="470" y="16" width="66" height="26" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)"/>
-      <text x="503" y="34" text-anchor="middle" font-size="9.5" font-weight="700" fill="#34d399" font-family="system-ui">6 indic.</text>
-      <rect x="544" y="16" width="76" height="26" rx="7" fill="rgba(251,191,36,0.08)" stroke="rgba(251,191,36,0.25)"/>
-      <text x="582" y="34" text-anchor="middle" font-size="9.5" font-weight="700" fill="#fbbf24" font-family="system-ui">20+ countries</text>
-      <rect x="40" y="158" width="180" height="24" rx="7" fill="rgba(167,139,250,0.08)" stroke="rgba(167,139,250,0.25)"/>
-      <text x="130" y="174" text-anchor="middle" font-size="9.5" font-weight="700" fill="#a78bfa" font-family="system-ui">Pandas → Streamlit</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Cross-country macro data lives in scattered API calls and one-off notebooks. This project delivers a self-service analytics dashboard visualizing the <strong>2008 financial crisis</strong> by querying the <strong>World Bank API</strong> for 6 macroeconomic indicators across 20+ countries from 2000 to 2020.` },
-      { title: 'Approach', list: [
-        'Queried the World Bank API for 6 macroeconomic indicators across 20+ countries',
-        'Covered a 2000-2020 window to capture the run-up to and recovery from the 2008 financial crisis',
-        'Transformed nested JSON responses into analysis-ready Pandas DataFrames for downstream charting',
-        'Built a self-service Streamlit dashboard so non-technical users could filter by country, indicator, and year'
-      ]},
-      { title: 'Results', results: [
-        { val:'6', label:'macro indicators', color:'var(--purple)' },
-        { val:'20+', label:'countries', color:'var(--mint)' },
-        { val:'2000-20', label:'year span', color:'var(--cyan)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'Centralizing multi-country indicator retrieval into one dashboard removed the need for manual World Bank data pulls per analysis',
-        'Visualizing the 2008 crisis across indicators side by side made cross-country divergence in recovery speed immediately visible'
-      ]}
-    ]
-  },
-  legalqa: {
-    kind: 'GenAI · RAG · Google PaLM API · ChromaDB',
-    title: 'Intelligent Legal Document Q&A System',
-    sub: 'RAG · Google PaLM API · ChromaDB vector search · 1K users served',
-    illusGrad: 'radial-gradient(ellipse at 50% 45%, rgba(244,114,182,0.2) 0%, #0d0f1c 65%)',
-    illusSvg: `<svg viewBox="0 0 660 185" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="lgA"><feGaussianBlur stdDeviation="14"/></filter>
-        <filter id="lgB"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <marker id="lgM" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#475569"/></marker>
-      </defs>
-      <rect width="660" height="185" fill="#0d0f1c"/>
-      <ellipse cx="330" cy="92" rx="260" ry="100" fill="rgba(244,114,182,0.07)" filter="url(#lgA)"/>
-      <rect x="20" y="66" width="110" height="58" rx="9" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.3)" stroke-width="1.5"/>
-      <text x="75" y="90" text-anchor="middle" font-size="11" font-weight="700" fill="#00d4ff" font-family="system-ui">Legal</text>
-      <text x="75" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#00d4ff" font-family="system-ui">Documents</text>
-      <path d="M130 95 L172 95" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#lgM)"/>
-      <rect x="172" y="62" width="120" height="66" rx="10" fill="rgba(52,211,153,0.09)" stroke="rgba(52,211,153,0.35)" stroke-width="1.6"/>
-      <text x="232" y="90" text-anchor="middle" font-size="12" font-weight="700" fill="#34d399" font-family="system-ui">ChromaDB</text>
-      <text x="232" y="105" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">vector search</text>
-      <path d="M292 95 L334 95" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#lgM)"/>
-      <rect x="334" y="58" width="130" height="74" rx="11" fill="rgba(244,114,182,0.1)" stroke="rgba(244,114,182,0.45)" stroke-width="2" filter="url(#lgB)"/>
-      <text x="399" y="88" text-anchor="middle" font-size="13" font-weight="800" fill="#f472b6" font-family="system-ui">PaLM API</text>
-      <text x="399" y="104" text-anchor="middle" font-size="8.5" fill="#7c8ca8" font-family="monospace">RAG-grounded answer</text>
-      <path d="M464 95 L506 95" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#lgM)"/>
-      <text x="516" y="101" font-size="18" fill="#34d399">✓</text>
-      <rect x="20" y="20" width="90" height="28" rx="7" fill="rgba(0,212,255,0.08)" stroke="rgba(0,212,255,0.25)"/>
-      <text x="65" y="39" text-anchor="middle" font-size="10.5" font-weight="800" fill="#00d4ff" font-family="system-ui">1K users</text>
-      <rect x="118" y="20" width="110" height="28" rx="7" fill="rgba(52,211,153,0.08)" stroke="rgba(52,211,153,0.25)"/>
-      <text x="173" y="39" text-anchor="middle" font-size="10.5" font-weight="800" fill="#34d399" font-family="system-ui">&lt;1s response</text>
-      <rect x="236" y="20" width="120" height="28" rx="7" fill="rgba(244,114,182,0.08)" stroke="rgba(244,114,182,0.25)"/>
-      <text x="296" y="39" text-anchor="middle" font-size="10.5" font-weight="800" fill="#f472b6" font-family="system-ui">+25% accuracy</text>
-    </svg>`,
-    sections: [
-      { title: 'Overview', body: `Legal research is slow when every question means manually digging through documents. This project built a <strong>GenAI-powered document Q&amp;A system</strong> using <strong>RAG</strong> and <strong>ChromaDB</strong> vector search on top of the <strong>Google PaLM API</strong>, serving 1K users with sub-second responses.` },
-      { title: 'Approach', list: [
-        'Chunked and embedded legal documents into a ChromaDB vector store for semantic retrieval',
-        'Retrieved the most relevant passages per query and passed them as grounding context to the Google PaLM API',
-        'Served natural-language answers to legal questions with sub-second response times',
-        'Iterated on chunking and retrieval parameters to boost retrieval accuracy'
-      ]},
-      { title: 'Results', results: [
-        { val:'1K', label:'users served', color:'var(--cyan)' },
-        { val:'<1s', label:'response time', color:'var(--mint)' },
-        { val:'+25%', label:'retrieval accuracy', color:'var(--pink)' }
-      ]},
-      { title: 'Key Insights', list: [
-        'RAG grounding on ChromaDB retrieval cut hallucinated citations relative to an ungrounded PaLM baseline',
-        'Faster retrieval directly reduced time spent on manual legal research for end users'
-      ]}
-    ]
-  }
-};
-
-function openModal(key) {
-  const d = MODALS[key];
-  if(!d) return;
-  let body = '';
-  d.sections.forEach(s => {
-    body += `<div class="modal-section"><div class="modal-sec-title">${s.title}</div>`;
-    if(s.body !== undefined) {
-      body += `<p class="modal-text">${s.body}</p>`;
-    } else if(s.list) {
-      body += `<ul class="modal-list">${s.list.map(i=>`<li>${i}</li>`).join('')}</ul>`;
-    } else if(s.results) {
-      body += `<div class="results-row">${s.results.map(r=>`
-        <div class="res-box">
-          <div class="res-val" style="color:${r.color}">${r.val}</div>
-          <div class="res-label">${r.label}</div>
-        </div>`).join('')}</div>`;
-    }
-    body += `</div>`;
-  });
-
-  document.getElementById('modalBox').innerHTML = `
-    <div class="modal-head">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-kind">${d.kind}</div>
-      <div class="modal-title">${d.title}</div>
-      <div class="modal-sub">${d.sub}</div>
-    </div>
-    <div class="modal-body">
-      <div class="modal-illus" style="background:${d.illusGrad}">${d.illusSvg}</div>
-      ${body}
-    </div>`;
-
-  document.getElementById('overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e) {
-  if(e && e.target !== document.getElementById('overlay')) return;
-  document.getElementById('overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
-</script>
+    menu.addEventListener('click', event => {
+      if (event.target.closest('a')) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>
