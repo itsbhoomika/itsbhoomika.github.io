@@ -110,17 +110,15 @@
     .cert p { color:var(--muted); margin-top:7px; font-size:14px; line-height:1.55; }
     .cert a { display:inline-block; margin-top:10px; color:var(--blue); font-size:13px; font-weight:600; text-decoration:none; }
     .cert a:hover { text-decoration:underline; }
-    #certifications { background:#fff; margin-bottom:80px; }
-    #certifications .section-head { border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:26px; }
-    #certifications .label { color:#6179bc; }
-    #certifications h2 { color:#1c2930; }
-    #certifications .cert-grid { gap:16px 18px; }
-    #certifications .cert { position:relative; background:#fff; border:1px solid #d8e1f4; border-radius:14px; padding:20px 20px 20px 58px; box-shadow:0 7px 20px rgba(38,58,111,.06); }
-    #certifications .cert::before { content:"✓"; position:absolute; top:20px; left:20px; display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:#eaf0ff; color:#4b62a6; font-size:13px; font-weight:800; }
-    #certifications .cert h3 { color:#243869; }
-    #certifications .cert p { color:#64708d; }
-    #certifications .cert a { color:#435fa6; border:1px solid #bdcaeb; border-radius:999px; padding:7px 11px; background:#f7f9ff; }
-    #certifications .cert a:hover { background:#e8eeff; text-decoration:none; }
+    #certifications { background:transparent; margin-bottom:80px; }
+    #certifications .section-head { margin-bottom:34px; }
+    #certifications .cert-grid { gap:0 36px; }
+    #certifications .cert { position:relative; background:transparent; border:0; border-top:1px solid var(--line); border-radius:0; padding:22px 0 22px 38px; box-shadow:none; }
+    #certifications .cert::before { content:"✓"; position:absolute; top:22px; left:0; display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:#202b47; color:#b8abff; font-size:13px; font-weight:800; }
+    #certifications .cert h3 { color:var(--ink); }
+    #certifications .cert p { color:var(--muted); }
+    #certifications .cert a { color:var(--blue); border:1px solid #495675; border-radius:999px; padding:7px 11px; background:#141f33; }
+    #certifications .cert a:hover { background:#202c46; text-decoration:none; }
     .contact { background:#1c2930; color:white; padding:85px 0; }
     .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:end; }
     .contact .label { color:#a9bfff; }
