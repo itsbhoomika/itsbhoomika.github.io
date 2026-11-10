@@ -110,12 +110,13 @@
     .cert p { color:var(--muted); margin-top:7px; font-size:14px; line-height:1.55; }
     .cert a { display:inline-block; margin-top:10px; color:var(--blue); font-size:13px; font-weight:600; text-decoration:none; }
     .cert a:hover { text-decoration:underline; }
-    #certifications { background:linear-gradient(135deg,#eef3ff 0%,#f7f9ff 100%); border:1px solid #d7e1fa; border-radius:24px; padding:64px 36px; margin-bottom:80px; }
-    #certifications .section-head { margin-bottom:26px; }
+    #certifications { background:#fff; margin-bottom:80px; }
+    #certifications .section-head { border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:26px; }
     #certifications .label { color:#6179bc; }
     #certifications h2 { color:#1c2930; }
-    #certifications .cert-grid { gap:16px; }
-    #certifications .cert { background:rgba(255,255,255,.82); border:1px solid #d8e1f4; border-radius:16px; padding:20px; box-shadow:0 8px 22px rgba(38,58,111,.06); }
+    #certifications .cert-grid { gap:16px 18px; }
+    #certifications .cert { position:relative; background:#fff; border:1px solid #d8e1f4; border-radius:14px; padding:20px 20px 20px 58px; box-shadow:0 7px 20px rgba(38,58,111,.06); }
+    #certifications .cert::before { content:"✓"; position:absolute; top:20px; left:20px; display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:#eaf0ff; color:#4b62a6; font-size:13px; font-weight:800; }
     #certifications .cert h3 { color:#243869; }
     #certifications .cert p { color:#64708d; }
     #certifications .cert a { color:#435fa6; border:1px solid #bdcaeb; border-radius:999px; padding:7px 11px; background:#f7f9ff; }
@@ -157,7 +158,7 @@
       .exp-desc { margin-top:10px; }
       .intro-strip .wrap { grid-template-columns:1fr; }
       .strip-name { grid-column:auto; }
-      #certifications { border-radius:18px; padding:46px 20px; margin-bottom:60px; }
+      #certifications { margin-bottom:60px; }
       .hero-sub { font-size:16px; }
       .edu-row { grid-template-columns:1fr; gap:3px; }
       footer .wrap { flex-direction:column; }
